@@ -6,7 +6,7 @@ We introduce the PyMatting package for Python which implements various methods t
 - **Website and Documentation:** [https://pymatting.github.io/](https://pymatting.github.io)
 - **Benchmarks:**  [https://pymatting.github.io/benchmarks.html](https://pymatting.github.io/benchmarks.html)
 
-![Lemur](data/lemur/lemur_at_the_beach.png?raw=true)
+![Lemur](https://github.com/pymatting/pymatting/raw/master/data/lemur/lemur_at_the_beach.png)
 
 Given an input image and a hand-drawn trimap (top row), alpha matting estimates the alpha channel of a foreground object which can then be composed onto a different background (bottom row).
 
