@@ -66,6 +66,7 @@ cutout(
 
 Run the tests from the main directory:
 ```
+ python3 tests/download_images.py
  python3 tests/run_tests.py
 ```
 
