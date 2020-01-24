@@ -4,7 +4,7 @@
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
 
 - **Website and Documentation:** [https://pymatting.github.io/](https://pymatting.github.io)
-- **Benchmarks:**  [https://pymatting.github.io/benchmarks.html](https://pymatting.github.io/benchmarks.html)
+- **Benchmarks:**  [https://pymatting.github.io/benchmark.html](https://pymatting.github.io/benchmark.html)
 
 ![Lemur](https://github.com/pymatting/pymatting/raw/master/data/lemur/lemur_at_the_beach.png)
 
