@@ -33,5 +33,7 @@ setup(
     ],
     project_urls={
         "Source": about["__uri__"],
-    }
+    },
+    # Fix for Numba caching issue
+    zip_safe=False,
 )
