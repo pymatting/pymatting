@@ -1,0 +1,4 @@
+*.zip
+Eigen/ 
+images/
+results/
