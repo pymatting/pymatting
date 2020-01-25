@@ -22,3 +22,12 @@ doc/source/*.rst
 !doc/source/figures/*.png
 !data/test/*.png
 !data/lemur/*.png
+
+# from tests/.gitignore
+tests/results/
+
+# from benchmarks/.gitignore
+benchmarks/*.zip
+benchmakrs/Eigen/
+benchmarks/images/
+benchmarks/results/

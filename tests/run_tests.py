@@ -23,7 +23,7 @@ TESTS = [
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--no_gpu", help="exclude tests for GPU implementation", action="store_true"
+        "--no-gpu", help="exclude tests for GPU implementation", action="store_true"
     )
     args = parser.parse_args()
     sucess_counter = 0
