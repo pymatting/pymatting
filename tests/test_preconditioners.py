@@ -3,7 +3,6 @@ import numpy as np
 import time
 import json
 import os
-import pyamg
 from pymatting import (
     load_image,
     show_images,
@@ -47,7 +46,6 @@ def main():
         ("jacobi", lambda A: jacobi(A)),
         ("icholt", lambda A: ichol(A)),
         ("vcycle", lambda A: vcycle(A, trimap.shape)),
-        ("pyamg", lambda A: pyamg.smoothed_aggregation_solver(A).aspreconditioner()),
     ]
 
     expected_iterations = {
@@ -55,7 +53,6 @@ def main():
         "jacobi": 250,
         "icholt": 3,
         "vcycle": 88,
-        "pyamg": 47,
     }
 
     for preconditioner_name, preconditioner in preconditioners:
