@@ -12,7 +12,7 @@ from pymatting import (
 )
 
 
-def main():
+def test_laplacians():
     indices = np.arange(27) + 1
     scale = 0.1
     atol = 1e-5
@@ -230,7 +230,3 @@ def main():
 
         # print results
         # print(f'"{laplacian_name}": {errors},')
-
-
-if __name__ == "__main__":
-    main()
