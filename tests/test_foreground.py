@@ -28,7 +28,7 @@ def test_foreground():
         estimate_foreground_ml,
         estimate_foreground_cf,
         ]
-        warnings.warn('Tests for PU implementation skipped')
+        warnings.warn('Tests for GPU implementation skipped, because of missing packages.')
         
 
     max_mse = 0.022
