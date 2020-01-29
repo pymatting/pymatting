@@ -11,4 +11,4 @@ install:
   - pip install -r requirements_gpu.txt
   - pip install .
 # command to run tests
-script: pytest
+script: python3 tests/download_images.py && pytest
