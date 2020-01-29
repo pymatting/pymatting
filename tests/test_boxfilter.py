@@ -4,7 +4,7 @@ import scipy.signal
 import time
 
 
-def test_boxfilter(m, n, r, mode, n_runs):
+def run_boxfilter(m, n, r, mode, n_runs):
     src = np.random.rand(m, n)
     kernel = np.ones((2 * r + 1, 2 * r + 1))
 
@@ -26,7 +26,7 @@ def test_boxfilter(m, n, r, mode, n_runs):
         assert max_error < 1e-10
 
 
-def main():
+def test_boxfilter():
     modes = ["valid", "same", "full"]
 
     for mode in modes:
@@ -35,15 +35,11 @@ def main():
             min_size = 2 * r + 1
             for m in range(min_size, min_size + 10):
                 for n in range(min_size, min_size + 10):
-                    test_boxfilter(m, n, r, mode, 2)
+                    run_boxfilter(m, n, r, mode, 2)
 
-        test_boxfilter(50, 50, 4, mode, 2)
+        run_boxfilter(50, 50, 4, mode, 2)
 
     for mode in modes:
         print("testing boxfilter mode", mode)
         for r in range(1, 20):
-            test_boxfilter(256, 256, r, mode, 1)
-
-
-if __name__ == "__main__":
-    main()
+            run_boxfilter(256, 256, r, mode, 1)

@@ -1,0 +1,2 @@
+cupy-cuda90>=6.5.0
+pyopencl>=2019.1.2

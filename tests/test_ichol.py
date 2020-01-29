@@ -3,7 +3,7 @@ import scipy.sparse
 from pymatting import ichol
 
 
-def test():
+def test_ichol():
     np.random.seed(0)
 
     for _ in range(10):
@@ -24,7 +24,3 @@ def test():
         error = np.linalg.norm(x - x_true)
 
         assert error < 1e-10
-
-
-if __name__ == "__main__":
-    test()

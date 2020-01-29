@@ -40,6 +40,9 @@ Additional requirements for GPU support
 * cupy-cuda90>=6.5.0 or similar
 * pyopencl>=2019.1.2
 
+Requirements to run the tests
+* pytest>=5.3.4
+
 ### Installation
 ```
 git clone https://github.com/pymatting/pymatting
@@ -67,10 +70,11 @@ cutout(
 Run the tests from the main directory:
 ```
  python3 tests/download_images.py
- python3 tests/run_tests.py
+ pip3 install -r requirements_tests.txt
+ pytest
 ```
 
-To skip the tests of the GPU implementation use the `--no_gpu` option. Currently 89% of the code is covered by tests.
+Currently 89% of the code is covered by tests.
 
 ## Authors
 

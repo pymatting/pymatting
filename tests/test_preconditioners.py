@@ -18,7 +18,7 @@ from pymatting import (
 )
 
 
-def main():
+def test_preconditioners():
     atol = 1e-6
     index = 1
     scale = 0.2
@@ -82,7 +82,3 @@ def main():
             )
 
         assert callback.n <= n_expected
-
-
-if __name__ == "__main__":
-    main()

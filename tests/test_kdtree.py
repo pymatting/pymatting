@@ -4,7 +4,7 @@ from pymatting import knn
 import numpy as np
 
 
-def test():
+def run_kdtree():
     np.random.seed(0)
 
     k = 20
@@ -42,10 +42,7 @@ def test():
     assert np.linalg.norm(distances1 - distances2) < 1e-5
 
 
-def main():
+def test_kdtree():
     for _ in range(10):
-        test()
+        run_kdtree()
 
-
-if __name__ == "__main__":
-    main()

@@ -16,7 +16,7 @@ from pymatting import (
 )
 
 
-def main():
+def test_lkm():
     index = 1
     scale = 0.2
     atol = 1e-5
@@ -82,7 +82,3 @@ def main():
     assert abs(lkm_callback.n - cf_callback.n) <= 2
 
     # print("ok")
-
-
-if __name__ == "__main__":
-    main()

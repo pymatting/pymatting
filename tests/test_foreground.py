@@ -1,5 +1,5 @@
 import numpy as np
-import argparse
+import warnings
 from pymatting import (
     load_image,
     estimate_foreground_cf,
@@ -9,20 +9,27 @@ from pymatting import (
 )
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--no-gpu", help="exclude tests for GPU implementation", action="store_true"
-    )
-    args = parser.parse_args()
-
-    if not args.no_gpu:
+def test_foreground():
+    try:
         from pymatting.foreground.estimate_foreground_ml_cupy import (
             estimate_foreground_ml_cupy,
         )
         from pymatting.foreground.estimate_foreground_ml_pyopencl import (
             estimate_foreground_ml_pyopencl,
         )
+        methods = [
+        estimate_foreground_ml,
+        estimate_foreground_cf,
+        estimate_foreground_ml_cupy,
+        estimate_foreground_ml_pyopencl,
+        ]
+    except:
+        methods = [
+        estimate_foreground_ml,
+        estimate_foreground_cf,
+        ]
+        warnings.warn('Tests for GPU implementation skipped, because of missing packages.')
+        
 
     max_mse = 0.022
     scale = 0.1
@@ -35,15 +42,6 @@ def main():
     expected_background = load_image(
         "data/lemur/lemur_background.png", "RGB", scale, "box"
     )
-
-    methods = [
-        estimate_foreground_ml,
-        estimate_foreground_cf,
-    ]
-
-    if not args.no_gpu:
-        methods.append(estimate_foreground_ml_cupy)
-        methods.append(estimate_foreground_ml_pyopencl)
 
     for estimate_foreground in methods:
         foreground, background = estimate_foreground(
@@ -64,7 +62,3 @@ def main():
             )
 
         assert mse <= max_mse
-
-
-if __name__ == "__main__":
-    main()

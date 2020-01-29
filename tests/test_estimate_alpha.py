@@ -2,7 +2,7 @@ import numpy as np
 from pymatting import *
 
 
-def main():
+def test_alpha():
     scale = 0.1
     index = 1
     name = f"GT{index:02d}"
@@ -34,7 +34,3 @@ def main():
         error = np.linalg.norm(alpha - true_alpha)
 
         assert error < max_error
-
-
-if __name__ == "__main__":
-    main()
