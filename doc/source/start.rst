@@ -33,6 +33,7 @@ Run the tests from the main directory:
 .. code-block::
 
    python3 tests/download_images.py
-   python3 tests/run_tests.py
+   pip3 install -r requirements_tests.txt
+   pytest
    
 To skip the tests of the GPU implementation use the --no_gpu option.

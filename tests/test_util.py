@@ -2,7 +2,7 @@ from pymatting import *
 import numpy as np
 
 
-def main():
+def test_util():
     @apply_to_channels
     def conv(image, kernel):
         height, width = image.shape
@@ -30,7 +30,3 @@ def main():
     assert np.allclose(vec_vec_dot(a, b), [np.inner(ai, bi) for ai, bi in zip(a, b)])
     assert np.allclose(vec_vec_outer(a, b), [np.outer(ai, bi) for ai, bi in zip(a, b)])
     assert np.allclose(mat_vec_dot(A, b), [np.dot(Ai, bi) for Ai, bi in zip(A, b)])
-
-
-if __name__ == "__main__":
-    main()
