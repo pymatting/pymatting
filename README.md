@@ -1,5 +1,6 @@
 # PyMatting: A Python Library for Alpha Matting
 [![License: MIT](https://img.shields.io/github/license/tuelwer/phase-retrieval)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/pymatting/pymatting.svg?branch=master)](https://travis-ci.org/pymatting/pymatting)
 
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
 
