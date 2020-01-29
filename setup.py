@@ -27,9 +27,7 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Linux",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: MacOS",
+        "Operating System :: OS Independent",
     ],
     project_urls={
         "Source": about["__uri__"],
