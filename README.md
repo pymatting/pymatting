@@ -1,5 +1,5 @@
 # PyMatting: A Python Library for Alpha Matting
-[![License: MIT](https://img.shields.io/github/license/tuelwer/phase-retrieval)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/github/license/pymatting/pymatting?color=brightgreen)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/pymatting/pymatting.svg?branch=master)](https://travis-ci.org/pymatting/pymatting)
 
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
@@ -44,14 +44,21 @@ Additional requirements for GPU support
 Requirements to run the tests
 * pytest>=5.3.4
 
-### Installation
+### Installation with PyPI
+
+```bash
+pip3 install pymatting
 ```
+
+### Installation from Source
+
+```bash
 git clone https://github.com/pymatting/pymatting
 cd pymatting
 pip3 install .
 ```
 
-## Very Short Example
+## Example
 ```python
 from pymatting import cutout
 
@@ -64,7 +71,7 @@ cutout(
     "lemur_cutout.png")
 ```
 
-[More examples](https://github.com/pymatting/pymatting/tree/master/examples)
+[More advanced examples](https://github.com/pymatting/pymatting/tree/master/examples)
 
 ### Testing
 
