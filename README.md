@@ -33,7 +33,7 @@ PyMatting provides:
 Minimal requiremens
 * numpy>=1.16.0
 * pillow>=5.2.0
-* numba>=0.44.0
+* numba>=0.47.0
 * scipy>=1.1.0
 
 Additional requirements for GPU support
