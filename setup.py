@@ -30,7 +30,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     project_urls={
-        "Source": about["__uri__"],
+        "Source": "https://github.com/pymatting/pymatting",
     },
     # Fix for Numba caching issue
     zip_safe=False,
