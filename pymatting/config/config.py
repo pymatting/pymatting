@@ -1,0 +1,1 @@
+USE_NUMBA_PARALLEL = False
