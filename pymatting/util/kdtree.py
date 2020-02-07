@@ -1,5 +1,6 @@
 import numpy as np
 from numba import njit, prange
+from pymatting.config.config import USE_NUMBA_PARALLEL
 
 # Numba support for object pointers is currently (Q4 2019) wonky,
 # which is why plain arrays with indices are used instead.
@@ -140,7 +141,7 @@ def _make_tree(
 
 @njit(
     "void(i8[:], i8[:], i8[:], i8[:], i8[:], f4[:, :, :], f4[:], f4[:, :], f4[:, :], i8[:, :], f4[:, :], i8)",
-    parallel=True,
+    parallel=USE_NUMBA_PARALLEL,
     cache=True,
 )
 def _find_knn(

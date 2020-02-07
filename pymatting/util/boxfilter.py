@@ -1,9 +1,9 @@
 from pymatting.util.util import apply_to_channels
 from numba import njit, prange
 import numpy as np
+from pymatting.config.config import USE_NUMBA_PARALLEL
 
-
-@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=True)
+@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=USE_NUMBA_PARALLEL)
 def boxfilter_rows_valid(src, r):
     m, n = src.shape
 
@@ -28,7 +28,7 @@ def boxfilter_rows_valid(src, r):
     return dst
 
 
-@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=True)
+@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=USE_NUMBA_PARALLEL)
 def boxfilter_rows_same(src, r):
     m, n = src.shape
 
@@ -57,7 +57,7 @@ def boxfilter_rows_same(src, r):
     return dst
 
 
-@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=True)
+@njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=USE_NUMBA_PARALLEL)
 def boxfilter_rows_full(src, r):
     m, n = src.shape
 
