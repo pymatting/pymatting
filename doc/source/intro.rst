@@ -13,7 +13,7 @@ holds. This problem is inherently ill-posed since for each pixel we have three e
 
 After estimating the alpha matte :math:`\alpha` the foreground pixels and background pixels can be estimated. We refer to this process as foreground estimation.
 
-.. figure:: figures/lemur_grid.png
+.. figure:: figures/lemur_at_the_beach.png
    :align: center
 
    Figure 1: Input image, input trimap, estimated alpha and extracted foreground.
