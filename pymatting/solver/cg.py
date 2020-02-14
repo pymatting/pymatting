@@ -33,7 +33,7 @@ def cg(
     elif callable(M):
         precondition = M
     else:
-        precondition = M.dot(x)
+        precondition = M.dot(x0)
 
     x = np.zeros_like(b) if x0 is None else x0.copy()
 
