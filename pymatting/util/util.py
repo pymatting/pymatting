@@ -417,6 +417,23 @@ def stack_images(*images):
     return np.concatenate(images, axis=2)
 
 
+def row_sum(A):
+    """Calculate the sum of each row of a matrix
+
+    Parameters
+    ----------
+    A: np.ndarray or scipy.sparse.spmatrix
+        Matrix to sum rows of
+
+    Returns
+    -------
+    row_sums: np.ndarray
+        Vector of summed rows
+    """
+    row_sums = A.dot(np.ones(A.shape[1], A.dtype))
+    
+    return row_sums
+
 def normalize_rows(A, threshold=0.0):
     """Normalize the rows of a matrix
 
@@ -434,7 +451,7 @@ def normalize_rows(A, threshold=0.0):
     A: scipy.sparse.spmatrix
         Matrix with normalized rows
     """
-    row_sums = np.array(A.sum(axis=1)).ravel()
+    row_sums = row_sum(A)
 
     # Prevent division by zero.
     row_sums[row_sums < threshold] = 1.0
@@ -576,7 +593,7 @@ def weights_to_laplacian(W, normalize=True, regularization=0.0):
     if normalize:
         W = normalize_rows(W)
 
-    d = regularization + np.array(W.sum(axis=1)).flatten()
+    d = regularization + row_sum(W)
     D = scipy.sparse.diags(d)
 
     L = D - W
