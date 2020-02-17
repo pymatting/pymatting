@@ -1,6 +1,7 @@
 import numpy as np
 from numba import njit
 
+
 @njit("void(f4[:, :, :], f4[:, :, :])", cache=True)
 def _resize_nearest_multichannel(dst, src):
     """
@@ -27,6 +28,7 @@ def _resize_nearest_multichannel(dst, src):
             for c in range(depth):
                 dst[y_dst, x_dst, c] = src[y_src, x_src, c]
 
+
 @njit("void(f4[:, :], f4[:, :])", cache=True)
 def _resize_nearest(dst, src):
     """
@@ -52,7 +54,11 @@ def _resize_nearest(dst, src):
 
             dst[y_dst, x_dst] = src[y_src, x_src]
 
-@njit("Tuple((f4[:, :, :], f4[:, :, :]))(f4[:, :, :], f4[:, :], f4, i4, i4, i4)", cache=True)
+
+@njit(
+    "Tuple((f4[:, :, :], f4[:, :, :]))(f4[:, :, :], f4[:, :], f4, i4, i4, i4)",
+    cache=True,
+)
 def _estimate_fb_ml(
     input_image,
     input_alpha,
@@ -203,9 +209,10 @@ def estimate_foreground_ml(
         regularization,
         n_small_iterations,
         n_big_iterations,
-        small_size)
+        small_size,
+    )
 
     if return_background:
         return foreground, background
-    
+
     return foreground

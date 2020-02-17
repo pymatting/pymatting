@@ -1,19 +1,12 @@
-import scipy.sparse.linalg
 import numpy as np
-import time
-import json
-import os
 from pymatting import (
     load_image,
-    show_images,
-    trimap_split,
     cf_laplacian,
     make_linear_system,
     cg,
     jacobi,
     ichol,
     vcycle,
-    ProgressCallback,
     CounterCallback,
 )
 
@@ -22,7 +15,6 @@ def test_preconditioners():
     atol = 1e-6
     index = 1
     scale = 0.2
-    max_error = 4.356
 
     name = f"GT{index:02d}"
     # print(name)
@@ -57,15 +49,10 @@ def test_preconditioners():
 
     for preconditioner_name, preconditioner in preconditioners:
         callback = CounterCallback()
-        t0 = time.perf_counter()
 
         M = preconditioner(A)
 
-        t1 = time.perf_counter()
-
         x = cg(A, b, M=M, atol=atol, rtol=0, maxiter=10000, callback=callback)
-
-        t2 = time.perf_counter()
 
         r = b - A.dot(x)
 

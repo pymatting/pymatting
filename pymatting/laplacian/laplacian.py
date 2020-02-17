@@ -1,6 +1,5 @@
 from pymatting.util.util import trimap_split
 import scipy.sparse
-import numpy as np
 
 
 def make_linear_system(L, trimap, lambda_value=100.0, return_c=False):

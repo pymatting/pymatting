@@ -9,7 +9,6 @@ def _cf(image, epsilon, r, values, indices, indptr):
     assert d == 3
     size = 2 * r + 1
     window_area = size * size
-    n = w * h
 
     for yi in range(h):
         for xi in range(w):

@@ -1,11 +1,7 @@
 import scipy.sparse.linalg
 import numpy as np
-import time
-import json
-import os
 from pymatting import (
     load_image,
-    show_images,
     trimap_split,
     make_linear_system,
     LAPLACIANS,
@@ -15,7 +11,6 @@ from pymatting import (
 def test_laplacians():
     indices = np.arange(27) + 1
     scale = 0.1
-    atol = 1e-5
     image_dir = "data"
 
     # allow 1% regression
@@ -201,10 +196,6 @@ def test_laplacians():
             A, b = make_linear_system(laplacian(image), trimap)
 
             x = scipy.sparse.linalg.spsolve(A, b)
-
-            r = b - A.dot(x)
-
-            norm_r = np.linalg.norm(r)
 
             alpha = np.clip(x, 0, 1).reshape(trimap.shape)
 

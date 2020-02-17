@@ -17,9 +17,9 @@ bar_widths = []
 bar_labels = []
 for laplacian_name, errors in info.items():
     bar_labels.append(names[laplacian_name])
-    
+
     errors = list(errors.values())
-    
+
     bar_widths.append(np.mean(errors))
 
 bar_widths, bar_labels = zip(*sorted(zip(bar_widths, bar_labels), reverse=True))

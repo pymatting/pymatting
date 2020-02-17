@@ -21,7 +21,10 @@ def run_boxfilter(m, n, r, mode, n_runs):
 
         assert np.all(np.isfinite(dst))
 
-        # print("%f gbyte/sec, %f seconds, max_error: %.20f %e %d-by-%d, r=%d" % (dst.nbytes * 1e-9 / dt, dt, max_error, max_error, m, n, r))
+        print(
+            "%f gbyte/sec, %f seconds, max_error: %.20f %e %d-by-%d, r=%d"
+            % (dst.nbytes * 1e-9 / dt, dt, max_error, max_error, m, n, r)
+        )
 
         assert max_error < 1e-10
 

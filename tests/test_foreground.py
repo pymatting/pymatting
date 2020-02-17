@@ -4,7 +4,6 @@ from pymatting import (
     load_image,
     estimate_foreground_cf,
     estimate_foreground_ml,
-    show_images,
     trimap_split,
 )
 
@@ -17,19 +16,21 @@ def test_foreground():
         from pymatting.foreground.estimate_foreground_ml_pyopencl import (
             estimate_foreground_ml_pyopencl,
         )
+
         methods = [
-        estimate_foreground_ml,
-        estimate_foreground_cf,
-        estimate_foreground_ml_cupy,
-        estimate_foreground_ml_pyopencl,
+            estimate_foreground_ml,
+            estimate_foreground_cf,
+            estimate_foreground_ml_cupy,
+            estimate_foreground_ml_pyopencl,
         ]
-    except:
+    except ImportError:
         methods = [
-        estimate_foreground_ml,
-        estimate_foreground_cf,
+            estimate_foreground_ml,
+            estimate_foreground_cf,
         ]
-        warnings.warn('Tests for GPU implementation skipped, because of missing packages.')
-        
+        warnings.warn(
+            "Tests for GPU implementation skipped, because of missing packages."
+        )
 
     max_mse = 0.022
     scale = 0.1
@@ -38,9 +39,6 @@ def test_foreground():
     alpha = load_image("data/lemur/lemur_alpha.png", "GRAY", scale, "box")
     expected_foreground = load_image(
         "data/lemur/lemur_foreground.png", "RGB", scale, "box"
-    )
-    expected_background = load_image(
-        "data/lemur/lemur_background.png", "RGB", scale, "box"
     )
 
     for estimate_foreground in methods:
