@@ -29,11 +29,16 @@ def cg(
         Solution of the system
     """
     if M is None:
-        precondition = lambda x: x
+
+        def precondition(x):
+            return x
+
     elif callable(M):
         precondition = M
     else:
-        precondition = lambda x: M.dot(x)
+
+        def precondition(x):
+            return M.dot(x)
 
     x = np.zeros_like(b) if x0 is None else x0.copy()
 

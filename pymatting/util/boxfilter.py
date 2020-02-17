@@ -3,6 +3,7 @@ from numba import njit, prange
 import numpy as np
 from pymatting.config.config import USE_NUMBA_PARALLEL
 
+
 @njit("f8[:, :](f8[:, :], i8)", cache=True, parallel=USE_NUMBA_PARALLEL)
 def boxfilter_rows_valid(src, r):
     m, n = src.shape

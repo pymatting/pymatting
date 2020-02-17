@@ -26,8 +26,8 @@ def _lbdm(image, epsilon, r):
     i_inds = np.zeros((n, area ** 2), dtype=np.int32)
     j_inds = np.zeros((n, area ** 2), dtype=np.int32)
 
-    gray = (image[:, :, 0] + image[:, :, 1] + image[:, :, 2]) / 3.0
-    v = np.std(gray)
+    # gray = (image[:, :, 0] + image[:, :, 1] + image[:, :, 2]) / 3.0
+    # v = np.std(gray)
 
     for y in range(r, h - r):
         for x in range(r, w - r):

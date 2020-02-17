@@ -18,7 +18,8 @@ def test_cg():
 
         M_jacobi = np.diag(1.0 / np.diag(A))
 
-        precondition = lambda x: M_jacobi.dot(x)
+        def precondition(x):
+            return M_jacobi.dot(x)
 
         for x0 in [None, np.random.rand(n)]:
             for M in [None, M_jacobi, precondition]:

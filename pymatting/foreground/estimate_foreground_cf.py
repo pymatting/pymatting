@@ -4,6 +4,7 @@ from pymatting.solver.cg import cg
 import scipy.sparse
 import numpy as np
 
+
 def estimate_foreground_cf(
     image,
     alpha,
@@ -55,9 +56,9 @@ def estimate_foreground_cf(
     stack_images: This function can be used to place the foreground on a new background.
     """
     h, w, d = image.shape
-    
-    assert(alpha.shape == (h, w))
-        
+
+    assert alpha.shape == (h, w)
+
     n = w * h
 
     a = alpha.flatten()
@@ -66,26 +67,21 @@ def estimate_foreground_cf(
     for dx, dy in neighbors:
         # directional derivative
         D = sparse_conv_matrix_with_offsets(w, h, [1.0, -1.0], [0, dx], [0, dy])
-        
+
         S2 = D.T.dot(scipy.sparse.diags(regularization + np.abs(D.dot(a)))).dot(D)
-        
+
         S = S2 if S is None else S + S2
-        
+
         del D, S2
-    
-    V = scipy.sparse.bmat([
-        [S, None],
-        [None, S],
-    ])
-    
+
+    V = scipy.sparse.bmat([[S, None], [None, S]])
+
     del S
-    
-    U = scipy.sparse.bmat([
-        [scipy.sparse.diags(a), scipy.sparse.diags(1 - a)]
-    ])
-    
+
+    U = scipy.sparse.bmat([[scipy.sparse.diags(a), scipy.sparse.diags(1 - a)]])
+
     A = U.T.dot(U) + V
-    
+
     A.sum_duplicates()
 
     del V
@@ -102,18 +98,17 @@ def estimate_foreground_cf(
         image_channel = image[:, :, channel].flatten()
 
         b = U.T.dot(image_channel)
-        
+
         # Initialization vector for conjugate gradient descent
-        fb = np.concatenate([
-            foreground[:, :, channel].flatten(),
-            background[:, :, channel].flatten(),
-        ])
-    
+        f0 = foreground[:, :, channel].flatten()
+        b0 = background[:, :, channel].flatten()
+        fb = np.concatenate([f0, b0])
+
         # Solve linear system
         # A fb = b
         # for fb using conjugate gradient descent
         fb = cg(A, b, x0=fb, M=precondition, rtol=rtol, **cg_kwargs)
-        
+
         foreground[:, :, channel] = fb[:n].reshape(h, w)
         background[:, :, channel] = fb[n:].reshape(h, w)
 
@@ -122,5 +117,5 @@ def estimate_foreground_cf(
 
     if return_background:
         return foreground, background
-    
+
     return foreground

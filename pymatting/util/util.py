@@ -7,7 +7,7 @@ from functools import wraps
 
 def apply_to_channels(single_channel_func):
     """Creates a new function which operates on each channel.
-    
+
     Parameters
     ----------
     single_channel_func: function
@@ -42,7 +42,7 @@ def apply_to_channels(single_channel_func):
 
 def vec_vec_dot(a, b):
     """Computes the dot product of two vectors.
-    
+
     Parameters
     ----------
     a: numpy.ndarray
@@ -60,7 +60,7 @@ def vec_vec_dot(a, b):
 
 def mat_vec_dot(A, b):
     """Calculates the matrix vector product for two arrays.
-    
+
     Parameters
     ----------
     A: numpy.ndarray
@@ -78,7 +78,7 @@ def mat_vec_dot(A, b):
 
 def vec_vec_outer(a, b):
     """Computes the outer product of two vectors
-    
+
     a: numpy.ndarray
         First vector (if np.ndim(b) > 1 the function calculates the product for the two last axes)
     b: numpy.ndarray
@@ -99,7 +99,7 @@ def isiterable(obj):
     ----------
     obj: object
         Object to check
-    
+
     Returns
     -------
     is_iterable: bool
@@ -133,14 +133,14 @@ def _resize_pil_image(image, size, resample="bicubic"):
 
 def load_image(path, mode=None, size=None, resample="box"):
     """This function can be used to load an image from a file.
-    
+
     Parameters
     ----------
     path: str
         Path of image to load.
     mode: str
         Can be \"GRAY\", \"RGB\" or something else (see PIL.convert())
-    
+
     Returns
     -------
     image: numpy.ndarray
@@ -164,7 +164,7 @@ def load_image(path, mode=None, size=None, resample="box"):
 
 def save_image(path, image, make_directory=True):
     """Given a path, save an image there.
-    
+
     Parameters
     ----------
     path: str
@@ -191,7 +191,7 @@ def save_image(path, image, make_directory=True):
 
 def to_rgb8(image):
     """Convertes an image to rgb8 color space
-    
+
     Parameters
     ----------
     image: numpy.ndarray
@@ -329,7 +329,7 @@ def show_images(images):
 
 
 def trimap_split(trimap, flatten=True):
-    """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown. 
+    """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown.
 
     Foreground pixels are pixels where the trimap has value 1.0. Background pixels are pixels where the trimap has value 0.
 
@@ -369,7 +369,7 @@ def trimap_split(trimap, flatten=True):
 
 
 def blend(foreground, background, alpha):
-    """This function composes a new image for given foreground image, background image and alpha matte. 
+    """This function composes a new image for given foreground image, background image and alpha matte.
 
     This is done by applying the composition equation
 
@@ -431,8 +431,9 @@ def row_sum(A):
         Vector of summed rows
     """
     row_sums = A.dot(np.ones(A.shape[1], A.dtype))
-    
+
     return row_sums
+
 
 def normalize_rows(A, threshold=0.0):
     """Normalize the rows of a matrix
@@ -573,7 +574,7 @@ def sparse_conv_matrix(width, height, kernel):
 
 def weights_to_laplacian(W, normalize=True, regularization=0.0):
     """Calculates the random walk normlized Laplacian matrix from the weight matrix
-    
+
     Parameters
     ----------
     W: numpy.ndarray
@@ -588,8 +589,6 @@ def weights_to_laplacian(W, normalize=True, regularization=0.0):
     L: scipy.sparse.spmatrix
         Laplacian matrix
     """
-    n = W.shape[0]
-
     if normalize:
         W = normalize_rows(W)
 
@@ -626,7 +625,7 @@ def div_round_up(x, n):
     Parameters
     ----------
     x: int
-        Numerator 
+        Numerator
     n: int
         Denominator
 

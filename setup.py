@@ -1,9 +1,11 @@
 import os
 from setuptools import setup, find_packages
 
+
 def load_text(path):
     with open(path, encoding="utf-8") as f:
         return f.read()
+
 
 # load information about package
 path = os.path.join(os.path.dirname(__file__), "pymatting", "__about__.py")
@@ -22,16 +24,14 @@ setup(
     license=about["__license__"],
     packages=find_packages(),
     install_requires=load_text("requirements.txt").strip().split("\n"),
-    keywords='alpha matting',
-    python_requires='>=3',
+    keywords="alpha matting",
+    python_requires=">=3",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    project_urls={
-        "Source": "https://github.com/pymatting/pymatting",
-    },
+    project_urls={"Source": "https://github.com/pymatting/pymatting"},
     # Fix for Numba caching issue
     zip_safe=False,
 )

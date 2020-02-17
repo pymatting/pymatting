@@ -11,7 +11,6 @@ def run_kdtree():
     n_data = 100_000
     n_query = n_data
     dimension = 5
-    min_leaf_size = 8
 
     data_points = np.random.rand(n_data, dimension).astype(np.float32)
     query_points = np.random.rand(n_query, dimension).astype(np.float32)
@@ -45,4 +44,3 @@ def run_kdtree():
 def test_kdtree():
     for _ in range(10):
         run_kdtree()
-

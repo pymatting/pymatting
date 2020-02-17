@@ -1,5 +1,4 @@
 from pymatting import *
-import numpy as np
 
 scale = 1.0
 

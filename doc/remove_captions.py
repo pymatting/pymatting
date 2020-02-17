@@ -12,4 +12,3 @@ text = re.sub(r"Subpackages\n-+\n", "", text)
 
 with open(name, "w") as f:
     f.write(text)
-            

@@ -289,7 +289,7 @@ class KDTree(object):
             Data points for which the next neighbours should be calculated
         k: int
             Number of neighbors to return
-        
+
         Returns
         -------
         distances: numpy.ndarray
@@ -334,9 +334,9 @@ def knn(data_points, query_points, k):
         Dataset
     query_points: numpy.ndarray
         Data points for which the next neighbours should be calculated
-    k: int 
+    k: int
         Number of neighbors
-    
+
     Returns
     -------
     distances: numpy.ndarray
