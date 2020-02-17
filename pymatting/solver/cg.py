@@ -33,7 +33,7 @@ def cg(
     elif callable(M):
         precondition = M
     else:
-        precondition = M.dot(x)
+        precondition = lambda x: M.dot(x)
 
     x = np.zeros_like(b) if x0 is None else x0.copy()
 
@@ -43,6 +43,11 @@ def cg(
         r = b - A(x)
     else:
         r = b - A.dot(x)
+
+    norm_r = np.linalg.norm(r)
+
+    if norm_r < atol or norm_r < rtol * norm_b:
+        return x
 
     z = precondition(r)
     p = z.copy()
