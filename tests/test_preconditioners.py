@@ -28,7 +28,7 @@ def test_preconditioners():
         f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
         "gray",
         scale,
-        "bilinear",
+        "nearest",
     )
 
     A, b = make_linear_system(cf_laplacian(image), trimap)

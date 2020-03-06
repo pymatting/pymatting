@@ -15,7 +15,7 @@ def test_alpha():
         f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
         "gray",
         scale,
-        "bilinear",
+        "nearest",
     )
     true_alpha = load_image(
         f"{image_dir}/gt_training_lowres/{name}.png", "gray", scale, "nearest"
@@ -25,7 +25,7 @@ def test_alpha():
         (estimate_alpha, 4.4),
         (estimate_alpha_cf, 4.4),
         (estimate_alpha_lbdm, 4.4),
-        (estimate_alpha_rw, 6.1),
+        (estimate_alpha_rw, 6.2),
         (estimate_alpha_knn, 3.6),
         (lambda *args: estimate_alpha_lkm(*args, laplacian_kwargs={"radius": 1}), 4.4),
     ]:

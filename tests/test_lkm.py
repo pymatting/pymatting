@@ -26,7 +26,7 @@ def test_lkm():
         f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
         "gray",
         scale,
-        "bilinear",
+        "nearest",
     )
 
     L_lkm, diag_L_lkm = lkm_laplacian(image, epsilon=epsilon, radius=radius)
@@ -53,5 +53,5 @@ def test_lkm():
 
     difference = np.linalg.norm(x_lkm - x_cf)
 
-    assert difference < 1e-5
+    assert difference < 2e-4
     assert abs(lkm_callback.n - cf_callback.n) <= 2

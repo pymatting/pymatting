@@ -126,7 +126,7 @@ def _resize_pil_image(image, size, resample="bicubic"):
     if not isiterable(size):
         size = (int(image.width * size), int(image.height * size))
 
-    image = image.resize(size, filters[resample])
+    image = image.resize(size, filters[resample.lower()])
 
     return image
 
@@ -362,8 +362,21 @@ def trimap_split(trimap, flatten=True):
 
     if is_fg.sum() == 0:
         raise ValueError("Trimap did not contain background values (values = 0)")
+
     if is_bg.sum() == 0:
         raise ValueError("Trimap did not contain foreground values (values = 1)")
+
+    counts = np.bincount(np.clip(trimap * 255, 0, 255).astype(np.uint8).ravel())
+
+    n_colors = np.sum(counts > 0)
+
+    if n_colors > 3:
+        raise ValueError(
+            "Trimap has %d colors, but should have no more than 3 (black, white, gray).\n"
+            "Make sure that your trimaps are stored as PNG instead of JPG.\n"
+            "If you scaled the trimap, make sure to use nearest filtering:\n"
+            '    load_image("trimap.png", "GRAY", 0.5, "nearest")' % n_colors
+        )
 
     return is_fg, is_bg, is_known, is_unknown
 
