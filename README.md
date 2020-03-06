@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/github/license/pymatting/pymatting?color=brightgreen)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/travis/pymatting/pymatting?label=Travis%20CI)](https://travis-ci.org/pymatting/pymatting)
 [![PyPI](https://img.shields.io/pypi/v/pymatting)](https://pypi.org/project/PyMatting/)
+[![Gitter](https://img.shields.io/gitter/room/pymatting/pymatting)](https://gitter.im/pymatting/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
 
