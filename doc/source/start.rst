@@ -35,5 +35,5 @@ Run the tests from the main directory:
    python3 tests/download_images.py
    pip3 install -r requirements_tests.txt
    pytest
-   
-To skip the tests of the GPU implementation use the --no_gpu option.
+
+Pytest will throw a warning if PyOpenCL or CuPy are not available.
