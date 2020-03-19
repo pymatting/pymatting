@@ -20,8 +20,19 @@ def cg(
        Square matrix
     b: numpy.ndarray
        Vector describing the right-hand side of the system
-    M: function
-       Preconditioning matrix
+    x0: numpy.ndarray
+       Initialization, if `None` then :code:`x=np.zeros_like(b)`
+    atol: float
+       Absolute tolerance. The loop terminates if the :math:`||r||` is smaller than `atol`, where :math:`r` denotes the residual of the current iterate.
+    rtol: float
+       Relative tolerance. The loop terminates if :math:`{||r||}/{||b||}` is smaller than `rtol`, where :math:`r` denotes the residual of the current iterate.
+    callback: function
+       Function :code:`callback(A, x, b, norm_b, r, norm_r)` called after each iteration, defaults to `None`
+    M: function or scipy.sparse.csr_matrix
+       Function that applies the preconditioner to a vector. Alternatively, `M` can be a matrix describing the precondioner.
+    reorthogonalize: boolean
+        Wether to apply reorthogonalization of the residuals after each update, defaults to `False`
+
     
     Returns
     -------

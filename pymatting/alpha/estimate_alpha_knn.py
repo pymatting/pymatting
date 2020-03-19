@@ -14,7 +14,7 @@ def estimate_alpha_knn(
     Parameters
     -----------------
     image: numpy.ndarray
-        Image with shape :math:`h \\times  w \\times d` for which the foreground should be estimated
+        Image with shape :math:`h \\times  w \\times d` for which the alpha matte should be estimated
     trimap: numpy.ndarray
         Trimap with shape :math:`h \\times  w \\times 1` of the image
     preconditioner: function or scipy.sparse.linalg.LinearOperator
@@ -22,7 +22,7 @@ def estimate_alpha_knn(
     laplacian_kwargs: dictionary
         Arguments passed to the :code:`knn_laplacian` function
     cg_kwargs: dictionary
-        Arguments passed to the :code:`cg`
+        Arguments passed to the :code:`cg` solver
 
     Returns
     ----------------

@@ -9,13 +9,17 @@ def cutout(image_path, trimap_path, cutout_path):
     This method is using Closed-Form Alpha Matting as proposed by :cite:`levin2007closed`.
 
     Parameters
-    -----------------
+    ----------
     image_path: str
         Path of input image
     trimap_path: str
         Path of input trimap
     cutout_path: str
         Path of output cutout image
+
+    Example
+    -------
+    >>> cutout("../data/lemur.png", "../data/lemur_trimap.png", "lemur_cutout.png")
     """
     image = load_image(image_path, "RGB")
     trimap = load_image(trimap_path, "GRAY")

@@ -35,7 +35,7 @@ Simply multiplying the alpha matte with the input image results in halo artifact
 .. figure:: figures/lemur_color_bleeding.png
    :align: center
 
-   Figure 2: Input image multiplied with estimated alpha matte (left) and extracted foreground (right).
+   Figure 2: Input image naively composed onto a grey background (left) and extracted foreground placed onto the same background (right).
 
 The following foreground estimation methods are implemented in PyMatting:
 
