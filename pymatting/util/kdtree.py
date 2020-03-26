@@ -241,15 +241,23 @@ def _find_knn(
 
 
 class KDTree(object):
+    """KDTree implementation"""
     def __init__(self, data_points, min_leaf_size=8):
-        """Constructs a KDTree for given data points
+        """Constructs a KDTree for given data points. The implementation currently only supports data type `np.float32`.
 
         Parameters
         ----------
-        data_points: numpy.ndarray
-            Data to store in Tree
+        data_points: numpy.ndarray (of type `np.float32`)
+            Dataset with shape :math:`n \\times d`, where :math:`n` is the number of data points in the data set and :math:`d` is the dimension of each data point
         min_leaf_size: int
-            Minimum number of nodes in a leaf, deafaults to 8.
+            Minimum number of nodes in a leaf, defaults to 8
+
+        Example
+        -------
+        >>> from pymatting import *
+        >>> import numpy as np
+        >>> data_set = np.random.randn(100, 2)
+        >>> tree = KDTree(data_set.astype(np.float32))
         """
         assert data_points.dtype == np.float32
 
@@ -285,10 +293,10 @@ class KDTree(object):
 
         Parameters
         ----------
-        query_points: numpy.ndarray
+        query_points: numpy.ndarray (of type `np.float32`)
             Data points for which the next neighbours should be calculated
         k: int
-            Number of neighbors to return
+            Number of neighbors to extract
 
         Returns
         -------
@@ -296,6 +304,15 @@ class KDTree(object):
             Distances to the neighbors
         indices: numpy.ndarray
             Indices of the k nearest neighbors in original data array
+        
+        Example
+        -------
+        >>> from pymatting import *
+        >>> import numpy as np
+        >>> data_set = np.random.randn(100, 2)
+        >>> tree = KDTree(data_set.astype(np.float32))
+        >>> tree.query(np.array([[0.5,0.5]], dtype=np.float32), k=3)
+        (array([[0.14234178, 0.15879704, 0.26760164]], dtype=float32), array([[29, 21, 20]]))
         """
         assert query_points.dtype == np.float32
 
@@ -326,16 +343,16 @@ class KDTree(object):
 
 
 def knn(data_points, query_points, k):
-    """Find k nearest neighbors
+    """Find k nearest neighbors in a data set. The implementation currently only supports data type `np.float32`.
 
     Parameters
     ----------
-    data_points: numpy.ndarray
-        Dataset
-    query_points: numpy.ndarray
+    data_points: numpy.ndarray (of type `np.float32`)
+        Dataset with shape :math:`n \\times d`, where :math:`n` is the number of data points in the data set and :math:`d` is the dimension of each data point
+    query_points: numpy.ndarray (of type `np.float32`)
         Data points for which the next neighbours should be calculated
     k: int
-        Number of neighbors
+        Number of neighbors to extract
 
     Returns
     -------
@@ -343,6 +360,14 @@ def knn(data_points, query_points, k):
         Distances to the neighbors
     indices: numpy.ndarray
         Indices of the k nearest neighbors in original data array
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> data_set = np.random.randn(100, 2)
+    >>> knn(data_set.astype(np.float32), np.array([[0.5,0.5]], dtype=np.float32), k=2)
+    (array([[0.16233477, 0.25393516]], dtype=float32), array([[25, 17]]))
     """
     tree = KDTree(data_points)
     return tree.query(query_points, k)
