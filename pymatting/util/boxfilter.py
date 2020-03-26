@@ -88,30 +88,54 @@ def boxfilter_rows_full(src, r):
 
 
 @apply_to_channels
-def boxfilter(src, radius, mode):
-    """Computes the boxfilter (uniform blur) of an input image.
+def boxfilter(src, radius=3, mode="same"):
+    """Computes the boxfilter (uniform blur, i.e. blur with kernel :code:`np.ones(radius, radius)`) of an input image.
     
     Depending on the mode, the input image of size :math:`(h, w)` is either of shape
     
-    * :math:`(h - 2 r, w - 2 r)` in case of `'valid'` mode
-    * :math:`(h, w)` in case of `'same'` mode
-    * :math:`(h + 2 r, w + 2 r)` in case of `'full'` mode
+    * :math:`(h - 2 r, w - 2 r)` in case of 'valid' mode
+    * :math:`(h, w)` in case of 'same' mode
+    * :math:`(h + 2 r, w + 2 r)` in case of 'full' mode
 
     .. image:: figures/padding.png
 
     Parameters
     ----------
     src: numpy.ndarray
-        Input image
+        Input image having either shape :math:`h \\times w \\times d`  or :math:`h \\times w`
     radius: int
-        Radius of boxfilter
+        Radius of boxfilter, defaults to :math:`3`
     mode: str
-        One of 'valid', 'same' or 'full'
+        One of 'valid', 'same' or 'full', defaults to 'same'
     
     Returns
     -------
     dst: numpy.ndarray
-        
+        Blurred image
+    
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> boxfilter(np.eye(5), radius=2, mode="valid")
+    array([[5.]])
+    >>> boxfilter(np.eye(5), radius=2, mode="same")
+    array([[3., 3., 3., 2., 1.],
+           [3., 4., 4., 3., 2.],
+           [3., 4., 5., 4., 3.],
+           [2., 3., 4., 4., 3.],
+           [1., 2., 3., 3., 3.]])
+    >>> boxfilter(np.eye(5), radius=2, mode="full")
+    array([[1., 1., 1., 1., 1., 0., 0., 0., 0.],
+           [1., 2., 2., 2., 2., 1., 0., 0., 0.],
+           [1., 2., 3., 3., 3., 2., 1., 0., 0.],
+           [1., 2., 3., 4., 4., 3., 2., 1., 0.],
+           [1., 2., 3., 4., 5., 4., 3., 2., 1.],
+           [0., 1., 2., 3., 4., 4., 3., 2., 1.],
+           [0., 0., 1., 2., 3., 3., 3., 2., 1.],
+           [0., 0., 0., 1., 2., 2., 2., 2., 1.],
+           [0., 0., 0., 0., 1., 1., 1., 1., 1.]])
+
     """
     assert radius > 0
     assert mode in ["valid", "same", "full"]

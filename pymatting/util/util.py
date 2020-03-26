@@ -6,7 +6,7 @@ from functools import wraps
 
 
 def apply_to_channels(single_channel_func):
-    """Creates a new function which operates on each channel.
+    """Creates a new function which operates on each channel
 
     Parameters
     ----------
@@ -17,6 +17,20 @@ def apply_to_channels(single_channel_func):
     -------
     channel_func: function
         The same function that operates on all color channels
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> # Let's pretend this function only operates on a single channel
+    >>> single_channel_fun = lambda x: x+1
+    >>> multi_channel_fun = apply_to_channels(single_channel_fun)
+    >>> I = np.random.rand(2,2,2)
+    >>> multi_channel_fun(I)
+    array([[[1.51525934, 1.54816556],
+            [1.9683256 , 1.65541576]],
+           [[1.44807138, 1.23979345],
+            [1.75529754, 1.81198415]]])
     """
 
     @wraps(single_channel_func)
@@ -758,7 +772,7 @@ def normalize(values):
 
 
 def div_round_up(x, n):
-    """Divides a number x by another integer n
+    """Divides a number x by another integer n and rounds the result up
 
     Parameters
     ----------
