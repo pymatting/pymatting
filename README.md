@@ -75,7 +75,16 @@ cutout(
 
 [More advanced examples](https://github.com/pymatting/pymatting/tree/master/examples)
 
-### Testing
+## Trimap Construction
+
+All implemented methods rely on trimaps which roughly classify the image into foreground, background and unknown reagions.
+Trimaps are expected to be `numpy.ndarrays` of type `np.float64`  having the same shape as the input image with only one color-channel.
+Trimap values of 0.0 denote pixels which are 100% background.
+Similarly, trimap values of 1.0 denote pixels which are 100% foreground.
+All other values indicate unknown pixels which will be estimated by the algorithm.
+
+
+## Testing
 
 Run the tests from the main directory:
 ```

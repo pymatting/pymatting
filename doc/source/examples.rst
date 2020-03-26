@@ -1,8 +1,16 @@
 Examples
 ========
 
+We provide different examples at different levels of abstraction.
+
+.. _example-simple:
+
 Simple Example
 ---------------
+
+This simple example is intended for application-oriented users.
+All parameters were set beforehand and should work well on most images.
+The :code:`cutout()` method employs closed-form alpha matting :cite:`levin2007closed` and multi-level foreground extraction :cite:`germer2020multilevel`.
 
 .. code-block:: python
    
@@ -19,6 +27,10 @@ Simple Example
 
 Advanced Example
 ----------------
+
+The following example demonstrates the use of the :code:`estimate_alpha_cf()` method as well as the :code:`estimate_foreground_ml()` method.
+Both methods can be easily replaced by other methods from the :code:`pymatting.alpha` and from the :code:`pymatting.foreground` module, respectively.
+Parameters can be tweaked by passing them to the corresponding function calls.
 
 .. code-block:: python
 
@@ -60,6 +72,10 @@ Advanced Example
 
 Expert Example
 --------------
+
+The third example provides an insight how PyMatting is working under-the-hood. The matting Laplacian matrix and the system of linear equations are constructed manually.
+The alpha matte is then calculated a preconditioner (using the :code:`ichol()` method) and solving the system using the :code:`cg()` method.
+This example is intended for developers and (future) contributors to demonstrate the implementation of the different alpha matting methods.
 
 .. code-block:: python
 
