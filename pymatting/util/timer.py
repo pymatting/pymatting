@@ -17,6 +17,17 @@ class Timer(object):
         ----------
         message: str
             Message to print in front of passed seconds
+
+        Example
+        -------
+        >>> from pymatting import *
+        >>> t = Timer()
+        >>> t.stop()
+        2.6157200919999966
+        >>> t = Timer()
+        >>> t.stop('Test')
+        Test  - 11.654551 seconds
+        11.654551381000001
         """
         delta_time = time.perf_counter() - self.t
 

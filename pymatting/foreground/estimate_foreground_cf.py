@@ -28,7 +28,7 @@ def estimate_foreground_cf(
     alpha: numpy.ndarray
         Input alpha matte.
     regularization: float
-        Regularization strength :math:`\\epsilon`, defaults to 1e-5.
+        Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`.
     neighbors: list of tuples of ints
         List of relative positions that define the neighborhood of a pixel.
     return_background: bool
@@ -52,7 +52,7 @@ def estimate_foreground_cf(
         Extracted background (not returned by default)
     
     See Also
-    ----
+    --------
     stack_images: This function can be used to place the foreground on a new background.
     """
     h, w, d = image.shape

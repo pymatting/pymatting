@@ -54,6 +54,15 @@ def vec_vec_dot(a, b):
     -------
     product: scalar
         Dot product of `a` and `b`
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from pymatting import *
+    >>> a = np.ones(2)
+    >>> b = np.ones(2)
+    >>> vec_vec_dot(a,b)
+    2.0
     """
     return np.einsum("...i,...i->...", a, b)
 
@@ -70,8 +79,17 @@ def mat_vec_dot(A, b):
 
     Returns
     -------
-    channel_func: function
-        The same function that operates on all color channels
+    product: numpy.ndarray
+        Matrix vector product of both arrays
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from pymatting import *
+    >>> A = np.eye(2,2)
+    >>> b = np.ones(2)
+    >>> mat_vec_dot(A,b)
+    array([1., 1.])
     """
     return np.einsum("...ij,...j->...i", A, b)
 
@@ -88,6 +106,16 @@ def vec_vec_outer(a, b):
     -------
     product: numpy.ndarray
         Outer product of `a` and `b` as numpy.ndarray
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from pymatting import *
+    >>> a = np.arange(1,3)
+    >>> b = np.arange(1,3)
+    >>> vec_vec_outer(a,b)
+    array([[1, 2],
+           [2, 4]])
     """
     return np.einsum("...i,...j", a, b)
 
@@ -104,6 +132,13 @@ def isiterable(obj):
     -------
     is_iterable: bool
         Boolean variable indicating wether the object is iterable
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> l = []
+    >>> isiterable(l)
+    True
     """
     try:
         iter(obj)
@@ -201,6 +236,17 @@ def to_rgb8(image):
     -------
     image: numpy.ndarray
         Converted image with same height and width as input image but with three color channels
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> I = np.eye(2)
+    >>> to_rgb8(I)
+    array([[[255, 255, 255],
+            [  0,   0,   0]],
+
+           [[  0,   0,   0],
+            [255, 255, 255]]], dtype=uint8)
     """
     assert len(image.shape) in [2, 3]
     assert image.dtype in [np.uint8, np.float32, np.float64]
@@ -350,6 +396,21 @@ def trimap_split(trimap, flatten=True):
         Boolean array indicating which pixel is known
     is_unknown: numpy.ndarray
         Boolean array indicating which pixel is unknown
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from pymatting import *
+    >>> T = np.array([[1,0],[0.5,0.2]])
+    >>> is_fg, is_bg, is_known, is_unknown = trimap_split(T)
+    >>> is_fg
+    array([ True, False, False, False])
+    >>> is_bg
+    array([False,  True, False, False])
+    >>> is_known
+    array([ True,  True, False, False])
+    >>> is_unknown
+    array([False, False,  True,  True])
     """
     if flatten:
         trimap = trimap.flatten()
@@ -422,6 +483,14 @@ def stack_images(*images):
     -------
     image: numpy.ndarray
         Stacked images as numpy.ndarray
+
+    Example
+    -------
+    >>> from pymatting.util.util import stack_images
+    >>> import numpy as np
+    >>> I = stack_images(np.random.rand(4,5,3), np.random.rand(4,5,3))
+    >>> I.shape
+    (4, 5, 6)
     """
     images = [
         (image if len(image.shape) == 3 else image[:, :, np.newaxis])
@@ -442,6 +511,17 @@ def row_sum(A):
     -------
     row_sums: np.ndarray
         Vector of summed rows
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> A = np.random.rand(2,2)
+    >>> A
+    array([[0.62750946, 0.12917617],
+           [0.8599449 , 0.5777254 ]])
+    >>> row_sum(A)
+    array([0.75668563, 1.4376703 ])
     """
     row_sums = A.dot(np.ones(A.shape[1], A.dtype))
 
@@ -464,6 +544,15 @@ def normalize_rows(A, threshold=0.0):
     -------
     A: scipy.sparse.spmatrix
         Matrix with normalized rows
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> A = np.arange(4).reshape(2,2)
+    >>> normalize_rows(A)
+    array([[0. , 1. ],
+           [0.4, 0.6]])
     """
     row_sums = row_sum(A)
 
@@ -497,6 +586,17 @@ def grid_coordinates(width, height, flatten=False):
         x coordinates
     y: numpy.ndarray
         y coordinates
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> x, y = grid_coordinates(2,2)
+    >>> x
+    array([[0, 1],
+           [0, 1]])
+    >>> y
+    array([[0, 0],
+           [1, 1]])
     """
     if flatten:
         x = np.tile(np.arange(width), height)
@@ -576,6 +676,14 @@ def sparse_conv_matrix(width, height, kernel):
     -------
     M: scipy.sparse.csr_matrix
         Convolution matrix
+    
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> sparse_conv_matrix(3,3,np.ones((3,3)))
+    <9x9 sparse matrix of type '<class 'numpy.float64'>'
+	with 49 stored elements in Compressed Sparse Row format>
     """
     kh, kw = kernel.shape
     x, y = grid_coordinates(kw, kh, flatten=True)
@@ -601,6 +709,16 @@ def weights_to_laplacian(W, normalize=True, regularization=0.0):
     -------
     L: scipy.sparse.spmatrix
         Laplacian matrix
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> weights_to_laplacian(np.ones((4,4)))
+    matrix([[ 0.75, -0.25, -0.25, -0.25],
+            [-0.25,  0.75, -0.25, -0.25],
+            [-0.25, -0.25,  0.75, -0.25],
+            [-0.25, -0.25, -0.25,  0.75]])
     """
     if normalize:
         W = normalize_rows(W)
@@ -625,6 +743,13 @@ def normalize(values):
     -------
     result: numpy.ndarray
         Normalized array
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> normalize(np.array([0, 1, 3, 10]))
+    array([0. , 0.1, 0.3, 1. ])
     """
     values = np.asarray(values)
     a = values.min()
@@ -646,5 +771,11 @@ def div_round_up(x, n):
     -------
     result: int
         Result
+    
+    Example
+    -------
+    >>> from pymatting import *
+    >>> div_round_up(3,2)
+    2
     """
     return (x + n - 1) // n

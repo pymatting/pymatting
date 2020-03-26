@@ -6,7 +6,7 @@ from pymatting.foreground.estimate_foreground_ml import estimate_foreground_ml
 def cutout(image_path, trimap_path, cutout_path):
     """
     Generate a cutout image from an input image and an input trimap.
-    This method is using Closed-Form Alpha Matting as proposed by :cite:`levin2007closed`.
+    This method is using closed-form alpha matting as proposed by :cite:`levin2007closed` and multi-level foreground extraction :cite:`germer2020multilevel`.
 
     Parameters
     ----------

@@ -180,12 +180,12 @@ def estimate_foreground_ml(
     alpha: numpy.ndarray
         Input alpha matte.
     regularization: float
-        Regularization strength :math:`\\epsilon`, defaults to 1e-5.
+        Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`.
         Higher regularization results in smoother colors.
     n_small_iterations: int
-        Number of iterations performed on small scale, defaults to 10.
+        Number of iterations performed on small scale, defaults to :math:`10`.
     n_big_iterations: int
-        Number of iterations performed on large scale, defaults to 2.
+        Number of iterations performed on large scale, defaults to :math:`2`.
     small_size: int
         Threshold that determines at which size `n_small_iterations` should be used.
     return_background: bool
