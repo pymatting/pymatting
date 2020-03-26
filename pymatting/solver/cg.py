@@ -38,6 +38,15 @@ def cg(
     -------
     x: numpy.ndarray
         Solution of the system
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> A = np.array([[5,4],[4,10]])
+    >>> M = jacobi(A)
+    >>> b = np.ones(2)
+    >>> cg(A, b)
+    array([0.17647059, 0.02941176])
     """
     if M is None:
 
