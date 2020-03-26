@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.sparse
+import scipy.sparse.linalg
 
 
 def make_P(shape):
@@ -108,13 +109,13 @@ def vcycle(
     Parameters
     ----------
     A: numpy.ndarray
-        Input matrix.
+        Input matrix
     shape: tuple of ints
-        Describing the height and width of the image.
+        Describing the height and width of the image
     num_pre_iter: int
-        Number of Jacobi iterations before each V-Cycle, defaults to 1.
+        Number of Jacobi iterations before each V-Cycle, defaults to 1
     num_post_iter: int
-        Number of Jacobi iterations after each V-Cycle, defaults to 1.
+        Number of Jacobi iterations after each V-Cycle, defaults to 1
     omega: float
         Weight parameter for the Jacobi method. If method fails to converge, try different values.
 
@@ -122,6 +123,16 @@ def vcycle(
     -------
     precondition: function
         Function which applies the V-Cycle preconditioner to a vector
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> from scipy.sparse import csc_matrix
+    >>> A = np.array([[2, 3], [3, 5]])
+    >>> preconditioner = vcycle(A, (2, 2))
+    >>> preconditioner(csc_matrix(np.array([[1], [2]])))
+    array([-1.,  1.])
     """
 
     if cache is None:

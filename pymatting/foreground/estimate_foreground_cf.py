@@ -17,7 +17,7 @@ def estimate_foreground_cf(
     ichol_kwargs={},
     cg_kwargs={},
 ):
-    """Estimates the foreground of an image given alpha matte and image
+    """Estimates the foreground of an image given alpha matte and image.
 
     This method is based on the publication :cite:`levin2007closed`.
 

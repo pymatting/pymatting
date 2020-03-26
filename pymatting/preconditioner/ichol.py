@@ -178,6 +178,15 @@ def ichol(
     ------
     ValueError
         If inappropriate parameter values were passed
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> A = np.array([[2.0, 3.0], [3.0, 5.0]])
+    >>> cholesky_decomposition = ichol(csc_matrix(A))
+    >>> cholesky_decomposition(np.array([1.0, 2.0]))
+    array([-1.,  1.])
     """
 
     if isinstance(A, scipy.sparse.csr_matrix):
