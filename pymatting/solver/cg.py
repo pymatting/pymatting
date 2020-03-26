@@ -42,11 +42,12 @@ def cg(
     Example
     -------
     >>> from pymatting import *
-    >>> A = np.array([[5,4],[4,10]])
+    >>> import numpy as np
+    >>> A = np.array([[3.0, 1.0], [1.0, 2.0]])
     >>> M = jacobi(A)
-    >>> b = np.ones(2)
-    >>> cg(A, b)
-    array([0.17647059, 0.02941176])
+    >>> b = np.array([4.0, 3.0])
+    >>> cg(A, b, M=M)
+    array([1., 1.])
     """
     if M is None:
 
