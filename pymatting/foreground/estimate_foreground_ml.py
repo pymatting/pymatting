@@ -171,23 +171,23 @@ def estimate_foreground_ml(
 ):
     """Estimates the foreground of an image given its alpha matte.
     
-    See (TODO submission pending) for reference.
+    See :cite:`germer2020multilevel` for reference.
 
     Parameters
     ----------
     image: numpy.ndarray
-        Input image.
+        Input image with shape :math:`h \\times  w \\times d`
     alpha: numpy.ndarray
-        Input alpha matte.
+        Input alpha matte shape :math:`h \\times  w \\times 1`
     regularization: float
         Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`.
         Higher regularization results in smoother colors.
     n_small_iterations: int
-        Number of iterations performed on small scale, defaults to :math:`10`.
+        Number of iterations performed on small scale, defaults to :math:`10`
     n_big_iterations: int
-        Number of iterations performed on large scale, defaults to :math:`2`.
+        Number of iterations performed on large scale, defaults to :math:`2`
     small_size: int
-        Threshold that determines at which size `n_small_iterations` should be used.
+        Threshold that determines at which size `n_small_iterations` should be used
     return_background: bool
         Whether to return the estimated background in addition to the foreground
     
@@ -197,6 +197,14 @@ def estimate_foreground_ml(
         Extracted foreground
     B: numpy.ndarray
         Extracted background
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> image = load_image("data/lemur/lemur.png", "RGB")
+    >>> alpha = load_image("data/lemur/lemur_alpha.png", "GRAY")
+    >>> F = estimate_foreground_ml(image, alpha, return_background=False)
+    >>> F, B = estimate_foreground_ml(image, alpha, return_background=True)
     
     See Also
     ----

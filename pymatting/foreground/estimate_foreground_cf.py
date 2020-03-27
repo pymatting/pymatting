@@ -24,15 +24,15 @@ def estimate_foreground_cf(
     Parameters
     ----------
     image: numpy.ndarray
-        Input image.
+        Input image with shape :math:`h \\times  w \\times d`
     alpha: numpy.ndarray
-        Input alpha matte.
+        Input alpha matte with shape :math:`h \\times  w \\times 1`
     regularization: float
-        Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`.
+        Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`
     neighbors: list of tuples of ints
-        List of relative positions that define the neighborhood of a pixel.
+        List of relative positions that define the neighborhood of a pixel
     return_background: bool
-        Whether to return the estimated background in addition to the foreground.
+        Whether to return the estimated background in addition to the foreground
     foreground_guess: numpy.ndarray
         An initial guess for the foreground image in order to accelerate convergence.
         Using input image by default.
@@ -40,9 +40,9 @@ def estimate_foreground_cf(
         An initial guess for the background image.
         Using input image by default.
     ichol_kwargs: dictionary
-        Keyword arguments for the incomplete Cholesky preconditioner.
+        Keyword arguments for the incomplete Cholesky preconditioner
     cg_kwargs: dictionary
-        Keyword arguments for the conjugate gradient descent solver.
+        Keyword arguments for the conjugate gradient descent solver
     
     Returns
     -------
@@ -50,6 +50,15 @@ def estimate_foreground_cf(
         Extracted foreground
     B: numpy.ndarray
         Extracted background (not returned by default)
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> image = load_image("data/lemur/lemur.png", "RGB")
+    >>> alpha = load_image("data/lemur/lemur_alpha.png", "GRAY")
+    >>> F = estimate_foreground_cf(image, alpha, return_background=False)
+    >>> F, B = estimate_foreground_cf(image, alpha, return_background=True)
+
     
     See Also
     --------

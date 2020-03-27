@@ -476,6 +476,14 @@ def blend(foreground, background, alpha):
     -------
     image: numpy.ndarray
         Composed image as numpy.ndarray
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> foreground = load_image("data/lemur/lemur_foreground.png", "RGB")
+    >>> background = load_image("data/lemur/beach.png", "RGB")
+    >>> alpha = load_image("data/lemur/lemur_alpha.png", "GRAY")
+    >>> I = blend(foreground, background, alpha)
     """
     if len(alpha.shape) == 2:
         alpha = alpha[:, :, np.newaxis]
