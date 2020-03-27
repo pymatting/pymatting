@@ -183,6 +183,7 @@ def ichol(
     -------
     >>> from pymatting import *
     >>> import numpy as np
+    >>> from scipy.sparse import csc_matrix
     >>> A = np.array([[2.0, 3.0], [3.0, 5.0]])
     >>> cholesky_decomposition = ichol(csc_matrix(A))
     >>> cholesky_decomposition(np.array([1.0, 2.0]))

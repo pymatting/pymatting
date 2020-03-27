@@ -13,17 +13,17 @@ All parameters were set beforehand and should work well on most images.
 The :code:`cutout()` method employs closed-form alpha matting :cite:`levin2007closed` and multi-level foreground extraction :cite:`germer2020multilevel`.
 
 .. code-block:: python
-   
+
     from pymatting import cutout
 
     cutout(
-	   # input image path
-	   "../data/lemur.png",
-	   # input trimap path
-	   "../data/lemur_trimap.png",
-	   # output cutout path
-	   "lemur_cutout.png")
-       
+       # input image path
+       "../data/lemur.png",
+       # input trimap path
+       "../data/lemur_trimap.png",
+       # output cutout path
+       "lemur_cutout.png")
+
 
 Advanced Example
 ----------------
@@ -73,8 +73,8 @@ Parameters can be tweaked by passing them to the corresponding function calls.
 Expert Example
 --------------
 
-The third example provides an insight how PyMatting is working under-the-hood. The matting Laplacian matrix and the system of linear equations are constructed manually.
-The alpha matte is then calculated a preconditioner (using the :code:`ichol()` method) and solving the system using the :code:`cg()` method.
+The third example provides an insight how PyMatting is working under-the-hood. The matting Laplacian matrix :code:`L` and the system of linear equations :code:`A x = b` are constructed manually. The solution vector :code:`x` is the flattened alpha matte.
+The alpha matte :code:`alpha` is then calculated by solving the linear system using the :code:`cg()` method. The convergence of the :code:`cg()` method is accelerated with a preconditioner using the :code:`ichol()` method.
 This example is intended for developers and (future) contributors to demonstrate the implementation of the different alpha matting methods.
 
 .. code-block:: python

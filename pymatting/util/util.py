@@ -22,15 +22,12 @@ def apply_to_channels(single_channel_func):
     -------
     >>> from pymatting import *
     >>> import numpy as np
-    >>> # Let's pretend this function only operates on a single channel
-    >>> single_channel_fun = lambda x: x+1
+    >>> from scipy.signal import convolve2d
+    >>> single_channel_fun = lambda x: convolve2d(x, np.ones((3, 3)), 'valid')
     >>> multi_channel_fun = apply_to_channels(single_channel_fun)
-    >>> I = np.random.rand(2,2,2)
-    >>> multi_channel_fun(I)
-    array([[[1.51525934, 1.54816556],
-            [1.9683256 , 1.65541576]],
-           [[1.44807138, 1.23979345],
-            [1.75529754, 1.81198415]]])
+    >>> I = np.random.rand(480, 320, 3)
+    >>> multi_channel_fun(I).shape
+    (478, 318, 3)
     """
 
     @wraps(single_channel_func)
@@ -100,7 +97,7 @@ def mat_vec_dot(A, b):
     -------
     >>> import numpy as np
     >>> from pymatting import *
-    >>> A = np.eye(2,2)
+    >>> A = np.eye(2)
     >>> b = np.ones(2)
     >>> mat_vec_dot(A,b)
     array([1., 1.])
@@ -414,8 +411,8 @@ def trimap_split(trimap, flatten=True):
     -------
     >>> import numpy as np
     >>> from pymatting import *
-    >>> T = np.array([[1,0],[0.5,0.2]])
-    >>> is_fg, is_bg, is_known, is_unknown = trimap_split(T)
+    >>> trimap = np.array([[1,0],[0.5,0.2]])
+    >>> is_fg, is_bg, is_known, is_unknown = trimap_split(trimap)
     >>> is_fg
     array([ True, False, False, False])
     >>> is_bg
@@ -697,14 +694,14 @@ def sparse_conv_matrix(width, height, kernel):
     -------
     M: scipy.sparse.csr_matrix
         Convolution matrix
-    
+
     Example
     -------
     >>> from pymatting import *
     >>> import numpy as np
     >>> sparse_conv_matrix(3,3,np.ones((3,3)))
     <9x9 sparse matrix of type '<class 'numpy.float64'>'
-	with 49 stored elements in Compressed Sparse Row format>
+    with 49 stored elements in Compressed Sparse Row format>
     """
     kh, kw = kernel.shape
     x, y = grid_coordinates(kw, kh, flatten=True)
@@ -779,7 +776,7 @@ def normalize(values):
 
 
 def div_round_up(x, n):
-    """Divides a number x by another integer n and rounds the result up
+    """Divides a number x by another integer n and rounds up the result
 
     Parameters
     ----------
@@ -792,7 +789,7 @@ def div_round_up(x, n):
     -------
     result: int
         Result
-    
+
     Example
     -------
     >>> from pymatting import *

@@ -131,7 +131,7 @@ def vcycle(
     >>> from scipy.sparse import csc_matrix
     >>> A = np.array([[2, 3], [3, 5]])
     >>> preconditioner = vcycle(A, (2, 2))
-    >>> preconditioner(csc_matrix(np.array([[1], [2]])))
+    >>> preconditioner(np.array([1, 2]))
     array([-1.,  1.])
     """
 

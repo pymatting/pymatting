@@ -29,10 +29,11 @@ def estimate_alpha_lkm(image, trimap, laplacian_kwargs={}, cg_kwargs={}):
     >>> from pymatting import *
     >>> image = load_image("data/lemur/lemur.png", "RGB")
     >>> trimap = load_image("data/lemur/lemur_trimap.png", "GRAY")
-    >>> alpha = estimate_alpha_lkm(image, 
-    ...                            trimap, 
-    ...                            laplacian_kwargs={"epsilon": 1e-6}, 
-    ...                            cg_kwargs={"maxiter":2000})
+    >>> alpha = estimate_alpha_lkm(
+    ...     image,
+    ...     trimap,
+    ...     laplacian_kwargs={"epsilon": 1e-6, "radius": 15},
+    ...     cg_kwargs={"maxiter":2000})
 
     """
     L_matvec, diag_L = lkm_laplacian(image, **laplacian_kwargs)

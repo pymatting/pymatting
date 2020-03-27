@@ -296,7 +296,7 @@ class KDTree(object):
         query_points: numpy.ndarray (of type `np.float32`)
             Data points for which the next neighbours should be calculated
         k: int
-            Number of neighbors to extract
+            Number of neighbors to find
 
         Returns
         -------
@@ -304,7 +304,7 @@ class KDTree(object):
             Distances to the neighbors
         indices: numpy.ndarray
             Indices of the k nearest neighbors in original data array
-        
+
         Example
         -------
         >>> from pymatting import *
@@ -352,7 +352,7 @@ def knn(data_points, query_points, k):
     query_points: numpy.ndarray (of type `np.float32`)
         Data points for which the next neighbours should be calculated
     k: int
-        Number of neighbors to extract
+        Number of neighbors to find
 
     Returns
     -------

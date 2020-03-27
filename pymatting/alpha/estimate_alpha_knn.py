@@ -34,10 +34,11 @@ def estimate_alpha_knn(
     >>> from pymatting import *
     >>> image = load_image("data/lemur/lemur.png", "RGB")
     >>> trimap = load_image("data/lemur/lemur_trimap.png", "GRAY")
-    >>> alpha = estimate_alpha_knn(image, 
-    ...                            trimap, 
-    ...                            laplacian_kwargs={"n_neighbors": [15, 10]}, 
-    ...                            cg_kwargs={"maxiter":2000})
+    >>> alpha = estimate_alpha_knn(
+    ...     image,
+    ...     trimap,
+    ...     laplacian_kwargs={"n_neighbors": [15, 10]},
+    ...     cg_kwargs={"maxiter":2000})
     """
     if preconditioner is None:
         preconditioner = jacobi

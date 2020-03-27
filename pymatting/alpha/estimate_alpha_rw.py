@@ -34,10 +34,11 @@ def estimate_alpha_rw(
     >>> from pymatting import *
     >>> image = load_image("data/lemur/lemur.png", "RGB")
     >>> trimap = load_image("data/lemur/lemur_trimap.png", "GRAY")
-    >>> alpha = estimate_alpha_rw(image, 
-    ...                           trimap, 
-    ...                           laplacian_kwargs={"sigma": 0.03}, 
-    ...                           cg_kwargs={"maxiter":2000})
+    >>> alpha = estimate_alpha_rw(
+    ....    image,
+    ...     trimap,
+    ...     laplacian_kwargs={"sigma": 0.03},
+    ...     cg_kwargs={"maxiter":2000})
 
     """
     if preconditioner is None:
