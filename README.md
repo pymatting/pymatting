@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/github/license/pymatting/pymatting?color=brightgreen)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/travis/pymatting/pymatting?label=Travis%20CI)](https://travis-ci.org/pymatting/pymatting)
 [![PyPI](https://img.shields.io/pypi/v/pymatting)](https://pypi.org/project/PyMatting/)
+[![Arxiv](http://img.shields.io/badge/cs.CV-arXiv-B31B1B.svg)](https://arxiv.org/abs/2003.12382)
 [![Gitter](https://img.shields.io/gitter/room/pymatting/pymatting)](https://gitter.im/pymatting/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
@@ -107,6 +108,21 @@ See also the list of [contributors](https://github.com/pymatting/pymatting/contr
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Citing
+
+If you found PyMatting to be useful for your work, please consider citing our paper:
+
+```
+@misc{germer2020pymatting,
+      title={PyMatting: A Python Library for Alpha Matting},
+      author={Thomas Germer and Tobias Uelwer and Stefan Conrad and Stefan Harmeling},
+      year={2020},
+      eprint={2003.12382},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
 ## References
 
