@@ -111,16 +111,16 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Citing
 
-If you found PyMatting to be useful for your work, please consider citing our paper:
+If you found PyMatting to be useful for your work, please consider citing our [paper](https://arxiv.org/abs/2003.12382):
 
 ```
 @misc{germer2020pymatting,
-      title={PyMatting: A Python Library for Alpha Matting},
-      author={Thomas Germer and Tobias Uelwer and Stefan Conrad and Stefan Harmeling},
-      year={2020},
-      eprint={2003.12382},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+  title={PyMatting: A Python Library for Alpha Matting},
+  author={Thomas Germer and Tobias Uelwer and Stefan Conrad and Stefan Harmeling},
+  year={2020},
+  eprint={2003.12382},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
 }
 ```
 
@@ -128,7 +128,6 @@ If you found PyMatting to be useful for your work, please consider citing our pa
 
 <a id="1">[1]</a> 
 Anat Levin, Dani Lischinski, and Yair Weiss. A closed-form solution to natural image matting. IEEE transactions on pattern analysis and machine intelligence, 30(2):228–242, 2007.
-
 
 <a id="2">[2]</a>
 Kaiming He, Jian Sun, and Xiaoou Tang. Fast matting using large kernel matting laplacian matrices. In 2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition, 2165–2172. IEEE, 2010.
