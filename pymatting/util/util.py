@@ -149,10 +149,10 @@ def fix_trimap(trimap, lower_threshold=0.1, upper_threshold=0.9):
         Possibly broken trimap
 
     lower_threshold: float
-        Threshold used to determine background pixels
+        Threshold used to determine background pixels, defaults to 0.1
 
     upper_threshold: float
-        Threshold used to determine foreground pixels
+        Threshold used to determine foreground pixels, defaults to 0.9
 
     Returns
     -------
@@ -772,7 +772,7 @@ def weights_to_laplacian(W, normalize=True, regularization=0.0):
     W: numpy.ndarray
         Array of weights
     normalize: bool
-        Whether the rows of W should be normalized to 1, defauts to True
+        Whether the rows of W should be normalized to 1, defaults to True
     regularization: float
         Regularization strength, defaults to 0, i.e. no regularizaion
 
