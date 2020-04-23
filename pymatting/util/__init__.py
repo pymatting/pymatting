@@ -5,6 +5,7 @@ from pymatting.util.util import (
     apply_to_channels,
     blend,
     div_round_up,
+    fix_trimap,
     grid_coordinates,
     isiterable,
     load_image,

@@ -131,6 +131,59 @@ def vec_vec_outer(a, b):
     return np.einsum("...i,...j", a, b)
 
 
+def fix_trimap(trimap, lower_threshold=0.1, upper_threshold=0.9):
+    """Fixes broken trimap :math:`T` by thresholding the values
+
+    .. math::
+        T^{\\text{fixed}}_{ij}=
+        \\begin{cases}
+            0,&\\text{if } T_{ij}<\\text{lower_threshold}\\\\
+            1,&\\text{if }T_{ij}>\\text{upper_threshold}\\\\
+            0.5, &\\text{otherwise}.\\\\
+        \\end{cases}
+
+
+    Parameters
+    ----------
+    trimap: numpy.ndarray
+        Possibly broken trimap
+
+    lower_threshold: float
+        Threshold used to determine background pixels
+
+    upper_threshold: float
+        Threshold used to determine foreground pixels
+
+    Returns
+    -------
+    fixed_trimap: numpy.ndarray
+        Trimap having values in :math:`\{0, 0.5, 1\}`
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> trimap = np.array([0,0.1, 0.4, 0.9, 1])
+    >>> fix_trimap(trimap, 0.2, 0.8)
+    array([0. , 0. , 0.5, 1. , 1. ])
+    """
+    if lower_threshold < 0 or lower_threshold > 1:
+        raise ValueError("Invalid lower threshold")
+
+    if upper_threshold < 0 or upper_threshold > 1:
+        raise ValueError("Invalid upper threshold")
+
+    if lower_threshold > upper_threshold:
+        raise ValueError("Lower threshold must be smaller than upper threshold")
+
+    is_bg = trimap < lower_threshold
+    is_fg = trimap > upper_threshold
+    fixed = 0.5 * np.ones_like(trimap)
+    fixed[is_fg] = 1
+    fixed[is_bg] = 0
+    return fixed
+
+
 def isiterable(obj):
     """Checks if an object is iterable
 
@@ -719,7 +772,7 @@ def weights_to_laplacian(W, normalize=True, regularization=0.0):
     W: numpy.ndarray
         Array of weights
     normalize: bool
-        Whether the rows of W should be normalized to 1, defaults to True
+        Whether the rows of W should be normalized to 1, defauts to True
     regularization: float
         Regularization strength, defaults to 0, i.e. no regularizaion
 
