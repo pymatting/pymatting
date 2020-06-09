@@ -484,10 +484,10 @@ def trimap_split(trimap, flatten=True):
     is_known = is_fg | is_bg
     is_unknown = ~is_known
 
-    if is_fg.sum() == 0:
+    if is_bg.sum() == 0:
         raise ValueError("Trimap did not contain background values (values = 0)")
 
-    if is_bg.sum() == 0:
+    if is_fg.sum() == 0:
         raise ValueError("Trimap did not contain foreground values (values = 1)")
 
     counts = np.bincount(np.clip(trimap * 255, 0, 255).astype(np.uint8).ravel())
