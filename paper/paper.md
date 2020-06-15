@@ -83,6 +83,12 @@ For this method our toolbox also provides GPU implementations for OpenCL and CUD
 
 ## Installation and Code Example
 
+The PyMatting library can be easily installed through pip:
+
+```
+pip3 install pymatting
+```
+
 The following code snippet demonstrates the usage of the library:
 
 ```python
@@ -98,7 +104,7 @@ save_image("results.png", cutout)
 The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimation, whereas the $\texttt{estimate\_foreground\_cf}$ method implements the closed-form foreground estimation [@levin2007closed]. 
 The $\texttt{stack\_images}$ method can be used to compose the foreground onto a new background.
 
-More code examples at different levels of abstraction can be found in the documentation of the toolbox. PyMatting can be easily installed through pip.
+More code examples at different levels of abstraction can be found in the documentation of the toolbox.
 
 
 ## Performance Comparison
