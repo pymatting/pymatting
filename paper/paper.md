@@ -78,7 +78,7 @@ Our toolbox implements the foreground estimation by @levin2007closed.
 Furthermore, the PyMatting toolbox implements a novel multi-level approach for foreground estimation.
 For this method our toolbox also provides GPU implementations for OpenCL and CUDA.
 
-![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground (bottom right) using the Pymatting library. Input image and input trimap are taken from @rhemann2009perceptually. 
+![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually. 
 \label{fig:grid}](figures/image_grid.png)
 
 ## Installation and Code Example
