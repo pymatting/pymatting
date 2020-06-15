@@ -106,11 +106,9 @@ Our results are consistent with the results achieved by the authors implementati
 
 ![Mean squared error of the estimated alpha matte to the ground truth alpha matte.\label{fig:errors}](figures/laplacian_quality_many_bars.pdf)
 
-![Peak memory usage for each solver in MB.\label{fig:memory}](figures/average_peak_memory_usage.pdf)
+![Comparison of peak memory usage in MB (left) and computational time (right) of our implementation of the preconditioned CG method with other solvers for closed-form matting.\label{fig:memory-runtime}](figures/memory_usage_and_running_time-crop.pdf)
 
-![Mean running time of each solver in seconds.\label{fig:runtime}](figures/average_running_time.pdf)
-
-![Comparison of runtime for different image sizes.\label{fig:runtimes}](figures/time_image_size.pdf)
+![Comparison of runtime for different image sizes.\label{fig:runtimes}](figures/time_image_size-crop.pdf)
 
 We compare the computational runtime of our solver with other solvers: PyAMG [@pyamg], UMFPACK [@umfpack], AMGCL [@amgcl], MUMPS [@MUMPS-a, MUMPS-b], Eigen [@eigen] and SuperLU [@li1999superlu]. \autoref{fig:runtimes} shows that our implemented conjugate gradients method in combination with the incomplete Cholesky decomposition preconditioner outperforms the other methods by a large margin. For the iterative solver, we use an absolute tolerance of $10^{-7}$, which we scale with the number of known pixels, i.e., pixels that are either marked as foreground or background in the trimap. The benchmarked linear system arises from the matting Laplacian by @levin2007closed. \autoref{fig:memory} shows that our solver also outperforms the other solvers in terms of memory usage.
 
