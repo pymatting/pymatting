@@ -42,8 +42,10 @@ holds for every pixel $i$. This problem is ill-posed since,
 for each pixel, we have three equations (one for each color channel) with
 seven unknown variables. The implemented methods rely on a trimap, which is a
 rough classification of the input image into foreground, background and unknown
-pixels, to further constrain the problem. Giving the alpha matte, foreground estimation
-aims to extract the foreground $F$ from image $I$.
+pixels, to further constrain the problem. Subsequently, the foreground $F$ can be 
+extracted from the input image $I$ and the previously computed alpha matte $\alpha$ 
+using a foreground estimation method.
+
 
 ## Implemented Methods for Alpha Matting
 
@@ -64,6 +66,7 @@ The calculated alpha of a pixel is the probability that a random walk starting f
 - Learning Based Digital Matting:
 @zheng2009learning estimate alpha using local semi-supervised learning. 
 They assume that the alpha value of a pixel can be learned by a linear combination of the neighboring pixels.
+
 
 ## Implemented Methods for Foreground Estimation
 
@@ -96,6 +99,7 @@ The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimatio
 The $\texttt{stack\_images}$ method can be used to compose the foreground onto a new background.
 
 More code examples at different levels of abstraction can be found in the documentation of the toolbox. PyMatting can be easily installed through pip.
+
 
 ## Performance Comparison
 
