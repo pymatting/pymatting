@@ -1,3 +1,3 @@
-Thomas Germer
-Tobias Uelwer
-Joseph Adams
+* Thomas Germer
+* Tobias Uelwer
+* Joseph Adams
