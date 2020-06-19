@@ -72,11 +72,11 @@ They assume that the alpha value of a pixel can be learned by a linear combinati
 
 - Closed-form Foreground Estimation:
 For given $\alpha$, the foreground pixels $F$ can be determined by making additional smoothness assumptions on $F$ and $B$. 
-Our toolbox implements the foreground estimation by @levin2007closed.
+Our library implements the foreground estimation by @levin2007closed.
 
 - Multi-level Foreground Estimation:
-Furthermore, the PyMatting toolbox implements a novel multi-level approach for foreground estimation.
-For this method our toolbox also provides GPU implementations for OpenCL and CUDA.
+Furthermore, the PyMatting library implements a novel multi-level approach for foreground estimation.
+For this method our library also provides GPU implementations using PyCuda and PyOpenCL [@kloeckner2012pycuda].
 
 ![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually. 
 \label{fig:grid}](figures/image_grid.png)
@@ -104,7 +104,7 @@ save_image("results.png", cutout)
 The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimation, whereas the $\texttt{estimate\_foreground\_cf}$ method implements the closed-form foreground estimation [@levin2007closed]. 
 The $\texttt{stack\_images}$ method can be used to compose the foreground onto a new background.
 
-More code examples at different levels of abstraction can be found in the documentation of the toolbox.
+More code examples at different levels of abstraction can be found in the documentation of the library.
 
 
 ## Performance Comparison
@@ -130,6 +130,6 @@ We compare the computational runtime of our solver with other solvers: PyAMG [@p
 
 The PyMatting package has been tested on Windows 10, Ubuntu 16.04 and macOS 10.15.2.
 The package can be easily extended by adding new definitions of the graph Laplacian matrix. 
-We plan on continuously extending our toolbox with new methods.
+We plan on continuously extending our library with new methods.
 
 # References
