@@ -29,7 +29,7 @@ from an image in order to place them in a scene of a movie or compose them onto
 another background. Alpha matting describes the problem of separating the objects
 in the foreground from the background of an image given only a rough sketch.
 We introduce the PyMatting package for Python which implements various approaches
-to solve the alpha matting problem. Our toolbox is also able to extract the
+to solve the alpha matting problem. Our library is also able to extract the
 foreground of an image given the alpha matte. The implementation aims to be
 computationally efficient and easy to use. 
 
