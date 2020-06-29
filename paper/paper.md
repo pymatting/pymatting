@@ -83,11 +83,7 @@ For this method our library also provides GPU implementations using PyCuda and P
 
 ## Installation and Code Example
 
-The PyMatting library can be easily installed through pip:
-
-```
-pip3 install pymatting
-```
+The PyMatting library can be easily installed via `pip3 install pymatting`.
 
 The following code snippet demonstrates the usage of the library:
 
