@@ -28,10 +28,10 @@ An important step of many image editing tasks is to extract specific objects
 from an image in order to place them in a scene of a movie or compose them onto
 another background. Alpha matting describes the problem of separating the objects
 in the foreground from the background of an image given only a rough sketch.
-We introduce the PyMatting package for Python which implements various approaches
-to solve the alpha matting problem. Our library is also able to extract the
-foreground of an image given the alpha matte. The implementation aims to be
-computationally efficient and easy to use. 
+We introduce the PyMatting package for the Python ecosystem which implements
+various approaches to solve the alpha matting problem. Our library is also
+able to extract the foreground of an image given the alpha matte.
+The implementation aims to be computationally efficient and easy to use.
 
 For an image $I$ with foreground pixels $F$ and background pixels $B$,
 alpha matting asks to determine opacities $\alpha$, such that the equality
@@ -76,7 +76,7 @@ Our library implements the foreground estimation by @levin2007closed.
 
 - Multi-level Foreground Estimation:
 Furthermore, the PyMatting library implements a novel multi-level approach for foreground estimation [@germer2020fast].
-For this method our library also provides GPU implementations using PyCuda and PyOpenCL [@kloeckner2012pycuda].
+For this method, our library also provides GPU implementations using PyCuda and PyOpenCL [@kloeckner2012pycuda].
 
 ![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually. 
 \label{fig:grid}](figures/image_grid.png)
@@ -94,7 +94,7 @@ trimap = load_image("plant_trimap.png", "GRAY")
 alpha = estimate_alpha_cf(image, trimap)
 foreground = estimate_foreground_cf(image, alpha)
 cutout = stack_images(foreground, alpha)
-save_image("results.png", cutout)
+save_image("result.png", cutout)
 ```
 
 The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimation, whereas the $\texttt{estimate\_foreground\_cf}$ method implements the closed-form foreground estimation [@levin2007closed]. 
@@ -105,27 +105,27 @@ More code examples at different levels of abstraction can be found in the docume
 
 ## Performance Comparison
 
-Since all of the considered methods require to solve a large sparse systems of linear equations, an efficient solver is crucial for good performance. 
-Therefore, the PyMatting package implements the conjugate gradients method [@hestenes1952methods] together with different preconditioners that improve convergence:
+Since all of the considered methods require to solve large sparse systems of linear equations, an efficient solver is crucial for good performance. 
+Therefore, the PyMatting package implements the conjugate gradient method [@hestenes1952methods] together with different preconditioners that improve convergence:
 Jacobi, V-cycle [@lee2014scalable] and thresholded incomplete Cholesky decomposition [@jones1995improved].
 
 To evaluate the performance of our implementation, we calculate the mean squared error on the unknown pixels of the benchmark images of @rhemann2009perceptually. 
 \autoref{fig:errors} shows the  mean squared error to the ground truth alpha matte.
-Our results are consistent with the results achieved by the authors implementation (if available).
+Our results are consistent with the results achieved by the authors' implementations (if available).
 
 ![Mean squared error of the estimated alpha matte to the ground truth alpha matte.\label{fig:errors}](figures/laplacian_quality_many_bars.pdf)
 
-![Comparison of peak memory usage in MB (left) and computational time (right) of our implementation of the preconditioned CG method with other solvers for closed-form matting.\label{fig:memory-runtime}](figures/memory_usage_and_running_time-crop.pdf)
+![Comparison of peak memory usage in MB (left) and runtime in seconds (right) of our implementation of the preconditioned CG method compared to other solvers for closed-form matting.\label{fig:memory-runtime}](figures/memory_usage_and_running_time-crop.pdf)
 
 ![Comparison of runtime for different image sizes.\label{fig:runtimes}](figures/time_image_size-crop.pdf)
 
-We compare the computational runtime of our solver with other solvers: PyAMG [@pyamg], UMFPACK [@umfpack], AMGCL [@amgcl], MUMPS [@MUMPS-a; @MUMPS-b], Eigen [@eigen] and SuperLU [@li1999superlu]. \autoref{fig:memory-runtime} and \autoref{fig:runtimes} show that our implemented conjugate gradients method in combination with the incomplete Cholesky decomposition preconditioner outperforms the other methods in terms of computational runtime by a large margin. For the iterative solver, we use an absolute tolerance of $10^{-7}$, which we scale with the number of known pixels, i.e., pixels that are either marked as foreground or background in the trimap. The benchmarked linear system arises from the matting Laplacian by @levin2007closed. \autoref{fig:memory-runtime} shows that our solver also outperforms the other solvers in terms of memory usage.
+We compare the computational runtime of our solver with other solvers: PyAMG [@pyamg], UMFPACK [@umfpack], AMGCL [@amgcl], MUMPS [@MUMPS-a; @MUMPS-b], Eigen [@eigen] and SuperLU [@li1999superlu]. \autoref{fig:memory-runtime} and \autoref{fig:runtimes} show that our implemented conjugate gradient method in combination with the incomplete Cholesky decomposition preconditioner outperforms the other methods in terms of computational runtime by a large margin. For the iterative solver, we use an absolute tolerance of $10^{-7}$, which we scale with the number of known pixels, i.e., pixels that are either marked as foreground or background in the trimap. The benchmarked linear system arises from the matting Laplacian by @levin2007closed. \autoref{fig:memory-runtime} shows that our solver also outperforms the other solvers in terms of memory usage.
 
 
 ## Compatibility and Extendability
 
 The PyMatting package has been tested on Windows 10, Ubuntu 16.04 and macOS 10.15.2.
-The package can be easily extended by adding new definitions of the graph Laplacian matrix. 
+New methods can be easily implemented by adding new definitions of graph Laplacian matrices.
 We plan on continuously extending our library with new methods.
 
 # References
