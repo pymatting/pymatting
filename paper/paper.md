@@ -75,7 +75,7 @@ For given $\alpha$, the foreground pixels $F$ can be determined by making additi
 Our library implements the foreground estimation by @levin2007closed.
 
 - Multi-level Foreground Estimation:
-Furthermore, the PyMatting library implements a novel multi-level approach for foreground estimation.
+Furthermore, the PyMatting library implements a novel multi-level approach for foreground estimation [@germer2020fast].
 For this method our library also provides GPU implementations using PyCuda and PyOpenCL [@kloeckner2012pycuda].
 
 ![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually. 
