@@ -2,7 +2,7 @@ import os
 import json
 import numpy as np
 from collections import defaultdict
-from config import IMAGE_DIR, ATOL
+from config import IMAGE_DIR, ATOL, SCALES, INDICES
 from pymatting import (
     load_image,
     trimap_split,
@@ -57,16 +57,14 @@ def compute_alpha(image, trimap, laplacian_name, is_fg, is_bg, is_known):
 
 
 def main():
-    indices = 1 + np.arange(27)
-    scale = 1.0
-    # scale = 0.1
+    scale = max(SCALES)
 
     laplacian_names = [laplacian.__name__ for laplacian in LAPLACIANS]
     laplacian_names.append("lkm_laplacian")
 
     results = defaultdict(dict)
 
-    for index in indices:
+    for index in INDICES:
         name = f"GT{index:02d}.png"
 
         image_path = os.path.join(IMAGE_DIR, "input_training_lowres", name)

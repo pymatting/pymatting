@@ -1,6 +1,6 @@
 from pymatting import load_image, show_images, trimap_split
 from pymatting import cf_laplacian, make_linear_system
-from config import IMAGE_DIR, ATOL, SOLVER_NAMES
+from config import IMAGE_DIR, ATOL, SOLVER_NAMES, SCALES, INDICES
 import scipy.sparse.linalg
 import numpy as np
 import threading
@@ -9,13 +9,6 @@ import psutil
 import time
 import json
 import os
-
-indices = np.arange(27)
-scales = np.sqrt(np.linspace(0.1, 1.0, 11))
-
-# Benchmark with fewer images for faster testing
-# indices = np.int32([1, 2])
-# scales = [0.05, 0.06, 0.07, 0.08, 0.09, 0.10]
 
 
 def get_memory_usage():
@@ -137,6 +130,9 @@ def run_solver_single_image(solver_name, scale, index):
     memory_usage = [get_memory_usage()]
     thread = threading.Thread(target=log_memory_usage, args=(memory_usage,))
     thread.is_running = True
+    # All threads should die if the solver thread crashes so we can at least
+    # carry on with the other solvers.
+    thread.daemon = True
     thread.start()
 
     # Measure solver build time
@@ -203,8 +199,8 @@ def run_solver(solver_name):
     # Dry run to ensure that everything has been loaded
     run_solver_single_image(solver_name, 0.1, 4)
 
-    for scale in scales:
-        for index in indices + 1:
+    for scale in SCALES:
+        for index in INDICES:
             result = run_solver_single_image(solver_name, scale, index)
 
             results.append(result)
@@ -222,7 +218,9 @@ def main():
     for solver_name in SOLVER_NAMES:
         process = multiprocessing.Process(target=run_solver, args=(solver_name,))
         process.start()
+        print("waiting for join...")
         process.join()
+        print("joined")
 
 
 if __name__ == "__main__":
