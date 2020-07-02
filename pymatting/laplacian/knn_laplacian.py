@@ -17,7 +17,7 @@ def knn_laplacian(
     n_neighbors: list of ints
         Number of neighbors to consider. If :code:`len(n_neighbors)>1` multiple nearest neighbor calculations are done and merged, defaults to `[20, 10]`, i.e. first 20 neighbors are considered and in the second run :math:`10` neighbors. The pixel distances are then weighted by the :code:`distance_weights`.
     distance_weights: list of floats
-        Weight of distance in feature vector, defaults to `[2.0, 1.0]`.
+        Weight of distance in feature vector, defaults to `[2.0, 0.1]`.
 
     Returns
     ---------
