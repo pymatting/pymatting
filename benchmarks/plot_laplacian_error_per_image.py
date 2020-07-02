@@ -2,15 +2,7 @@ import matplotlib.pyplot as plt
 import json
 import numpy as np
 from natsort import natsorted
-
-names = {
-    "rw_laplacian": "Random Walk",
-    "lbdm_laplacian": "Learning-Based $(r = 1)$",
-    "knn_laplacian": "KNN",
-    "cf_laplacian": "Closed-Form $(r = 1)$",
-    "uniform_laplacian": "Uniform",
-    "lkm_laplacian": "Large Kernel $(r = 10)$",
-}
+from config import LABEL_NAMES
 
 with open("results/laplacians.json", "r") as f:
     items = json.load(f)
@@ -44,17 +36,15 @@ plt.figure(figsize=(11, 4))
 
 print(items)
 
-del items["uniform_laplacian"]
+items = dict((key, value) for key, value in items.items() if key in LABEL_NAMES)
+
 laplacian_names = natsorted(items.keys())
 
 for i, laplacian_name in enumerate(laplacian_names):
     err = list(items[laplacian_name][str(j)] for j in indices)
 
-    x = (
-        1
-        + np.arange(len(indices))
-        + (i - (len(laplacian_names) - 1) / 2) * bar_scale / len(laplacian_names)
-    )
+    offset = (i - (len(laplacian_names) - 1) / 2) * bar_scale / len(laplacian_names)
+    x = np.arange(1, 1 + len(indices)) + offset
 
     for color, alpha, use_label in [
         ("none", 1.0, False),
@@ -64,7 +54,7 @@ for i, laplacian_name in enumerate(laplacian_names):
             x=x,
             height=err,
             width=bar_scale / len(laplacian_names),
-            label=names[laplacian_name] if use_label else None,
+            label=LABEL_NAMES[laplacian_name] if use_label else None,
             color=color,
             alpha=alpha,
             edgecolor=edgecolor,

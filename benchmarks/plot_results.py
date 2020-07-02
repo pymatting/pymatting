@@ -9,7 +9,7 @@ names = {
     "pyamg": "PyAMG",
     "petsc": "PETSc",
     "amgcl": "AMGCL",
-    "eigen_cholesky": "Eigen LDLT",
+    "eigen_cholesky": "Eigen $L D L^T$",
     "mumps": "MUMPS",
     "umfpack": "UMFPACK",
     "superlu": "SuperLU",
@@ -19,7 +19,6 @@ names = {
 def make_fancy_bar_plot(
     filename, title, xlabel, xticks, bar_widths, bar_labels, xerr=None
 ):
-    # plt.title(title)
     plt.barh(bar_labels, bar_widths, alpha=0.5)
 
     if xerr is None:
@@ -50,17 +49,21 @@ def make_fancy_bar_plot(
 
 
 def plot_memory_usage():
-    image_scale = 1.0
+    max_scale = max(result["scale"] for result in solver_results[0])
 
     labels = []
     peak_memory_usage = []
     for results in solver_results:
+        solver_name = results[0]["solver_name"]
 
-        labels.append(results[0]["solver_name"])
+        if solver_name not in names:
+            continue
+
+        labels.append(solver_name)
 
         mbs = []
         for result in results:
-            if result["scale"] != image_scale:
+            if result["scale"] != max_scale:
                 continue
 
             mb = 1e-6 * np.float64(result["memory_usage"])
@@ -90,21 +93,24 @@ def plot_memory_usage():
 
 
 def plot_time():
-
-    image_scale = 1.0
+    max_scale = max(result["scale"] for result in solver_results[0])
 
     labels = []
     rows = []
     for results in solver_results:
+        solver_name = results[0]["solver_name"]
 
-        labels.append(results[0]["solver_name"])
+        if solver_name not in names:
+            continue
+
+        labels.append(solver_name)
 
         row = []
         for result in results:
-            if result["scale"] != image_scale:
+            if result["scale"] != max_scale:
                 continue
 
-            row.append(result["t"])
+            row.append(result["build_time"] + result["solve_time"])
 
         rows.append(row)
 
@@ -136,6 +142,11 @@ def plot_time_image_size():
     sort_values = []
 
     for results in solver_results:
+        solver_name = results[0]["solver_name"]
+
+        if solver_name not in names:
+            continue
+
         timings = defaultdict(list)
         n_pixels = defaultdict(list)
         for result in results:
@@ -144,7 +155,7 @@ def plot_time_image_size():
 
             n = width * height
 
-            timings[result["scale"]].append(result["t"])
+            timings[result["scale"]].append(result["build_time"] + result["solve_time"])
             n_pixels[result["scale"]].append(n)
 
         scales = sorted(n_pixels.keys())
@@ -153,7 +164,7 @@ def plot_time_image_size():
 
         sort_values.append(timings[-1])
 
-        plt.semilogy(n_pixels, timings, label=names[result["solver_name"]])
+        plt.semilogy(n_pixels, timings, label=names[solver_name])
 
     indices = np.argsort(sort_values)
 
@@ -173,10 +184,10 @@ if __name__ == "__main__":
 
     solver_results = []
     for solver in os.listdir(directory):
-        path = os.path.join(directory, solver, "results.json")
+        path = os.path.join(directory, solver)
         with open(path, "rb") as f:
             solver_results.append(json.load(f))
 
-    # plot_memory_usage()
-    # plot_time()
     plot_time_image_size()
+    plot_memory_usage()
+    plot_time()
