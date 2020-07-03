@@ -42,15 +42,15 @@ holds for every pixel $i$. This problem is ill-posed since,
 for each pixel, we have three equations (one for each color channel) with
 seven unknown variables. The implemented methods rely on a trimap, which is a
 rough classification of the input image into foreground, background and unknown
-pixels, to further constrain the problem. Subsequently, the foreground $F$ can be 
-extracted from the input image $I$ and the previously computed alpha matte $\alpha$ 
+pixels, to further constrain the problem. Subsequently, the foreground $F$ can be
+extracted from the input image $I$ and the previously computed alpha matte $\alpha$
 using a foreground estimation method (\autoref{fig:grid}).
 
 
 ## Implemented Methods for Alpha Matting
 
 - Closed-form Matting:
-@levin2007closed show that assuming local smoothness of pixel colors yields a closed-form solution to the alpha matting problem. 
+@levin2007closed show that assuming local smoothness of pixel colors yields a closed-form solution to the alpha matting problem.
 
 - KNN Matting:
 @lee2011nonlocal and @chen2013knn use nearest neighbor information to derive closed-form solutions to the alpha matting problem which they note to perform particularly well on sparse trimaps.
@@ -60,25 +60,25 @@ using a foreground estimation method (\autoref{fig:grid}).
 They show that the computational complexity of their method is independent of the kernel size.
 
 - Random Walk Matting:
-@grady2005random use random walks on the pixels to estimate alpha. 
+@grady2005random use random walks on the pixels to estimate alpha.
 The calculated alpha of a pixel is the probability that a random walk starting from that pixel will reach a foreground pixel before encountering a background pixel.
 
 - Learning Based Digital Matting:
-@zheng2009learning estimate alpha using local semi-supervised learning. 
+@zheng2009learning estimate alpha using local semi-supervised learning.
 They assume that the alpha value of a pixel can be learned by a linear combination of the neighboring pixels.
 
 
 ## Implemented Methods for Foreground Estimation
 
 - Closed-form Foreground Estimation:
-For given $\alpha$, the foreground pixels $F$ can be determined by making additional smoothness assumptions on $F$ and $B$. 
+For given $\alpha$, the foreground pixels $F$ can be determined by making additional smoothness assumptions on $F$ and $B$.
 Our library implements the foreground estimation by @levin2007closed.
 
 - Multi-level Foreground Estimation:
 Furthermore, the PyMatting library implements a novel multi-level approach for foreground estimation [@germer2020fast].
 For this method, our library also provides GPU implementations using PyCuda and PyOpenCL [@kloeckner2012pycuda].
 
-![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually. 
+![Input image (top left) and input trimap (top right) are used to estimate an alpha matte (bottom left) and a foreground image (bottom right, composed onto a white background) using the Pymatting library. Input image and input trimap are courtesy of @rhemann2009perceptually.
 \label{fig:grid}](figures/image_grid.png)
 
 ## Installation and Code Example
@@ -97,7 +97,7 @@ cutout = stack_images(foreground, alpha)
 save_image("result.png", cutout)
 ```
 
-The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimation, whereas the $\texttt{estimate\_foreground\_cf}$ method implements the closed-form foreground estimation [@levin2007closed]. 
+The $\texttt{estimate\_alpha\_cf}$ method implements closed-form alpha estimation, whereas the $\texttt{estimate\_foreground\_cf}$ method implements the closed-form foreground estimation [@levin2007closed].
 The $\texttt{stack\_images}$ method can be used to compose the foreground onto a new background.
 
 More code examples at different levels of abstraction can be found in the documentation of the library.
@@ -105,11 +105,11 @@ More code examples at different levels of abstraction can be found in the docume
 
 ## Performance Comparison
 
-Since all of the considered methods require to solve large sparse systems of linear equations, an efficient solver is crucial for good performance. 
+Since all of the considered methods require to solve large sparse systems of linear equations, an efficient solver is crucial for good performance.
 Therefore, the PyMatting package implements the conjugate gradient method [@hestenes1952methods] together with different preconditioners that improve convergence:
-Jacobi, V-cycle [@lee2014scalable] and thresholded incomplete Cholesky decomposition [@jones1995improved].
+Jacobi, V-cycle [@lee2014scalable] and thresholded incomplete Cholesky decomposition [@kershaw1978incomplete; @jones1995improved].
 
-To evaluate the performance of our implementation, we calculate the mean squared error on the unknown pixels of the benchmark images of @rhemann2009perceptually. 
+To evaluate the performance of our implementation, we calculate the mean squared error on the unknown pixels of the benchmark images of @rhemann2009perceptually.
 \autoref{fig:errors} shows the  mean squared error to the ground truth alpha matte.
 Our results are consistent with the results achieved by the authors' implementations (if available).
 
