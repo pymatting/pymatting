@@ -204,7 +204,7 @@ def ichol(
     assert m == n
 
     Lv = np.empty(max_nnz, dtype=np.float64)  # Values of non-zero elements of L
-    Lr = np.empty(max_nnz, dtype=np.int64)  # Values of non-zero elements of L
+    Lr = np.empty(max_nnz, dtype=np.int64)  # Row indices of non-zero elements of L
     Lp = np.zeros(
         n + 1, dtype=np.int64
     )  # Start(Lp[i]) and end(Lp[i+1]) index of L[:, i] in Lv
