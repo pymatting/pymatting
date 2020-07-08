@@ -16,7 +16,7 @@ authors:
   - name: Stefan Harmeling
     affiliation: 1
 affiliations:
- - name: Department of Computer Science, Heinrich-Heine-Universtität Düsseldorf
+ - name: Department of Computer Science, Heinrich Heine University Düsseldorf
    index: 1
 date: 12 June 2020
 bibliography: paper.bib
