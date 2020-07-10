@@ -23,7 +23,7 @@ PyMatting provides:
   - Random Walk Matting [[5]](#5)
 - Foreground estimation implementations for:
   - Closed Form Foreground Estimation [[1]](#1)
-  - Multilevel Foreground Estimation (CPU, CUDA and OpenCL)
+  - Fast Multi-Level Foreground Estimation (CPU, CUDA and OpenCL) [[6]](#6)
 - Fast multithreaded KNN search
 - Preconditioners to accelerate the convergence rate of conjugate gradient descent:
   - The *incomplete thresholded Cholesky decomposition* (*Incomplete* is part of the name. The implementation is quite complete.)
@@ -140,3 +140,6 @@ Yuanjie Zheng and Chandra Kambhamettu. Learning based digital matting. In 2009 I
 
 <a id="5">[5]</a>
 Leo Grady, Thomas Schiwietz, Shmuel Aharon, and Rüdiger Westermann. Random walks for interactive alpha-matting. In Proceedings of VIIP, volume 2005, 423–429. 2005.
+
+<a id="6">[6]</a>
+Germer, T., Uelwer, T., Conrad, S., & Harmeling, S. (2020). Fast Multi-Level Foreground Estimation. arXiv preprint arXiv:2006.14970.
