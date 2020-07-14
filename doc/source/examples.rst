@@ -18,9 +18,9 @@ The :code:`cutout()` method employs closed-form alpha matting :cite:`levin2007cl
 
     cutout(
        # input image path
-       "../data/lemur.png",
+       "../data/lemur/lemur.png",
        # input trimap path
-       "../data/lemur_trimap.png",
+       "../data/lemur/lemur_trimap.png",
        # output cutout path
        "lemur_cutout.png")
 
@@ -39,8 +39,8 @@ Parameters can be tweaked by passing them to the corresponding function calls.
 
     scale = 1.0
 
-    image = load_image("../data/lemur.png", "RGB", scale, "box")
-    trimap = load_image("../data/lemur_trimap.png", "GRAY", scale, "nearest")
+    image = load_image("../data/lemur/lemur.png", "RGB", scale, "box")
+    trimap = load_image("../data/lemur/lemur_trimap.png", "GRAY", scale, "nearest")
 
     # estimate alpha from image and trimap
     alpha = estimate_alpha_cf(image, trimap)
@@ -85,8 +85,8 @@ This example is intended for developers and (future) contributors to demonstrate
 
     scale = 1.0
 
-    image = load_image("../data/lemur.png", "RGB", scale, "box")
-    trimap = load_image("../data/lemur_trimap.png", "GRAY", scale, "nearest")
+    image = load_image("../data/lemur/lemur.png", "RGB", scale, "box")
+    trimap = load_image("../data/lemur/lemur_trimap.png", "GRAY", scale, "nearest")
 
     # height and width of trimap
     h, w = trimap.shape[:2]
