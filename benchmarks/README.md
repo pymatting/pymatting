@@ -23,7 +23,7 @@ export OMP_NUM_THREADS=1
 export OMP_THREAD_LIMIT=1
 
 python3 calculate_laplacian_error.py
-python3 plot_laplacian_error_per_image
+python3 plot_laplacian_error_per_image.py
 
 python3 benchmark_image_sizes.py
 python3 plot_results.py
