@@ -74,7 +74,7 @@ cutout(
     "lemur_cutout.png")
 ```
 
-[More advanced examples](https://github.com/pymatting/pymatting/tree/master/examples)
+[More advanced examples](https://pymatting.github.io/examples.html)
 
 ## Trimap Construction
 
@@ -95,6 +95,14 @@ Run the tests from the main directory:
 ```
 
 Currently 89% of the code is covered by tests.
+
+## Community Guidelines
+
+1. To contribute to the PyMatting library see [CONTRIBUTING.md](https://github.com/pymatting/pymatting/blob/master/CONTRIBUTING.md).
+2. For bug reports please open a new issue. Include a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) and state your operating system, as well as the versions of all relevant Python packages you are using. 
+3. If you have any other questions about the usage of the library feel free to open an issue.
+
+**Important:** Before opening a new issue, make sure to check wether a similar issue already exists.
 
 ## Authors
 
