@@ -96,6 +96,10 @@ Run the tests from the main directory:
 
 Currently 89% of the code is covered by tests.
 
+## Bug Reports, Questions and Pull-Requests
+
+Please, see [our community guidelines](https://github.com/pymatting/pymatting/blob/master/CONTRIBUTING.md).
+
 ## Authors
 
 - **Thomas Germer**
