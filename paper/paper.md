@@ -33,6 +33,7 @@ We introduce the PyMatting package for the Python ecosystem which implements
 various approaches to solve the alpha matting problem. Our library is also
 able to extract the foreground of an image given the alpha matte.
 The implementation aims to be computationally efficient and easy to use.
+The target audience of our toolbox are researchers of image processing and computer vision. 
 
 For an image $I$ with foreground pixels $F$ and background pixels $B$,
 alpha matting asks to determine opacities $\alpha$, such that the equality
