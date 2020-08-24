@@ -30,10 +30,6 @@ another background. Alpha matting describes the problem of separating the object
 in the foreground from the background of an image given only a rough sketch.
 Besides everyday image editing, alpha matting has been applied, e.g., to medical image analysis 
 [@fan2019hierarchical; @zhaozheng2010understanding] and microscopy image restoration [@kanade2011cell].
-We introduce the PyMatting toolbox for Python which implements various approaches to solve 
-the alpha matting problem. Our library is also able to extract the foreground of an image given the alpha matte.
-The target audience of our toolbox are researchers of image processing and computer vision.
-The implementation aims to be computationally efficient and easy to use.
 
 For an image $I$ with foreground pixels $F$ and background pixels $B$,
 alpha matting asks to determine opacities $\alpha$, such that the equality
@@ -47,6 +43,11 @@ rough classification of the input image into foreground, background and unknown
 pixels, to further constrain the problem. Subsequently, the foreground $F$ can be
 extracted from the input image $I$ and the previously computed alpha matte $\alpha$
 using a foreground estimation method (\autoref{fig:grid}).
+
+We introduce the PyMatting toolbox for Python which implements various approaches to solve 
+the alpha matting problem. Our library is also able to extract the foreground of an image given the alpha matte.
+The target audience of our toolbox are researchers of image processing and computer vision.
+The implementation aims to be computationally efficient and easy to use.
 
 
 ## Implemented Methods for Alpha Matting
