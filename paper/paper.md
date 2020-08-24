@@ -44,7 +44,7 @@ pixels, to further constrain the problem. Subsequently, the foreground $F$ can b
 extracted from the input image $I$ and the previously computed alpha matte $\alpha$
 using a foreground estimation method (\autoref{fig:grid}).
 
-We introduce the PyMatting toolbox for the Python ecosystem which implements various approaches to solve 
+We introduce the PyMatting toolbox for Python which implements various approaches to solve 
 the alpha matting problem. Our library is also able to extract the foreground of an image given the alpha matte.
 The target audience are researchers of image processing and computer vision.
 The implementation aims to be computationally efficient and easy to use.
