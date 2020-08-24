@@ -28,7 +28,7 @@ A fundamental problem of many image processing tasks is the extraction of specif
 from an image in order to place them in a scene of a movie or compose them onto
 another background. Alpha matting describes the problem of separating the objects
 in the foreground from the background of an image given only a rough sketch.
-Besides everyday image editing, alpha matting has been applied, e.g., to medical image analysis 
+Besides everyday image editing, alpha matting has been applied to medical image analysis 
 [@fan2019hierarchical; @zhaozheng2010understanding] and microscopy image restoration [@kanade2011cell].
 
 For an image $I$ with foreground pixels $F$ and background pixels $B$,
