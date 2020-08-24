@@ -1,3 +1,49 @@
+@article{fan2019hierarchical,
+    author={Z. {Fan} and J. {Lu} and C. {Wei} and H. {Huang} and X. {Cai} and X. {Chen}},
+    journal={IEEE Transactions on Image Processing}, 
+    title={A Hierarchical Image Matting Model for Blood Vessel Segmentation in Fundus Images}, 
+    year={2019},
+    volume={28},
+    number={5},
+    pages={2367-2377},
+    abstract={In this paper, a hierarchical image matting model is proposed to extract blood vessels from fundus images. More specifically, a hierarchical strategy is integrated into the image matting model for blood vessel segmentation. Normally, the matting models require a user specified trimap, which separates the input image into three regions: the foreground, background, and unknown regions. However, creating a user specified trimap is laborious for vessel segmentation tasks. In this paper, we propose a method that first generates trimap automatically by utilizing region features of blood vessels, then applies a hierarchical image matting model to extract the vessel pixels from the unknown regions. The proposed method has low calculation time and outperforms many other state-of-art supervised and unsupervised methods. It achieves a vessel segmentation accuracy of 96.0%, 95.7%, and 95.1% in an average time of 10.72s, 15.74s, and 50.71s on images from three publicly available fundus image datasets DRIVE, STARE, and CHASE_DB1, respectively.},
+    keywords={blood vessels;eye;feature extraction;image segmentation;medical image processing;hierarchical image matting model;blood vessels extraction;trimap;input image separation;matting models;fundus images;blood vessel segmentation;time 50.71 s;time 10.72 s;time 15.74 s;Image segmentation;Feature extraction;Blood vessels;Biomedical imaging;Deformable models;Diseases;Retina;Image matting;hierarchical strategy;fundus;trimap;region features;segmentation;vessel},
+    doi={10.1109/TIP.2018.2885495},
+    ISSN={1941-0042},
+    month={May}
+}
+
+@inproceedings{zhaozheng2010understanding,
+    author={Yin, Zhaozheng and Li, Kang and Kanade, Takeo and Chen, Mei},
+    editor={Jiang, Tianzi and Navab, Nassir and Pluim, Josien P. W. and Viergever, Max A.},
+    title={Understanding the Optics to Aid Microscopy Image Segmentation},
+    booktitle={Medical {I}mage {C}omputing and {C}omputer-{A}ssisted {I}ntervention -- {M}{I}{C}{C}{A}{I} 2010},
+    year={2010},
+    publisher={Springer Berlin Heidelberg},
+    address={Berlin, Heidelberg},
+    pages={209--217},
+    abstract={Image segmentation is essential for many automated microscopy image analysis systems. Rather than treating microscopy images as general natural images and rushing into the image processing warehouse for solutions, we propose to study a microscope's optical properties to model its image formation process first using phase contrast microscopy as an exemplar. It turns out that the phase contrast imaging system can be relatively well explained by a linear imaging model. Using this model, we formulate a quadratic optimization function with sparseness and smoothness regularizations to restore the ``authentic'' phase contrast images that directly correspond to specimen's optical path length without phase contrast artifacts such as halo and shade-off. With artifacts removed, high quality segmentation can be achieved by simply thresholding the restored images. The imaging model and restoration method are quantitatively evaluated on two sequences with thousands of cells captured over several days.},
+    isbn={978-3-642-15705-9},
+    doi={10.1007/978-3-642-15705-9_26}
+}
+
+
+@inproceedings{kanade2011cell,
+    author={T. {Kanade} and Z. {Yin} and R. {Bise} and S. {Huh} and S. {Eom} and M. F. {Sandbothe} and M. {Chen}},
+    booktitle={2011 {I}{E}{E}{E} {W}orkshop on {A}pplications of {C}omputer {V}ision ({W}{A}{C}{V})}, 
+    title={Cell image analysis: Algorithms, system and applications}, 
+    year={2011},
+    volume={},
+    number={},
+    pages={374-381},
+    abstract={We present several algorithms for cell image analysis including microscopy image restoration, cell event detection and cell tracking in a large population. The algorithms are integrated into an automated system capable of quantifying cell proliferation metrics in vitro in real-time. This offers unique opportunities for biological applications such as efficient cell behavior discovery in response to different cell culturing conditions and adaptive experiment control. We quantitatively evaluated our system's performance on 16 microscopy image sequences with satisfactory accuracy for biologists' need. We have also developed a public website compatible to the system's local user interface, thereby allowing biologists to conveniently check their experiment progress online. The website will serve as a community resource that allows other research groups to upload their cell images for analysis and comparison.},
+    keywords={image restoration;medical image processing;cell image analysis;microscopy image restoration;cell event detection;cell tracking;automated system;cell proliferation metrics;biological applications;cell culturing conditions;Microscopy;Image restoration;Image segmentation;Biology;Tracking;Pixel;Algorithm design and analysis},
+    doi={10.1109/WACV.2011.5711528},
+    ISSN={1550-5790},
+    month={Jan}
+}
+
+
 @article{chen2013knn,
     author={Q. {Chen} and D. {Li} and C. {Tang}},
     journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
@@ -59,7 +105,7 @@
 
 @inproceedings{zheng2009learning,
     author={Y. {Zheng} and C. {Kambhamettu}},
-    booktitle={2009 IEEE 12th International Conference on Computer Vision},
+    booktitle={2009 {I}{E}{E}{E} 12th {I}nternational {C}onference on {C}omputer {V}ision},
     title={Learning based digital matting},
     year={2009},
     volume={},
@@ -75,7 +121,7 @@
 @inproceedings{grady2005random,
     title={Random walks for interactive alpha-matting},
     author={Grady, Leo and Schiwietz, Thomas and Aharon, Shmuel and Westermann, R{\"u}diger},
-    booktitle={Proceedings of VIIP},
+    booktitle={Proceedings of {V}{I}{I}{P}},
     volume={2005},
     pages={423--429},
     year={2005}
@@ -101,7 +147,7 @@
     issn = {0098-3500},
     url = {https://doi.org/10.1145/992200.992206},
     doi = {10.1145/992200.992206},
-    journal = {ACM Trans. Math. Softw.},
+    journal = {ACM Transactions on Mathematical Software},
     month = jun,
     pages = {196–199},
     numpages = {4},
@@ -164,7 +210,7 @@
 
 @inproceedings{he2010fast,
     author={K. {He} and J. {Sun} and X. {Tang}},
-    booktitle={2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
+    booktitle={2010 {I}{E}{E}{E} {C}omputer {S}ociety {C}onference on {C}omputer {V}ision and {P}attern {R}ecognition},
     title={Fast matting using large kernel matting Laplacian matrices},
     year={2010},
     volume={},
@@ -179,7 +225,7 @@
 
 @inproceedings{rhemann2009perceptually,
     author={C. {Rhemann} and C. {Rother} and J. {Wang} and M. {Gelautz} and P. {Kohli} and P. {Rott}},
-    booktitle={2009 IEEE Conference on Computer Vision and Pattern Recognition},
+    booktitle={2009 {I}{E}{E}{E} {C}onference on {C}omputer {V}ision and {P}attern {R}ecognition},
     title={A perceptually motivated online benchmark for image matting},
     year={2009},
     volume={},
@@ -203,7 +249,7 @@
     title={The incomplete Cholesky—conjugate gradient method for the iterative solution of systems of linear equations},
     author={Kershaw, David S},
     doi={10.1016/0021-9991(78)90098-0},
-    journal={Journal of computational physics},
+    journal={Journal of {C}omputational {P}hysics},
     volume={26},
     number={1},
     pages={43--65},
@@ -215,7 +261,7 @@
     title={Methods of conjugate gradients for solving linear systems},
     author={Hestenes, Magnus R and Stiefel, Eduard and others},
     doi={10.1201/9781351069397-24},
-    journal={Journal of research of the National Bureau of Standards},
+    journal={Journal of {R}esearch of the {N}ational {B}ureau of {S}tandards},
     volume={49},
     number={6},
     pages={409--436},
@@ -248,7 +294,7 @@
     issn = {0098-3500},
     url = {https://doi.org/10.1145/200979.200981},
     doi = {10.1145/200979.200981},
-    journal = {ACM Trans. Math. Softw.},
+    journal = {ACM Transactions on Mathematical Software},
     month = mar,
     pages = {5–17},
     numpages = {13},
