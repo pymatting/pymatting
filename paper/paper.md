@@ -28,9 +28,9 @@ A fundamental problem of many image processing tasks is the extraction of specif
 from an image in order to place them in a scene of a movie or compose them onto
 another background. Alpha matting describes the problem of separating the objects
 in the foreground from the background of an image given only a rough sketch.
-Besides everyday image editing, alpha matting has been applied to, e.g., medical image analysis 
+Besides everyday image editing, alpha matting has been applied to medical image analysis 
 [@fan2019hierarchical; @zhaozheng2010understanding] and microscopy image restoration [@kanade2011cell].
-We introduce the PyMatting package for the Python ecosystem which implements
+We introduce the PyMatting toolbox for the Python ecosystem which implements
 various approaches to solve the alpha matting problem. Our library is also
 able to extract the foreground of an image given the alpha matte.
 The target audience of our toolbox are researchers of image processing and computer vision.
