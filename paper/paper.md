@@ -112,11 +112,10 @@ Since all of the considered methods require to solve large sparse systems of lin
 Therefore, the PyMatting package implements the conjugate gradient method [@hestenes1952methods] together with different preconditioners that improve convergence:
 Jacobi, V-cycle [@lee2014scalable] and thresholded incomplete Cholesky decomposition [@kershaw1978incomplete; @jones1995improved].
 
-To evaluate the performance of our implementation, we calculate the mean squared error on the unknown pixels of the benchmark images of @rhemann2009perceptually.
-\autoref{fig:errors} shows the  mean squared error to the ground truth alpha matte.
+To evaluate the performance of our implementation, we use the benchmark images from @rhemann2009perceptually. \autoref{fig:errors} shows the mean squared error between the estimated alpha matte and the ground truth alpha matte, computed over the region of pixels with unknown alpha values.
 Our results are consistent with the results achieved by the authors' implementations (if available).
 
-![Mean squared error of the estimated alpha matte to the ground truth alpha matte.\label{fig:errors}](figures/laplacian_quality_many_bars.pdf)
+![Mean squared error between the estimated alpha matte and the ground truth alpha matte.\label{fig:errors}](figures/laplacian_quality_many_bars.pdf)
 
 ![Comparison of peak memory usage in MB (left) and runtime in seconds (right) of our implementation of the preconditioned CG method compared to other solvers for closed-form matting.\label{fig:memory-runtime}](figures/memory_usage_and_running_time-crop.pdf)
 
@@ -128,7 +127,7 @@ We compare the computational runtime of our solver with other solvers: PyAMG [@p
 ## Compatibility and Extendability
 
 The PyMatting package has been tested on Windows 10, Ubuntu 16.04 and macOS 10.15.2.
-New methods can be easily implemented by adding new definitions of graph Laplacian matrices.
+New methods can easily be implemented by adding new definitions of graph Laplacian matrices.
 We plan on continuously extending our library with new methods.
 
 # References
