@@ -6,7 +6,7 @@ import numpy as np
 
 def estimate_alpha_lkm(image, trimap, laplacian_kwargs={}, cg_kwargs={}):
     """
-    Estimate alpha from an input image and an input trimap using Learning Based Digital Matting as proposed by :cite:`he2010fast`.
+    Estimate alpha from an input image and an input trimap as described in Fast Matting Using Large Kernel Matting Laplacian Matrices by :cite:`he2010fast`.
 
     Parameters
     ----------
