@@ -2,7 +2,7 @@
 
 Running the benchmarks will take about a day, not including the time required to install all libraries.
 
-```
+```bash
 # install required libraries for benchmark
 sudo apt install build-essential unzip cmake libboost-all-dev libopenmpi-dev libmumps-dev petsc-dev libsuitesparse-dev swig
 pip3 install psutil scikit-umfpack pyamg pymatting natsort
@@ -35,7 +35,7 @@ For faster debugging, it might be helpful to uncomment `SCALES` in the config fi
 
 Sometimes it helps to build packages from source instead of binaries:
 
-```
+```bash
 pip3 uninstall <package>
 pip3 install <package> --no-binary :all:
 ```
