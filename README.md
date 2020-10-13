@@ -2,7 +2,6 @@
 [![License: MIT](https://img.shields.io/github/license/pymatting/pymatting?color=brightgreen)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/travis/pymatting/pymatting?label=Travis%20CI)](https://travis-ci.org/pymatting/pymatting)
 [![PyPI](https://img.shields.io/pypi/v/pymatting)](https://pypi.org/project/PyMatting/)
-[![Arxiv](http://img.shields.io/badge/cs.CV-arXiv-B31B1B.svg)](https://arxiv.org/abs/2003.12382)
 [![JOSS](https://joss.theoj.org/papers/9766cab65bfbf07a70c8a835edd3875a/status.svg)](https://joss.theoj.org/papers/9766cab65bfbf07a70c8a835edd3875a)
 [![Gitter](https://img.shields.io/gitter/room/pymatting/pymatting)](https://gitter.im/pymatting/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -116,16 +115,20 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Citing
 
-If you found PyMatting to be useful for your work, please consider citing our [paper](https://arxiv.org/abs/2003.12382):
+If you found PyMatting to be useful for your work, please consider citing our [paper](https://doi.org/10.21105/joss.02481):
 
 ```
-@misc{germer2020pymatting,
-  title={PyMatting: A Python Library for Alpha Matting},
-  author={Thomas Germer and Tobias Uelwer and Stefan Conrad and Stefan Harmeling},
-  year={2020},
-  eprint={2003.12382},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+@article{Germer2020,
+  doi = {10.21105/joss.02481},
+  url = {https://doi.org/10.21105/joss.02481},
+  year = {2020},
+  publisher = {The Open Journal},
+  volume = {5},
+  number = {54},
+  pages = {2481},
+  author = {Thomas Germer and Tobias Uelwer and Stefan Conrad and Stefan Harmeling},
+  title = {PyMatting: A Python Library for Alpha Matting},
+  journal = {Journal of Open Source Software}
 }
 ```
 
