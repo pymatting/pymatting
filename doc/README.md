@@ -1,14 +1,19 @@
-If there are new modules in this package you need to run
-`sphinx-apidoc -f -o source/ ../pymatting/`
-in order to generate the stubs for this module.
+## Building the docs
 
-After changeing docstrings it is sufficient to call
-`make clean && make html`
+1. Install the following packages:
+```bash
+pip3 install Sphinx sphinxcontrib-bibtex nbsphinx sphinx_rtd_theme
+```
+2. Run `./build.sh`
+3. The files will appear in `pymatting/build/html`.
 
-Doc string format:
+## Doc string format
+
 https://numpydoc.readthedocs.io/en/latest/format.html
 
-Example doc string:
+## Doc string example:
+
+```
     """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown. 
 
     Foreground pixels are pixels where the trimap has value 1.0. Background pixels are pixels where the trimap has value 0.
@@ -32,7 +37,4 @@ Example doc string:
         Boolean array indicating which pixel is unknown
 
     """
-
-
-Fix for less warnings (?):
-sphinx-autogen -o generated source/*.rst
+```
