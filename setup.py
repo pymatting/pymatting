@@ -1,7 +1,7 @@
 import os
 import pkgutil
 from setuptools import setup, find_packages
-from numba.pycc import CC
+from pymatting_aot.cc import cc
 
 
 def load_text(path):
@@ -17,7 +17,6 @@ about = {}
 exec(load_text(path), about)
 
 # collect AOT-compiled modules
-cc = CC("aot")
 for importer, module_name, _ in pkgutil.walk_packages(
     [os.path.join(directory, "pymatting_aot")]
 ):
