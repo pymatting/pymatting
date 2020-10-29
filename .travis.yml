@@ -4,12 +4,14 @@ jobs:
     - name: "Python 3.8.0 on Xenial Linux"
       python: 3.8
       before_install:
+        - python3 -c "import pymatting"
         - python3 tests/download_images.py
     - name: "Python 3.7.4 on macOS"
       os: osx
       osx_image: xcode11.2
       language: shell
       before_install:
+        - python3 -c "import pymatting"
         - python3 tests/download_images.py
     - name: "Python 3.8.0 on Windows"
       os: windows
@@ -17,12 +19,12 @@ jobs:
       before_install:
         - choco install python --version 3.8.0
         - python -m pip install --upgrade pip
+        - python -c "import pymatting"
         - python tests/download_images.py
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 install:
   - pip3 install -r requirements.txt -r requirements_tests.txt
   - pip3 install .
-  - python -c "import pymatting"
 before_script: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
 script: pytest
