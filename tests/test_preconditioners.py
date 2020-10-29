@@ -36,7 +36,7 @@ def test_preconditioners():
     preconditioners = [
         ("no", lambda A: None),
         ("jacobi", lambda A: jacobi(A)),
-        ("icholt", lambda A: ichol(A)),
+        ("icholt", lambda A: ichol(A, max_nnz=500000)),
         ("vcycle", lambda A: vcycle(A, trimap.shape)),
     ]
 

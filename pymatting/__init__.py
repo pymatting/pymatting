@@ -1,3 +1,7 @@
+# Trigger aot-compilation on first run.
+import pymatting_aot.cc
+
+# Import relevant submodules for ease-of-use
 from pymatting.util import *
 from pymatting.laplacian import *
 from pymatting.solver import *
