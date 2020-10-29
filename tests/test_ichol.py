@@ -14,7 +14,7 @@ def test_ichol():
 
         A = scipy.sparse.csc_matrix(A)
 
-        decomposition = ichol(A, discard_threshold=0.0)
+        decomposition = ichol(A, discard_threshold=0.0, max_nnz=100000)
 
         x_true = np.random.rand(n)
         b = A.dot(x_true)
