@@ -15,11 +15,14 @@ def compile_modules():
 
     cc.compile()
 
+
 # Test if modules need to be compiled
 try:
     import pymatting_aot.aot
 except ImportError:
-    print("Failed to import ahead-of-time-compiled modules. This is expected on first import.")
+    print(
+        "Failed to import ahead-of-time-compiled modules. This is expected on first import."
+    )
     print("Compiling modules and trying again (this might take a minute).")
 
     compile_modules()
