@@ -34,7 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Download test images
       run: |
-        python3 tests/download_images.py
+        python tests/download_images.py
     - name: Test with pytest
       run: |
         python -c "import pymatting"
