@@ -1,4 +1,4 @@
-name: Code linting using flake8
+name: lint
 
 on:
   push:
