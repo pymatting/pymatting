@@ -32,5 +32,5 @@ jobs:
         python3 tests/download_images.py
     - name: Test with pytest
       run: |
-        import pymatting
+        python -c "import pymatting"
         pytest 
