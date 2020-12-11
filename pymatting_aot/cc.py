@@ -1,6 +1,7 @@
 import os
 import pkgutil
 
+
 def compile_modules():
     from numba.pycc import CC
 
@@ -16,6 +17,7 @@ def compile_modules():
 
     cc.compile()
 
+
 def is_out_of_date(module):
     # Check if module is older than files in pymatting_aot
     module_modification_time = os.path.getmtime(module.__file__)
@@ -28,6 +30,7 @@ def is_out_of_date(module):
 
     return False
 
+
 # Test if modules need to be compiled
 try:
     import pymatting_aot.aot
@@ -39,6 +42,7 @@ try:
         compile_modules()
 
         import importlib
+
         importlib.reload(pymatting_aot.aot)
 
 except ImportError:
