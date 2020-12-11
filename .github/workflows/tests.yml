@@ -2,9 +2,9 @@ name: tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 jobs:
   build:
@@ -32,4 +32,4 @@ jobs:
     - name: Test with pytest
       run: |
         python -c "import pymatting"
-        pytest 
+        pytest
