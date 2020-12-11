@@ -62,6 +62,7 @@ def _estimate_fb_ml(
     n_small_iterations,
     n_big_iterations,
     small_size,
+    gradient_weight,
 ):
     h0, w0, depth = input_image.shape
 
@@ -120,7 +121,9 @@ def _estimate_fb_ml(
                         x2 = max(0, min(w - 1, x + dx[d]))
                         y2 = max(0, min(h - 1, y + dy[d]))
 
-                        da = regularization + abs(a0 - alpha[y2, x2])
+                        gradient = abs(a0 - alpha[y2, x2])
+
+                        da = regularization + gradient_weight * gradient
 
                         a00 += da
                         a11 += da
@@ -164,6 +167,6 @@ exports = {
     "_resize_nearest": (_resize_nearest, "void(f4[:, :], f4[:, :])"),
     "_estimate_fb_ml": (
         _estimate_fb_ml,
-        "Tuple((f4[:, :, :], f4[:, :, :]))(f4[:, :, :], f4[:, :], f4, i4, i4, i4)",
+        "Tuple((f4[:, :, :], f4[:, :, :]))(f4[:, :, :], f4[:, :], f4, i4, i4, i4, f4)",
     ),
 }

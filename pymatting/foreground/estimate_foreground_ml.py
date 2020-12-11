@@ -10,6 +10,7 @@ def estimate_foreground_ml(
     n_big_iterations=2,
     small_size=32,
     return_background=False,
+    gradient_weight=1.0,
 ):
     """Estimates the foreground of an image given its alpha matte.
 
@@ -32,6 +33,8 @@ def estimate_foreground_ml(
         Threshold that determines at which size `n_small_iterations` should be used
     return_background: bool
         Whether to return the estimated background in addition to the foreground
+    gradient_weight: float
+        Larger values enforce smoother foregrounds, defaults to :math:`1`
 
     Returns
     -------
@@ -60,6 +63,7 @@ def estimate_foreground_ml(
         n_small_iterations,
         n_big_iterations,
         small_size,
+        gradient_weight,
     )
 
     if return_background:
