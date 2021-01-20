@@ -151,3 +151,5 @@ Leo Grady, Thomas Schiwietz, Shmuel Aharon, and Rüdiger Westermann. Random walk
 
 <a id="6">[6]</a>
 Germer, T., Uelwer, T., Conrad, S., & Harmeling, S. (2020). Fast Multi-Level Foreground Estimation. arXiv preprint arXiv:2006.14970.
+
+Lemur image by Mathias Appel from https://www.flickr.com/photos/mathiasappel/25419442300/ licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain License](https://creativecommons.org/publicdomain/zero/1.0/).
