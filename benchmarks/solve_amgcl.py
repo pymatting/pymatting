@@ -24,7 +24,14 @@ _solve_amgcl_csr.argtypes = [
 
 
 def solve_amgcl_csr(
-    csr_values, csr_indices, csr_indptr, b, x=None, atol=1e-10, rtol=0, maxiter=10000,
+    csr_values,
+    csr_indices,
+    csr_indptr,
+    b,
+    x=None,
+    atol=1e-10,
+    rtol=0,
+    maxiter=10000,
 ):
     assert csr_values.flags["C_CONTIGUOUS"]
     assert csr_indices.flags["C_CONTIGUOUS"]

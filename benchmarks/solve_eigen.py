@@ -35,7 +35,12 @@ _solve_eigen_cholesky_coo.argtypes = [
 
 
 def solve_eigen_icholt_coo(
-    coo_data, row, col, b, rtol=1e-10, initial_shift=0.01,
+    coo_data,
+    row,
+    col,
+    b,
+    rtol=1e-10,
+    initial_shift=0.01,
 ):
     assert coo_data.flags["C_CONTIGUOUS"]
     assert row.flags["C_CONTIGUOUS"]
