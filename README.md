@@ -96,6 +96,15 @@ Run the tests from the main directory:
 
 Currently 89% of the code is covered by tests.
 
+## Upgrade
+
+```bash
+pip3 install --upgrade pymatting
+python3 -c "import pymatting"
+```
+
+The last line is necessary to rebuild the ahead-of-time compiled module. Without it, the module will be rebuilt on first import, but the old module will already be loaded at that point, which might cause compatibility issues. Simply re-running the code should usually fix it.
+
 ## Bug Reports, Questions and Pull-Requests
 
 Please, see [our community guidelines](https://github.com/pymatting/pymatting/blob/master/CONTRIBUTING.md).
