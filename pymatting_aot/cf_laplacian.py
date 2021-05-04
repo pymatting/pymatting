@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def _cf_laplacian(image, epsilon, r, values, indices, indptr):
+def _cf_laplacian(image, epsilon, r, values, indices, indptr, is_known):
     h, w, d = image.shape
     assert d == 3
     size = 2 * r + 1
@@ -28,6 +28,9 @@ def _cf_laplacian(image, epsilon, r, values, indices, indptr):
     # For each pixel of image
     for y in range(r, h - r):
         for x in range(r, w - r):
+
+            if np.all(is_known[y - r : y + r + 1, x - r : x + r + 1]):
+                continue
 
             # For each color channel
             for dc in range(3):
@@ -127,6 +130,6 @@ def _cf_laplacian(image, epsilon, r, values, indices, indptr):
 exports = {
     "_cf_laplacian": (
         _cf_laplacian,
-        "void(f8[:, :, :], f8, i8, f8[:, :, :], i8[:], i8[:])",
+        "void(f8[:, :, :], f8, i8, f8[:, :, :], i8[:], i8[:], b1[:, :])",
     ),
 }

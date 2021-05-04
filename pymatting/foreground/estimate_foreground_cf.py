@@ -43,7 +43,7 @@ def estimate_foreground_cf(
         Keyword arguments for the incomplete Cholesky preconditioner
     cg_kwargs: dictionary
         Keyword arguments for the conjugate gradient descent solver
-    
+
     Returns
     -------
     F: numpy.ndarray
@@ -59,7 +59,7 @@ def estimate_foreground_cf(
     >>> F = estimate_foreground_cf(image, alpha, return_background=False)
     >>> F, B = estimate_foreground_cf(image, alpha, return_background=True)
 
-    
+
     See Also
     --------
     stack_images: This function can be used to place the foreground on a new background.

@@ -437,7 +437,7 @@ def show_images(images):
     grid.show()
 
 
-def trimap_split(trimap, flatten=True):
+def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
     """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown.
 
     Foreground pixels are pixels where the trimap has value 1.0. Background pixels are pixels where the trimap has value 0.
@@ -459,6 +459,11 @@ def trimap_split(trimap, flatten=True):
         Boolean array indicating which pixel is known
     is_unknown: numpy.ndarray
         Boolean array indicating which pixel is unknown
+    bg_threshold: float
+        Pixels with smaller trimap values will be considered background.
+    fg_threshold: float
+        Pixels with larger trimap values will be considered foreground.
+
 
     Example
     -------
@@ -478,29 +483,21 @@ def trimap_split(trimap, flatten=True):
     if flatten:
         trimap = trimap.flatten()
 
-    is_fg = trimap == 1.0
-    is_bg = trimap == 0.0
+    is_fg = trimap >= fg_threshold
+    is_bg = trimap <= bg_threshold
+
+    if is_bg.sum() == 0:
+        raise ValueError(
+            "Trimap did not contain background values (values <= %f)" % bg_threshold
+        )
+
+    if is_fg.sum() == 0:
+        raise ValueError(
+            "Trimap did not contain foreground values (values >= %f)" % fg_threshold
+        )
 
     is_known = is_fg | is_bg
     is_unknown = ~is_known
-
-    if is_bg.sum() == 0:
-        raise ValueError("Trimap did not contain background values (values = 0)")
-
-    if is_fg.sum() == 0:
-        raise ValueError("Trimap did not contain foreground values (values = 1)")
-
-    counts = np.bincount(np.clip(trimap * 255, 0, 255).astype(np.uint8).ravel())
-
-    n_colors = np.sum(counts > 0)
-
-    if n_colors > 3:
-        raise ValueError(
-            "Trimap has %d colors, but should have no more than 3 (black, white, gray).\n"
-            "Make sure that your trimaps are stored as PNG instead of JPG.\n"
-            "If you scaled the trimap, make sure to use nearest filtering:\n"
-            '    load_image("trimap.png", "GRAY", 0.5, "nearest")' % n_colors
-        )
 
     return is_fg, is_bg, is_known, is_unknown
 

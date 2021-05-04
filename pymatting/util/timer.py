@@ -12,7 +12,7 @@ class Timer(object):
     def stop(self, message=None):
         """Return and print time since last stop-call or initialization.
         Also print elapsed time if message is provided.
-        
+
         Parameters
         ----------
         message: str

@@ -1,4 +1,4 @@
-from pymatting.laplacian.laplacian import make_linear_system
+from pymatting.util.util import trimap_split
 from pymatting.laplacian.cf_laplacian import cf_laplacian
 from pymatting.preconditioner.ichol import ichol
 from pymatting.solver.cg import cg
@@ -23,6 +23,9 @@ def estimate_alpha_cf(
         Arguments passed to the :code:`cf_laplacian` function
     cg_kwargs: dictionary
         Arguments passed to the :code:`cg` solver
+    is_known: numpy.ndarray
+        Binary mask of pixels for which to compute the laplacian matrix.
+        Providing this parameter might improve performance if few pixels are unknown.
 
     Returns
     -------
@@ -43,9 +46,30 @@ def estimate_alpha_cf(
     if preconditioner is None:
         preconditioner = ichol
 
-    A, b = make_linear_system(cf_laplacian(image, **laplacian_kwargs), trimap)
+    h, w = trimap.shape[:2]
 
-    x = cg(A, b, M=preconditioner(A), **cg_kwargs)
+    is_fg, is_bg, is_known, is_unknown = trimap_split(trimap)
+
+    L = cf_laplacian(image, **laplacian_kwargs, is_known=is_known)
+
+    # Split Laplacian matrix L into
+    #
+    #     [L_U   R ]
+    #     [R^T   L_K]
+    #
+    # and then solve L_U x_U = -R is_fg_K for x where K (is_known) corresponds to
+    # fixed pixels and U (is_unknown) corresponds to unknown pixels. For reference, see
+    # Grady, Leo, et al. "Random walks for interactive alpha-matting." Proceedings of VIIP. Vol. 2005. 2005.
+
+    L_U = L[is_unknown, :][:, is_unknown]
+
+    R = L[is_unknown, :][:, is_known]
+
+    m = is_fg[is_known]
+
+    x = trimap.copy().ravel()
+
+    x[is_unknown] = cg(L_U, -R.dot(m), M=preconditioner(L_U), **cg_kwargs)
 
     alpha = np.clip(x, 0, 1).reshape(trimap.shape)
 

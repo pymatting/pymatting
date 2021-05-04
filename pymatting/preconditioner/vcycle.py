@@ -44,7 +44,14 @@ def jacobi_step(A, A_diag, b, x, num_iter, omega):
 
 
 def _vcycle_step(
-    A, b, shape, cache, num_pre_iter, num_post_iter, omega, direct_solve_size,
+    A,
+    b,
+    shape,
+    cache,
+    num_pre_iter,
+    num_post_iter,
+    omega,
+    direct_solve_size,
 ):
     h, w = shape
     n = h * w
