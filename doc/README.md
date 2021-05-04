@@ -2,7 +2,7 @@
 
 1. Install the following packages:
 ```bash
-pip3 install Sphinx sphinxcontrib-bibtex nbsphinx sphinx_rtd_theme
+pip3 install Sphinx sphinxcontrib-bibtex==1.0.0 nbsphinx sphinx_rtd_theme
 ```
 2. Run `./build.sh`
 3. The files will appear in `pymatting/build/html`.
