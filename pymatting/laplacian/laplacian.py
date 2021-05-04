@@ -11,7 +11,7 @@ def make_linear_system(L, trimap, lambda_value=100.0, return_c=False):
 
     where :math:`C=\mathop{Diag}(c)` having :math:`c_i = 1` if pixel i is known and :math:`c_i = 0` otherwise.
     The right-hand-side :math:`b` is a vector with entries :math:`b_i = 1` is pixel is is a foreground pixel and :math:`b_i = 0` otherwise.
-    
+
 
     Parameters
     ----------
@@ -23,7 +23,7 @@ def make_linear_system(L, trimap, lambda_value=100.0, return_c=False):
         Constraint penalty, defaults to 100
     return_c: bool
         Whether to return the constraint matrix `C`, defaults to False
-    
+
     Returns
     -------
     A: scipy.sparse.spmatrix

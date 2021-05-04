@@ -33,7 +33,7 @@ def cg(
     reorthogonalize: boolean
         Wether to apply reorthogonalization of the residuals after each update, defaults to `False`
 
-    
+
     Returns
     -------
     x: numpy.ndarray

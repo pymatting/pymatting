@@ -1,5 +1,5 @@
 __title__ = "PyMatting"
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 __author__ = "The PyMatting Developers"
 __email__ = "pymatting@gmail.com"
 __license__ = "MIT"

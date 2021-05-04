@@ -1,7 +1,7 @@
 def jacobi(A):
     """
     Compute the Jacobi preconditioner function for the matrix A.
-    
+
     Parameters
     -----------
     A: np.array

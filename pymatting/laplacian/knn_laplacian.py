@@ -5,7 +5,9 @@ from pymatting.util.util import normalize_rows
 
 
 def knn_laplacian(
-    image, n_neighbors=[20, 10], distance_weights=[2.0, 0.1],
+    image,
+    n_neighbors=[20, 10],
+    distance_weights=[2.0, 0.1],
 ):
     """
     This function calculates the KNN matting Laplacian matrix as described in :cite:`chen2013knn`.

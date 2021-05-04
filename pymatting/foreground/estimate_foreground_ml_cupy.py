@@ -148,7 +148,17 @@ def estimate_foreground_ml_cupy(
         )
 
         _resize_nearest(
-            grid_size, block_size, (dst, src, w_src, h_src, w_dst, h_dst, depth,)
+            grid_size,
+            block_size,
+            (
+                dst,
+                src,
+                w_src,
+                h_src,
+                w_dst,
+                h_dst,
+                depth,
+            ),
         )
 
     resize_nearest(F, input_image, w0, h0, w_prev, h_prev, depth)

@@ -1,3 +1,6 @@
+### 1.1.3
+- Add optimization for `estimate_alpha_cf` which should reduce computation time if most pixels in the trimap are known.
+
 ### 1.1.2
 
 - Recompile ahead-of-time-compiled modules if they are out of date.
