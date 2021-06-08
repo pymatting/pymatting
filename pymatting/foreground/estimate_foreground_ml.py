@@ -21,7 +21,7 @@ def estimate_foreground_ml(
     image: numpy.ndarray
         Input image with shape :math:`h \\times  w \\times d`
     alpha: numpy.ndarray
-        Input alpha matte shape :math:`h \\times  w \\times 1`
+        Input alpha matte shape :math:`h \\times  w`
     regularization: float
         Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`.
         Higher regularization results in smoother colors.

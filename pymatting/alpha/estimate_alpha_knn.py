@@ -16,7 +16,7 @@ def estimate_alpha_knn(
     image: numpy.ndarray
         Image with shape :math:`h \\times  w \\times d` for which the alpha matte should be estimated
     trimap: numpy.ndarray
-        Trimap with shape :math:`h \\times  w \\times 1` of the image
+        Trimap with shape :math:`h \\times  w` of the image
     preconditioner: function or scipy.sparse.linalg.LinearOperator
         Function or sparse matrix that applies the preconditioner to a vector (default: jacobi)
     laplacian_kwargs: dictionary

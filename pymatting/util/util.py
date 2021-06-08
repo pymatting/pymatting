@@ -445,7 +445,7 @@ def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
     Parameters
     ----------
     trimap: numpy.ndarray
-        Trimap with shape :math:`h\\times w\\times 1`
+        Trimap with shape :math:`h \\times w`
     flatten: bool
         If true np.flatten is called on the trimap
 

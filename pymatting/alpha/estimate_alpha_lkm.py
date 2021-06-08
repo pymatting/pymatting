@@ -13,7 +13,7 @@ def estimate_alpha_lkm(image, trimap, laplacian_kwargs={}, cg_kwargs={}):
     image: numpy.ndarray
         Image with shape :math:`h \\times  w \\times d` for which the alpha matte should be estimated
     trimap: numpy.ndarray
-        Trimap with shape :math:`h \\times  w \\times 1` of the image
+        Trimap with shape :math:`h \\times  w` of the image
     laplacian_kwargs: dictionary
         Arguments passed to the :code:`lkm_laplacian` function
     cg_kwargs: dictionary

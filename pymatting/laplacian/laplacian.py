@@ -18,7 +18,7 @@ def make_linear_system(L, trimap, lambda_value=100.0, return_c=False):
     L: scipy.sparse.spmatrix
         Laplacian matrix, e.g. calculated with :code:`lbdm_laplacian` function
     trimap: numpy.ndarray
-        Trimap with shape :math:`h\\times w \\times 1`
+        Trimap with shape :math:`h\\times w`
     lambda_value: float
         Constraint penalty, defaults to 100
     return_c: bool

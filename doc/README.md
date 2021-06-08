@@ -21,7 +21,7 @@ https://numpydoc.readthedocs.io/en/latest/format.html
     Parameters
     ----------
     trimap: array_like
-        Trimap with shape :math:`h\\times w\\times 1`
+        Trimap with shape :math:`h\\times w`
     flatten: boolean
         If true np.flatten is called on the trimap
 

@@ -26,7 +26,7 @@ def estimate_foreground_cf(
     image: numpy.ndarray
         Input image with shape :math:`h \\times  w \\times d`
     alpha: numpy.ndarray
-        Input alpha matte with shape :math:`h \\times  w \\times 1`
+        Input alpha matte with shape :math:`h \\times  w`
     regularization: float
         Regularization strength :math:`\\epsilon`, defaults to :math:`10^{-5}`
     neighbors: list of tuples of ints
