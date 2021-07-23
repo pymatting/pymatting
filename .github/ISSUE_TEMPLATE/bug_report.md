@@ -29,6 +29,7 @@ assignees: ''
 
 ```bash
 python --version --version
+python -c "import platform;print(platform.platform())"
 python -c "import numpy; numpy.show_config()"
 python -c "import scipy;scipy.show_config()"
 python -c "import numba;print('Numba version:', numba.__version__)"
