@@ -438,11 +438,11 @@ def show_images(images):
 
 
 def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
-    """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown.
+    """This function splits the trimap into foreground pixel, background pixel, and unknown pixel.
 
-    Foreground pixels are pixels where the trimap has values larger than or equal to `fg_threshold` (default: 0.9). 
-    Background pixels are pixels where the trimap has values smaller than or equal to `bg_threshold` (default: 0.1).
-    All other values are assumed to be unknown pixel
+    Foreground pixel are pixel where the trimap has values larger than or equal to `fg_threshold` (default: 0.9). 
+    Background pixel are pixel where the trimap has values smaller than or equal to `bg_threshold` (default: 0.1).
+    Pixel with other values are assumed to be unknown.
 
     Parameters
     ----------
