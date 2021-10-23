@@ -23,7 +23,7 @@ def run_kdtree():
 
     tree = cKDTree(data_points)
 
-    distances2, indices2 = tree.query(query_points, k=k, n_jobs=-1)
+    distances2, indices2 = tree.query(query_points, k=k)
 
     t2 = time.perf_counter()
 
