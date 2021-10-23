@@ -1,4 +1,9 @@
+### 1.1.4
+
+- Switch back to `njit` because ahead-of-time compilation caused too many issues with installation.
+
 ### 1.1.3
+
 - Add optimization for `estimate_alpha_cf` which should reduce computation time if most pixels in the trimap are known.
 - Allow sloppy trimaps.
 
