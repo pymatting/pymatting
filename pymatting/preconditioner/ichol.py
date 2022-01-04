@@ -3,14 +3,37 @@ import scipy.sparse
 from numba import njit
 
 
-@njit("i8(i8, f8[:], i8[:], i8[:], f8[:], i8[:], i8[:], f8, f8, i8)", cache=True, nogil=True)
-def _ichol(n, Av, Ar, Ap, Lv, Lr, Lp, discard_threshold, shift, max_nnz):
+@njit(
+    "i8(i8, f8[:], i8[:], i8[:], f8[:], i8[:], i8[:], f8, f8, i8, f8, b1)",
+    cache=True,
+    nogil=True,
+)
+def _ichol(
+    n,
+    Av,
+    Ar,
+    Ap,
+    Lv,
+    Lr,
+    Lp,
+    discard_threshold,
+    shift,
+    max_nnz,
+    relative_discard_threshold,
+    diag_keep_discarded,
+):
+    """
+    :cite:`jones1995improved` might be slightly interesting for the general idea
+    to use linked list to keep track of the sparse matrix values. But instead of
+    pointers, we have to use indices here, since this is Python and not C.
+    """
     nnz = 0
     c_n = 0
     s = np.zeros(n, np.int64)  # Next non-zero row index i in column j of L
     t = np.zeros(n, np.int64)  # First subdiagonal index i in column j of A
     l = np.zeros(n, np.int64) - 1  # Linked list of non-zero columns in row k of L
     a = np.zeros(n, np.float64)  # Values of column j
+    r = np.zeros(n, np.float64)  # r[j] = sum(abs(A[j:, j])) for relative threshold
     b = np.zeros(
         n, np.bool8
     )  # b[i] indicates if the i-th element of column j is non-zero
@@ -22,6 +45,8 @@ def _ichol(n, Av, Ar, Ap, Lv, Lr, Lp, discard_threshold, shift, max_nnz):
             if i == j:
                 d[j] += Av[idx]
                 t[j] = idx + 1
+            if i >= j:
+                r[j] += abs(Av[idx])
     for j in range(n):  # For each column j
         for idx in range(t[j], Ap[j + 1]):  # For each L_ij
             i = Ar[idx]
@@ -66,8 +91,16 @@ def _ichol(n, Av, Ar, Ap, Lv, Lr, Lp, discard_threshold, shift, max_nnz):
             c[:c_n]
         ):  # Sort row indices of column j for correct insertion order into L
             L_ij = a[i] / d[j]  # Get non-zero element from sparse column j
-            d[i] -= L_ij * L_ij  # Update diagonal element L_ii
-            if abs(L_ij) > discard_threshold:  # If element is sufficiently non-zero
+            if diag_keep_discarded:
+                d[i] -= L_ij * L_ij  # Update diagonal element L_ii
+            rel = (
+                relative_discard_threshold * r[j]
+            )  # Relative discard threshold (before div)
+            if (
+                abs(L_ij) > discard_threshold and abs(a[i]) > rel
+            ):  # If element is sufficiently non-zero
+                if not diag_keep_discarded:
+                    d[i] -= L_ij * L_ij  # Update diagonal element L_ii
                 Lv[nnz] = L_ij  # Add element L_ij to L
                 Lr[nnz] = i  # Add row index of L_ij
                 nnz += 1
@@ -155,6 +188,8 @@ def ichol(
     discard_threshold=1e-4,
     shifts=[0.0, 1e-4, 1e-3, 1e-2, 0.1, 0.5, 1.0, 10.0, 100, 1e3, 1e4, 1e5],
     max_nnz=int(4e9 / 16),
+    relative_discard_threshold=0.0,
+    diag_keep_discarded=True,
 ):
     """Implements the thresholded incomplete Cholesky decomposition
 
@@ -168,6 +203,23 @@ def ichol(
         Values to try for regularizing the matrix of interest in case it is not positive definite after discarding the small values
     max_nnz: int
         Maximum number of non-zero entries in the Cholesky decomposition. Defaults to 250 million, which should usually be around 4 GB.
+    relative_discard_threshold: float
+        Values with an absolute value of less than `relative_discard_threshold * sum(abs(A[j:, j]))` will be discarded.
+        A dense ichol implementation would look like this:
+
+        ```
+        L = np.tril(A)
+        for j in range(n):
+            col = L[j:, j]
+            col -= np.sum(L[j, :j] * L[j:, :j], axis=1)
+            discard_mask = abs(col[1:]) < relative_discard_threshold * np.sum(np.abs(A[j:, j]))
+            col[1:][discard_mask] = 0
+            col[0] **= 0.5
+            col[1:] /= col[0]
+        ```
+
+    diag_keep_discarded: bool
+        Whether to update the diagonal with the discarded values. Usually better if `True`.
 
     Returns
     -------
@@ -221,6 +273,8 @@ def ichol(
             discard_threshold,
             shift,
             max_nnz,
+            relative_discard_threshold,
+            diag_keep_discarded,
         )
 
         if nnz >= 0:
