@@ -14,6 +14,9 @@ path = os.path.join(directory, "pymatting", "__about__.py")
 about = {}
 exec(load_text(path), about)
 
+with open("MANIFEST.in", "w", encoding="utf-8") as f:
+    f.write("include requirements.txt\n")
+
 setup(
     name=about["__title__"],
     version=about["__version__"],
