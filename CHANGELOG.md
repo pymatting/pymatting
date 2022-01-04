@@ -1,3 +1,7 @@
+### 1.1.5
+
+- Add `relative_discard_threshold` for `ichol` preconditioner.
+
 ### 1.1.4
 
 - Switch back to `njit` because ahead-of-time compilation caused too many issues with installation.

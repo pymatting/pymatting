@@ -21,11 +21,11 @@ sys.path.insert(0, os.path.abspath("../.."))
 # -- Project information -----------------------------------------------------
 
 project = "PyMatting"
-copyright = "2020, Thomas Germer, Tobias Uelwer, Stefan Conrad, Stefan Harmeling"
+copyright = "2022, Thomas Germer, Tobias Uelwer, Stefan Conrad, Stefan Harmeling"
 author = "Thomas Germer, Tobias Uelwer, Stefan Conrad, Stefan Harmeling"
 
 # The full version, including alpha/beta/rc tags
-release = "1.1.4"
+release = "1.1.5"
 
 
 # -- General configuration ---------------------------------------------------
