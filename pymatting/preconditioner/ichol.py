@@ -204,23 +204,21 @@ def ichol(
     max_nnz: int
         Maximum number of non-zero entries in the Cholesky decomposition. Defaults to 250 million, which should usually be around 4 GB.
     relative_discard_threshold: float
-        Values with an absolute value of less than `relative_discard_threshold * sum(abs(A[j:, j]))` will be discarded.
-        A dense ichol implementation would look like this:
-
-        ```
-        L = np.tril(A)
-        for j in range(n):
-            col = L[j:, j]
-            col -= np.sum(L[j, :j] * L[j:, :j], axis=1)
-            discard_mask = abs(col[1:]) < relative_discard_threshold * np.sum(np.abs(A[j:, j]))
-            col[1:][discard_mask] = 0
-            col[0] **= 0.5
-            col[1:] /= col[0]
-        ```
+        Values with an absolute value of less than :code:`relative_discard_threshold * sum(abs(A[j:, j]))` will be discarded.
+        A dense ichol implementation with relative threshold would look like this::
+        
+            L = np.tril(A)
+            for j in range(n):
+                col = L[j:, j]
+                col -= np.sum(L[j, :j] * L[j:, :j], axis=1)
+                discard_mask = abs(col[1:]) < relative_discard_threshold * np.sum(np.abs(A[j:, j]))
+                col[1:][discard_mask] = 0
+                col[0] **= 0.5
+                col[1:] /= col[0]
 
     diag_keep_discarded: bool
-        Whether to update the diagonal with the discarded values. Usually better if `True`.
-
+        Whether to update the diagonal with the discarded values. Usually better if :code:`True`.
+    
     Returns
     -------
     chol: CholeskyDecomposition
