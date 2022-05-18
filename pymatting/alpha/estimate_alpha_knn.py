@@ -9,7 +9,8 @@ def estimate_alpha_knn(
     image, trimap, preconditioner=None, laplacian_kwargs={}, cg_kwargs={}
 ):
     """
-    Estimate alpha from an input image and an input trimap using KNN Matting as proposed by :cite:`chen2013knn`.
+    Estimate alpha from an input image and an input trimap using KNN Matting similar to :cite:`chen2013knn`.
+    See `knn_laplacian` for more details.
 
     Parameters
     ----------
