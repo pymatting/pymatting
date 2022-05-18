@@ -1,3 +1,7 @@
+### 1.1.6
+
+- Add `kernel` parameter for `knn_laplacian`.
+
 ### 1.1.5
 
 - Add `relative_discard_threshold` for `ichol` preconditioner.

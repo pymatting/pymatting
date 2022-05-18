@@ -25,7 +25,7 @@ copyright = "2022, Thomas Germer, Tobias Uelwer, Stefan Conrad, Stefan Harmeling
 author = "Thomas Germer, Tobias Uelwer, Stefan Conrad, Stefan Harmeling"
 
 # The full version, including alpha/beta/rc tags
-release = "1.1.5"
+release = "1.1.6"
 
 
 # -- General configuration ---------------------------------------------------
