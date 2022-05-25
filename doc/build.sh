@@ -17,3 +17,5 @@ sed 's/pymatting package/API Reference/' source/pymatting.rst > temp && mv temp 
 
 make clean
 make html
+
+python3 embed_external_resources.py
