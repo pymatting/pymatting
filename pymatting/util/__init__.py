@@ -14,6 +14,7 @@ from pymatting.util.util import (
     normalize_rows,
     normalize,
     row_sum,
+    sanity_check_image,
     save_image,
     show_images,
     sparse_conv_matrix,
