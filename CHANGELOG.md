@@ -1,3 +1,7 @@
+### 1.1.7
+
+- Add sanity check for image and trimap.
+
 ### 1.1.6
 
 - Add `kernel` parameter for `knn_laplacian`.
