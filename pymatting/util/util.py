@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 import scipy.sparse
 import os
+import warnings
 from functools import wraps
 
 
@@ -485,6 +486,28 @@ def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
     if flatten:
         trimap = trimap.flatten()
 
+    min_value = trimap.min()
+    max_value = trimap.max()
+
+    if min_value < 0.0:
+        warnings.warn(
+            "Trimap values should be in [0, 1], but trimap.min() is %s." % min_value,
+            stacklevel=2,
+        )
+
+    if max_value > 1.0:
+        warnings.warn(
+            "Trimap values should be in [0, 1], but trimap.max() is %s." % min_value,
+            stacklevel=2,
+        )
+
+    if trimap.dtype not in [np.float32, np.float64]:
+        warnings.warn(
+            "Unexpected trimap.dtype %s. Are you sure that you do not want to use np.float32 or np.float64 instead?"
+            % trimap.dtype,
+            stacklevel=2,
+        )
+
     is_fg = trimap >= fg_threshold
     is_bg = trimap <= bg_threshold
 
@@ -502,6 +525,59 @@ def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
     is_unknown = ~is_known
 
     return is_fg, is_bg, is_known, is_unknown
+
+
+def sanity_check_image(image):
+    """Performs a sanity check for input images. Image values should be in the
+    range [0, 1], the `dtype` should be `np.float32` or `np.float64` and the
+    image shape should be `(?, ?, 3)`.
+
+    Parameters
+    ----------
+    image: numpy.ndarray
+        Image with shape :math:`h \\times w \\times 3`
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from pymatting import check_image
+    >>> image = (np.random.randn(64, 64, 2) * 255).astype(np.int32)
+    >>> sanity_check_image(image)
+    __main__:1: UserWarning: Expected RGB image of shape (?, ?, 3), but image.shape is (64, 64, 2).
+    __main__:1: UserWarning: Image values should be in [0, 1], but image.min() is -933.
+    __main__:1: UserWarning: Image values should be in [0, 1], but image.max() is 999.
+    __main__:1: UserWarning: Unexpected image.dtype int32. Are you sure that you do not want to use np.float32 or np.float64 instead?
+
+    """
+
+    if len(image.shape) != 3 or image.shape[2] != 3:
+        warnings.warn(
+            "Expected RGB image of shape (?, ?, 3), but image.shape is %s."
+            % str(image.shape),
+            stacklevel=2,
+        )
+
+    min_value = image.min()
+    max_value = image.max()
+
+    if min_value < 0.0:
+        warnings.warn(
+            "Image values should be in [0, 1], but image.min() is %s." % min_value,
+            stacklevel=2,
+        )
+
+    if max_value > 1.0:
+        warnings.warn(
+            "Image values should be in [0, 1], but image.max() is %s." % max_value,
+            stacklevel=2,
+        )
+
+    if image.dtype not in [np.float32, np.float64]:
+        warnings.warn(
+            "Unexpected image.dtype %s. Are you sure that you do not want to use np.float32 or np.float64 instead?"
+            % image.dtype,
+            stacklevel=2,
+        )
 
 
 def blend(foreground, background, alpha):

@@ -1,3 +1,4 @@
+from pymatting.util.util import sanity_check_image
 from pymatting.laplacian.laplacian import make_linear_system
 from pymatting.laplacian.knn_laplacian import knn_laplacian
 from pymatting.preconditioner.jacobi import jacobi
@@ -43,6 +44,8 @@ def estimate_alpha_knn(
     """
     if preconditioner is None:
         preconditioner = jacobi
+
+    sanity_check_image(image)
 
     A, b = make_linear_system(knn_laplacian(image, **laplacian_kwargs), trimap)
 

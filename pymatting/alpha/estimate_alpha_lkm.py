@@ -1,3 +1,4 @@
+from pymatting.util.util import sanity_check_image
 from pymatting.laplacian.lkm_laplacian import lkm_laplacian
 from pymatting.util.util import trimap_split
 from pymatting.solver.cg import cg
@@ -36,6 +37,9 @@ def estimate_alpha_lkm(image, trimap, laplacian_kwargs={}, cg_kwargs={}):
     ...     cg_kwargs={"maxiter":2000})
 
     """
+
+    sanity_check_image(image)
+
     L_matvec, diag_L = lkm_laplacian(image, **laplacian_kwargs)
 
     is_fg, is_bg, is_known, is_unknown = trimap_split(trimap)

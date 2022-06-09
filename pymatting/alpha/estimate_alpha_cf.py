@@ -1,4 +1,4 @@
-from pymatting.util.util import trimap_split
+from pymatting.util.util import sanity_check_image, trimap_split
 from pymatting.laplacian.cf_laplacian import cf_laplacian
 from pymatting.preconditioner.ichol import ichol
 from pymatting.solver.cg import cg
@@ -45,6 +45,8 @@ def estimate_alpha_cf(
     """
     if preconditioner is None:
         preconditioner = ichol
+
+    sanity_check_image(image)
 
     h, w = trimap.shape[:2]
 

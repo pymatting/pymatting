@@ -1,3 +1,4 @@
+from pymatting.util.util import sanity_check_image
 from pymatting.laplacian.laplacian import make_linear_system
 from pymatting.laplacian.rw_laplacian import rw_laplacian
 from pymatting.preconditioner.jacobi import jacobi
@@ -43,6 +44,8 @@ def estimate_alpha_rw(
     """
     if preconditioner is None:
         preconditioner = jacobi
+
+    sanity_check_image(image)
 
     A, b = make_linear_system(rw_laplacian(image, **laplacian_kwargs), trimap)
 

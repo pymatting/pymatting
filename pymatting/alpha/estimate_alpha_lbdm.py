@@ -1,3 +1,4 @@
+from pymatting.util.util import sanity_check_image
 from pymatting.laplacian.laplacian import make_linear_system
 from pymatting.laplacian.lbdm_laplacian import lbdm_laplacian
 from pymatting.preconditioner.ichol import ichol
@@ -43,6 +44,8 @@ def estimate_alpha_lbdm(
     """
     if preconditioner is None:
         preconditioner = ichol
+
+    sanity_check_image(image)
 
     A, b = make_linear_system(lbdm_laplacian(image, **laplacian_kwargs), trimap)
 
