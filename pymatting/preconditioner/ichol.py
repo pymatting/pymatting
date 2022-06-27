@@ -155,7 +155,7 @@ class CholeskyDecomposition(object):
     Parameters
     ----------
     Ltuple: tuple of numpy.ndarrays
-        Tuple of array describing values, row indices and row pointers for Cholesky factor in the compressed sparse comlumn format (csc)
+        Tuple of array describing values, row indices and row pointers for Cholesky factor in the compressed sparse column format (csc)
     """
 
     def __init__(self, Ltuple):
