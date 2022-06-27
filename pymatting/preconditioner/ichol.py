@@ -198,7 +198,7 @@ def ichol(
     A: scipy.sparse.csc_matrix
         Matrix for which the preconditioner should be calculated
     discard_threshold: float
-        Values having an absolute value smaller than this theshold will be discarded while calculating the cholesky decompositions
+        Values having an absolute value smaller than this threshold will be discarded while calculating the Cholesky decompositions
     shifts: array of floats
         Values to try for regularizing the matrix of interest in case it is not positive definite after discarding the small values
     max_nnz: int
