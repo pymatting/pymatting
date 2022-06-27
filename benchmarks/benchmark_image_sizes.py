@@ -88,7 +88,7 @@ def build_solver(solver_name, A, Acsr, Acsc, Acoo, AL, b, atol, rtol):
     if solver_name == "eigen_icholt":
         from solve_eigen import solve_eigen_icholt_coo
 
-        # Choose shift hust large enough to not fail for given images
+        # Choose shift just large enough to not fail for given images
         # (might fail with larger/different images)
         initial_shift = 5e-4
 
