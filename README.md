@@ -1,6 +1,6 @@
 # PyMatting: A Python Library for Alpha Matting
 [![License: MIT](https://img.shields.io/github/license/pymatting/pymatting?color=brightgreen)](https://opensource.org/licenses/MIT)
-[![CI](https://img.shields.io/github/workflow/status/pymatting/pymatting/tests?label=tests)](https://github.com/pymatting/pymatting/actions?query=workflow%3Atests)
+[![CI](https://img.shields.io/github/actions/workflow/status/pymatting/pymatting/.github/workflows/tests.yml?branch=master)](https://github.com/pymatting/pymatting/actions?query=workflow%3Atests)
 [![PyPI](https://img.shields.io/pypi/v/pymatting)](https://pypi.org/project/PyMatting/)
 [![JOSS](https://joss.theoj.org/papers/9766cab65bfbf07a70c8a835edd3875a/status.svg)](https://joss.theoj.org/papers/9766cab65bfbf07a70c8a835edd3875a)
 [![Gitter](https://img.shields.io/gitter/room/pymatting/pymatting)](https://gitter.im/pymatting/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
