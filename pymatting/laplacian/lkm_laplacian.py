@@ -22,7 +22,7 @@ def lkm_laplacian(image, epsilon=1e-7, radius=10, return_diagonal=True):
     L_matvec: function
         Function that applies the Laplacian matrix to a vector
     diag_L: numpy.ndarray
-        Diagonal entries of the matting Laplacian, only returnes if `return_diagonal` is True
+        Diagonal entries of the matting Laplacian, only returns if `return_diagonal` is True
     """
     image = image.astype(np.float64)
 

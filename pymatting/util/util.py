@@ -196,7 +196,7 @@ def isiterable(obj):
     Returns
     -------
     is_iterable: bool
-        Boolean variable indicating wether the object is iterable
+        Boolean variable indicating whether the object is iterable
 
     Example
     -------
@@ -759,7 +759,7 @@ def grid_coordinates(width, height, flatten=False):
 def sparse_conv_matrix_with_offsets(width, height, kernel, dx, dy):
     """Calculates a convolution matrix that can be applied to a vectorized image
 
-    Additionaly, this function allows to specify which pixels should be used for the convoltion, i.e.
+    Additionally, this function allows to specify which pixels should be used for the convoltion, i.e.
 
     .. math:: \\left(I * K\\right)_{ij} = \\sum_k K_k I_{i+{\\Delta_y}_k,j+{\\Delta_y}_k},
 

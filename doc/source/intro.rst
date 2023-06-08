@@ -30,7 +30,7 @@ To estimate the alpha matte Pymatting implements the following methods:
 Foreground Extraction
 ---------------------
 
-Simply multiplying the alpha matte with the input image results in halo artifacts. This motivates the developement of foreground extraction methods.
+Simply multiplying the alpha matte with the input image results in halo artifacts. This motivates the development of foreground extraction methods.
 
 .. figure:: figures/lemur_color_bleeding.png
    :align: center

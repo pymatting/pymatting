@@ -26,7 +26,7 @@
 
 ### 1.1.1
 
-- Compile on first import instead of during build to simplfy PyPI upload process.
+- Compile on first import instead of during build to simplify PyPI upload process.
 
 ### 1.1.0
 

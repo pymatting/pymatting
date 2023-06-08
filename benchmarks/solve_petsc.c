@@ -89,7 +89,7 @@ int solve_petsc_coo(
     
     ierr = VecSetValues(b, n, indices, rhs, INSERT_VALUES);CHKERRQ(ierr);
 
-    // inizialize Krylov subspace solver
+    // initialize Krylov subspace solver
     ierr = KSPCreate(PETSC_COMM_WORLD,&ksp);CHKERRQ(ierr);
     ierr = KSPSetOperators(ksp,A,A);CHKERRQ(ierr);
     // should be preconditioned conjugate gradient descent
