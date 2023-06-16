@@ -31,7 +31,7 @@ def cg(
     M: function or scipy.sparse.csr_matrix
        Function that applies the preconditioner to a vector. Alternatively, `M` can be a matrix describing the precondioner.
     reorthogonalize: boolean
-        Wether to apply reorthogonalization of the residuals after each update, defaults to `False`
+        Whether to apply reorthogonalization of the residuals after each update, defaults to `False`
 
 
     Returns
