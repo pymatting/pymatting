@@ -28,6 +28,7 @@ def test_alpha():
         (estimate_alpha_rw, 6.2),
         (estimate_alpha_knn, 3.6),
         (lambda *args: estimate_alpha_lkm(*args, laplacian_kwargs={"radius": 1}), 4.4),
+        (estimate_alpha_sm, 5.1),
     ]:
         alpha = estimate_alpha_method(image, trimap)
 

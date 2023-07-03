@@ -4,3 +4,4 @@ from pymatting.alpha.estimate_alpha_rw import estimate_alpha_rw
 from pymatting.alpha.estimate_alpha_knn import estimate_alpha_knn
 from pymatting.alpha.estimate_alpha_cf import estimate_alpha_cf
 from pymatting.alpha.estimate_alpha_cf import estimate_alpha_cf as estimate_alpha
+from pymatting.alpha.estimate_alpha_sm import estimate_alpha_sm

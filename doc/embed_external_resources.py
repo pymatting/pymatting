@@ -12,6 +12,7 @@ mapping = {
     "https://github.com/pymatting/videos/blob/master/knn_web.mp4?raw=true": "_static/knn_web.mp4",
     "https://github.com/pymatting/videos/blob/master/lkm_web.mp4?raw=true": "_static/lkm_web.mp4",
     "https://github.com/pymatting/videos/blob/master/rw_web.mp4?raw=true": "_static/rw_web.mp4",
+    "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML": "_static/MathJax.js",
 }
 
 fonts = """

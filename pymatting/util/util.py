@@ -158,7 +158,7 @@ def fix_trimap(trimap, lower_threshold=0.1, upper_threshold=0.9):
     Returns
     -------
     fixed_trimap: numpy.ndarray
-        Trimap having values in :math:`\{0, 0.5, 1\}`
+        Trimap having values in :math:`\\{0, 0.5, 1\\}`
 
     Example
     -------
@@ -441,7 +441,7 @@ def show_images(images):
 def trimap_split(trimap, flatten=True, bg_threshold=0.1, fg_threshold=0.9):
     """This function splits the trimap into foreground pixels, background pixels, and unknown pixels.
 
-    Foreground pixels are pixels where the trimap has values larger than or equal to `fg_threshold` (default: 0.9). 
+    Foreground pixels are pixels where the trimap has values larger than or equal to `fg_threshold` (default: 0.9).
     Background pixels are pixels where the trimap has values smaller than or equal to `bg_threshold` (default: 0.1).
     Pixels with other values are assumed to be unknown.
 
