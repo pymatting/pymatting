@@ -1,3 +1,7 @@
+### 1.1.9
+
+- Add Shared Matting
+
 ### 1.1.7
 
 - Add sanity check for image and trimap.
