@@ -134,7 +134,7 @@ def cf_laplacian(image, epsilon=1e-7, radius=1, is_known=None):
     This function implements the alpha estimator for closed-form alpha matting as proposed by :cite:`levin2007closed`.
 
     Parameters
-    ------------
+    ----------
     image: numpy.ndarray
        Image with shape :math:`h\\times w \\times 3`
     epsilon: float

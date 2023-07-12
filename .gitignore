@@ -8,6 +8,9 @@ __pycache__
 *.zip
 *.so
 *.egg-info
+*.ttf
+*.woff
+*.woff2
 dist
 build
 .ipynb_checkpoints
@@ -20,8 +23,12 @@ doc/source/*.rst
 !doc/source/start.rst
 !doc/source/references.rst
 !doc/source/figures/*.png
+!doc/static/figures/*.png
 !data/test/*.png
 !data/lemur/*.png
+doc/static/auto-render.min.js
+doc/static/katex.min.css
+doc/static/katex.min.js
 
 # from tests/.gitignore
 tests/results/

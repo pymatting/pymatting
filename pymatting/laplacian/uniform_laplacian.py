@@ -10,7 +10,7 @@ def uniform_laplacian(image, radius=1):
     """This function returns a Laplacian matrix with all weights equal to one.
 
     Parameters
-    ------------
+    ----------
     image: numpy.ndarray
         Image with shape :math:`h\\times w \\times 3`
     radius: int

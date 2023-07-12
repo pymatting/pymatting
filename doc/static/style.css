@@ -1,0 +1,188 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    font-family: Arial;
+}
+.left {
+    width: 240px;
+    color: #fff;
+    background-color: #333;
+    padding: 5px;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+}
+.left ul {
+    padding: 0 0 0 20px;
+    margin: 0;
+}
+.left li {
+    margin: 10px;
+    font-size: 15px;
+}
+.logo {
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    background-color: #2980b9;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    justify-content: center;
+}
+.logotext {
+    margin-left: 10px;
+    margin-right: 20px;
+    color: inherit;
+}
+.middle {
+    position: absolute;
+    top: 0;
+    left: 280px;
+    padding-left: 10px;
+    max-width: 600px;
+    line-height: 1.5;
+}
+.parameteritem {
+    list-style-type: none;
+    margin-bottom: 30px;
+    border: 1px solid #0000007a;
+    padding: 5px;
+    border-radius: 5px;
+}
+.parameterdescription {
+    list-style-type: none;
+}
+.parameter {
+    background-color: #2b2537;
+    color: #d7d7d7;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 1px 5px 1px 5px;
+}
+.referenceid {
+    border-top: 3px solid #6ab0de;
+    padding-top: 5px;
+    color: #2980b9;
+    background: #e7f2fa;
+    font-weight: bold;
+}
+.referenceitem {
+    margin-bottom: 2em;
+}
+footer {
+    border-top: 1px solid #d0d0d0;
+    color: #a2a2a2;
+    padding: 10px;
+}
+.comment {
+    color: #f78f5d;
+}
+.string {
+    color: #57a4d2;
+}
+.operator {
+    color: #22b340;
+    font-weight: bold;
+}
+.keyword {
+    color: #cca955;
+    font-weight: bold;
+}
+.name {
+    color: #d7d7d7;
+}
+.number {
+    color: #d0b344;
+    font-weight: bold;
+}
+.indentation {
+    color: #656660;
+    user-select: none;
+    pointer-events: none;
+}
+.codeinline {
+    border-radius: 3px;
+    padding: 1px 4px 1px 4px;
+    background-color: #2b2537;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    white-space: nowrap;
+}
+.codeblock {
+    border-radius: 5px;
+    padding: 5px 8px 5px 8px;
+    background-color: #2b2537;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    white-space: nowrap;
+    white-space: pre;
+}
+.block {
+    margin-bottom: 20px;
+}
+.function {
+    margin-bottom: 50px;
+    background-color: #e2e2e2;
+    padding: 0px 15px 15px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1px solid #0000007a;
+}
+.sidebarlink {
+    color: inherit;
+}
+a.currentpage {
+    font-weight: bold;
+}
+.functionname {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    display: inline-block;
+    color: #000;
+    background-color: #e7f2fa;
+    padding: 15px;
+    border-radius: 25px;
+    border: 1px solid #0000007a;
+}
+.functionanchorlink {
+    color: inherit;
+    padding: 10px;
+}
+.functionsourcelink {
+    color: inherit;
+}
+.sidebarcontents {
+    color: #55a5d9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+.github-icon {
+    height: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.figure {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.figure img {
+    width: 600px;
+}
+.caption {
+    text-align: center;
+    font-size: 13px;
+}
+.signature h4, .signature .codeblock {
+    margin: 0;
+}

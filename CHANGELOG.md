@@ -1,3 +1,7 @@
+### 1.1.10
+
+- Introduce new tool to build documentation.
+
 ### 1.1.9
 
 - Add Shared Matting
