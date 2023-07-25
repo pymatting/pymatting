@@ -67,7 +67,7 @@ def generate_html(node, references, html=None):
         html.append(HTML(node["value"]))
 
     elif node["type"] == "text_block":
-        html.append(div(generate_html(node["value"], references)))
+        html.append(div(cls="textblock", children=generate_html(node["value"], references)))
 
     elif node["type"] == "inline_code":
         highlighted = highlight.highlight_inline(node["value"])
@@ -224,12 +224,6 @@ def main():
             el("script", src="/katex.min.js"),
         ]
 
-        middle = div(cls="middle", children=[
-            el("h1", title),
-            content,
-            el("footer", footer),
-        ])
-
         api_reference = [
             li(a_link(f"/{sub_dir}.html", title2, cls="sidebarlink" + (" currentpage" if title == title2 else "")))
             for sub_dir, title2 in directories]
@@ -252,15 +246,19 @@ def main():
             else:
                 pages.append(li(a_link("/" + url, title2, cls=cls)))
 
-        sidebar = div(cls="left", children=[
+        sidebar = div(cls="sidebar", children=[
             div(cls="logo", children=[
                 a_link("/", img("/figures/lemur_small.png", width="50px"), cls=cls),
                 a_link("/", "PyMatting", cls="logotext"),
             ]),
-            div(cls="sidebar", children=[
-                div("CONTENTS", cls="sidebarcontents"),
-                ul(pages),
-            ]),
+            div("CONTENTS", cls="sidebarcontents"),
+            ul(pages),
+        ])
+
+        middle = div(cls="middle", children=[
+            el("h1", title),
+            content,
+            el("footer", footer),
         ])
 
         body = [sidebar, middle]

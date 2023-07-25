@@ -4,7 +4,7 @@ body {
     font-size: 15px;
     font-family: Arial;
 }
-.left {
+.sidebar {
     width: 240px;
     color: #fff;
     background-color: #333;
@@ -15,11 +15,11 @@ body {
     padding: 0;
     margin: 0;
 }
-.left ul {
+.sidebar ul {
     padding: 0 0 0 20px;
     margin: 0;
 }
-.left li {
+.sidebar li {
     margin: 10px;
     font-size: 15px;
 }
@@ -40,11 +40,8 @@ body {
     color: inherit;
 }
 .middle {
-    position: absolute;
-    top: 0;
-    left: 280px;
-    padding-left: 10px;
-    max-width: 600px;
+    margin-left: 260px;
+    margin-right: 20px;
     line-height: 1.5;
 }
 .parameteritem {
@@ -111,7 +108,9 @@ footer {
     padding: 1px 4px 1px 4px;
     background-color: #2b2537;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    white-space: nowrap;
+}
+.textblock {
+    max-width: 600px;
 }
 .codeblock {
     border-radius: 5px;
@@ -119,23 +118,33 @@ footer {
     background-color: #2b2537;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: inline-block;
+    display: block;
     white-space: nowrap;
     white-space: pre;
-}
-.block {
-    margin-bottom: 20px;
+
+    /* Take up as much space as available in parent, but no more than needed. */
+    display: inline-block;
+    /* consider size of border when computing max-width */
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: scroll;
 }
 .function {
     margin-bottom: 50px;
     background-color: #e2e2e2;
     padding: 0px 15px 15px 15px;
     border-radius: 10px;
-    display: inline-block;
     border: 1px solid #0000007a;
+
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%;
+}
+.block {
+    margin-bottom: 20px;
+}
+.signature {
+    display: block;
 }
 .sidebarlink {
     color: inherit;
