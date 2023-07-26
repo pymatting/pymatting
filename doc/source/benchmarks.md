@@ -20,7 +20,7 @@ The following videos show the iterates of the different methods.
 Note that the videos of the slower methods have been accelerated.
 
 .. html::
-    <table style="width:100%">
+    <table style="width:100%;display:inline-block;">
         <tr align="center">
         <td>
             <embed>

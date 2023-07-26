@@ -114,7 +114,8 @@ def generate_html(node, references, html=None):
 
         signature = HTML(highlight.highlight_block(signature))
 
-        prefix = str(Path(node["filename"]).relative_to(src_dir).parent).replace("/", ".") + "."
+        #prefix = str(Path(node["filename"]).relative_to(src_dir).parent).replace("/", ".") + "."
+        prefix = "pymatting."
         for parent in reversed(node["parents"]):
             prefix += parent + "."
 

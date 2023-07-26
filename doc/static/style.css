@@ -8,10 +8,9 @@ body {
     width: 240px;
     color: #fff;
     background-color: #333;
-    padding: 5px;
     top: 0;
-    bottom: 0;
-    position: fixed;
+    height: 100vh;
+    position: sticky;
     padding: 0;
     margin: 0;
 }
@@ -40,6 +39,9 @@ body {
     color: inherit;
 }
 .middle {
+    /* By default, this element starts below sidebar. Shift it up. */
+    transform: translateY(-100vh);
+    padding: 0;
     margin-left: 260px;
     margin-right: 20px;
     line-height: 1.5;
@@ -50,6 +52,10 @@ body {
     border: 1px solid #0000007a;
     padding: 5px;
     border-radius: 5px;
+
+    box-sizing: border-box;
+    display: table;
+    max-width: 600px;
 }
 .parameterdescription {
     list-style-type: none;
@@ -59,7 +65,7 @@ body {
     color: #d7d7d7;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 1px 5px 1px 5px;
 }
 .referenceid {
@@ -104,7 +110,7 @@ footer {
     pointer-events: none;
 }
 .codeinline {
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 1px 4px 1px 4px;
     background-color: #2b2537;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -133,7 +139,7 @@ footer {
     margin-bottom: 50px;
     background-color: #e2e2e2;
     padding: 0px 15px 15px 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #0000007a;
 
     box-sizing: border-box;
@@ -158,7 +164,7 @@ a.currentpage {
     color: #000;
     background-color: #e7f2fa;
     padding: 15px;
-    border-radius: 25px;
+    border-radius: 5px;
     border: 1px solid #0000007a;
 }
 .functionanchorlink {
@@ -184,6 +190,8 @@ a.currentpage {
 .figure {
     padding-top: 25px;
     padding-bottom: 25px;
+    text-align: center;
+    display: table;
 }
 .figure img {
     width: 600px;
