@@ -21,9 +21,10 @@ PyMatting provides:
   - KNN Matting [[3]](#3)
   - Learning Based Digital Matting [[4]](#4)
   - Random Walk Matting [[5]](#5)
+  - Shared Sampling Matting [[6]](#6)
 - Foreground estimation implementations for:
   - Closed Form Foreground Estimation [[1]](#1)
-  - Fast Multi-Level Foreground Estimation (CPU, CUDA and OpenCL) [[6]](#6)
+  - Fast Multi-Level Foreground Estimation (CPU, CUDA and OpenCL) [[7]](#7)
 - Fast multithreaded KNN search
 - Preconditioners to accelerate the convergence rate of conjugate gradient descent:
   - The *incomplete thresholded Cholesky decomposition* (*Incomplete* is part of the name. The implementation is quite complete.)
@@ -141,7 +142,7 @@ If you found PyMatting to be useful for your work, please consider citing our [p
 
 ## References
 
-<a id="1">[1]</a> 
+<a id="1">[1]</a>
 Anat Levin, Dani Lischinski, and Yair Weiss. A closed-form solution to natural image matting. IEEE transactions on pattern analysis and machine intelligence, 30(2):228–242, 2007.
 
 <a id="2">[2]</a>
@@ -157,6 +158,9 @@ Yuanjie Zheng and Chandra Kambhamettu. Learning based digital matting. In 2009 I
 Leo Grady, Thomas Schiwietz, Shmuel Aharon, and Rüdiger Westermann. Random walks for interactive alpha-matting. In Proceedings of VIIP, volume 2005, 423–429. 2005.
 
 <a id="6">[6]</a>
+Eduardo S. L. Gastal and Manuel M. Oliveira. "Shared Sampling for Real-Time Alpha Matting". Computer Graphics Forum. Volume 29 (2010), Number 2, Proceedings of Eurographics 2010, pp. 575-584.
+
+<a id="7">[7]</a>
 Germer, T., Uelwer, T., Conrad, S., & Harmeling, S. (2020). Fast Multi-Level Foreground Estimation. arXiv preprint arXiv:2006.14970.
 
 Lemur image by Mathias Appel from https://www.flickr.com/photos/mathiasappel/25419442300/ licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain License](https://creativecommons.org/publicdomain/zero/1.0/).
