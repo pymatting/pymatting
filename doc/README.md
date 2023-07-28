@@ -1,6 +1,6 @@
 ## Building and viewing the docs
 
-1. Install Python 3.8 or newer (required for [`end_col_offset`](https://docs.python.org/3/whatsnew/3.8.html#ast)).
+1. Install Python 3.8 or newer (required for [`end_col_offset`](https://docs.python.org/3/whatsnew/3.8.html#ast) and [walrus operator](https://docs.python.org/3/whatsnew/3.8.html#assignment-expressions)).
 2. Run the following command in this directory
 ```bash
 python3 build.py
@@ -16,7 +16,7 @@ https://numpydoc.readthedocs.io/en/latest/format.html
 ## Doc string example:
 
 ```python3
-    """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown. 
+    """This function splits the trimap into foreground pixels, background pixels and classifies each pixel as known or unknown.
 
     Foreground pixels are pixels where the trimap has value 1.0. Background pixels are pixels where the trimap has value 0.
 
