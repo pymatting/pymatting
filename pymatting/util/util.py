@@ -138,8 +138,8 @@ def fix_trimap(trimap, lower_threshold=0.1, upper_threshold=0.9):
     .. math::
         T^{\\text{fixed}}_{ij}=
         \\begin{cases}
-            0,&\\text{if } T_{ij}<\\text{lower_threshold}\\\\
-            1,&\\text{if }T_{ij}>\\text{upper_threshold}\\\\
+            0,&\\text{if } T_{ij}<\\text{lower\\_threshold}\\\\
+            1,&\\text{if }T_{ij}>\\text{upper\\_threshold}\\\\
             0.5, &\\text{otherwise}.\\\\
         \\end{cases}
 
@@ -148,10 +148,8 @@ def fix_trimap(trimap, lower_threshold=0.1, upper_threshold=0.9):
     ----------
     trimap: numpy.ndarray
         Possibly broken trimap
-
     lower_threshold: float
         Threshold used to determine background pixels, defaults to 0.1
-
     upper_threshold: float
         Threshold used to determine foreground pixels, defaults to 0.9
 

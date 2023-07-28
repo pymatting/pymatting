@@ -7,7 +7,7 @@ def lkm_laplacian(image, epsilon=1e-7, radius=10, return_diagonal=True):
     """Calculates the Laplacian for large kernel matting :cite:`he2010fast`
 
     Parameters
-    ---------
+    ----------
     image: numpy.ndarray
         Image of shape :math:`h\\times w \\times 3`
     epsilons: float

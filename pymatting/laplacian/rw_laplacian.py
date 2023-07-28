@@ -49,7 +49,7 @@ def rw_laplacian(image, sigma=0.033, radius=1, regularization=1e-8):
     This function implements the alpha estimator for random walk alpha matting as described in :cite:`grady2005random`.
 
     Parameters
-    ------------
+    ----------
     image: numpy.ndarray
         Image with shape :math:`h\\times w \\times 3`
     sigma: float

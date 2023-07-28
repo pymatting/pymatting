@@ -1,0 +1,217 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    font-family: Arial;
+}
+.sidebar {
+    width: 240px;
+    color: #fff;
+    background-color: #333;
+    top: 0;
+    height: 100vh;
+    position: sticky;
+    padding: 0;
+    margin: 0;
+}
+.sidebar ul {
+    padding: 0 0 0 20px;
+    margin: 0;
+}
+.sidebar li {
+    margin: 10px;
+    font-size: 15px;
+}
+.logo {
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    background-color: #2980b9;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    justify-content: center;
+}
+.logotext {
+    margin-left: 10px;
+    margin-right: 20px;
+    color: inherit;
+}
+.middle {
+    /* By default, this element starts below sidebar. Shift it up. */
+    transform: translateY(-100vh);
+    padding: 0;
+    margin-left: 260px;
+    margin-right: 20px;
+    line-height: 1.5;
+}
+.parameteritem {
+    list-style-type: none;
+    margin-bottom: 10px;
+    border: 1px solid #0000007a;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+
+    box-sizing: border-box;
+    display: table;
+    max-width: 600px;
+}
+.parameterdescription {
+    list-style-type: none;
+}
+.parameter {
+    background-color: #2b2537;
+    color: #d7d7d7;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 1px 5px 1px 5px;
+}
+.referenceid {
+    border-top: 3px solid #6ab0de;
+    padding-top: 5px;
+    color: #2980b9;
+    background: #e7f2fa;
+    font-weight: bold;
+}
+.referenceitem {
+    margin-bottom: 2em;
+}
+footer {
+    border-top: 1px solid #d0d0d0;
+    color: #a2a2a2;
+    padding: 10px;
+}
+.comment {
+    color: #f78f5d;
+}
+.string {
+    color: #57a4d2;
+}
+.operator {
+    color: #22b340;
+    font-weight: bold;
+}
+.keyword {
+    color: #cca955;
+    font-weight: bold;
+}
+.name {
+    color: #d7d7d7;
+}
+.number {
+    color: #d0b344;
+    font-weight: bold;
+}
+.indentation {
+    color: #656660;
+    user-select: none;
+    pointer-events: none;
+}
+.codeinline {
+    border-radius: 5px;
+    padding: 1px 4px 1px 4px;
+    background-color: #2b2537;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.textblock {
+    max-width: 600px;
+    margin-bottom: 5px;
+}
+.codeblock {
+    border-radius: 5px;
+    padding: 5px 8px 5px 8px;
+    background-color: #2b2537;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+    white-space: pre;
+
+    /* Take up as much space as available in parent, but no more than needed. */
+    display: inline-block;
+    /* Consider size of border when computing max-width */
+    box-sizing: border-box;
+    /* Subtract left margin */
+    max-width: calc(100% - 40px);
+    overflow-x: scroll;
+}
+.function {
+    margin-bottom: 20px;
+    background-color: #e9e9e9;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px;
+    border: 1px solid #0000007a;
+
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%;
+}
+.block {
+    margin-bottom: 20px;
+}
+.signature {
+    display: block;
+}
+.sidebarlink {
+    color: inherit;
+}
+a.currentpage {
+    font-weight: bold;
+}
+.functionname {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    display: inline-block;
+    color: #000;
+    background-color: #e7f2fa;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #0000007a;
+}
+.functionanchorlink {
+    color: inherit;
+    padding: 10px;
+}
+.functionsourcelink {
+    color: inherit;
+}
+.sidebarcontents {
+    color: #55a5d9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+.github-icon {
+    height: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.figure {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    display: table;
+}
+.figure img {
+    width: 600px;
+}
+.caption {
+    text-align: center;
+    font-size: 13px;
+    max-width: 600px;
+}
+.math_block {
+    max-width: 600px;
+}
+.function .textblock {
+    margin-left: 40px;
+    max-width: 540px;
+}
+.function .codeblock {
+    margin-left: 40px;
+}
+.middle ol, .middle ul {
+    max-width: 560px;
+}

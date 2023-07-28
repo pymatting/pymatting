@@ -26,7 +26,7 @@ def knn_laplacian(
         Must be either "binary" or "soft". Default is "binary".
 
     Returns
-    ---------
+    -------
     L: scipy.sparse.spmatrix
         Matting Laplacian matrix
     """
