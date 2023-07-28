@@ -1,4 +1,5 @@
 import re, ast
+from highlight import escape
 
 class Stream:
     def __init__(self, text):
@@ -6,27 +7,11 @@ class Stream:
         self.pos = 0
 
     def peek(self, n=1):
-        return self.peek_at(0, n)
+        return self.text[self.pos:self.pos + n]
 
     def consume(self, n=1):
         result = self.peek(n)
         self.skip(n)
-        return result
-
-    def peek_at(self, offset, n=1):
-        return self.text[self.pos + offset:self.pos + offset + n]
-
-    def peek_until(self, end):
-        s = ""
-        n = 0
-        while n <= self.available() and self.peek_at(n, len(end)) != end:
-            s += self.peek_at(n)
-            n += 1
-        return s
-
-    def consume_until(self, end):
-        result = self.peek_until(end)
-        self.skip(len(result))
         return result
 
     def available(self):
@@ -38,6 +23,15 @@ class Stream:
 
     def __bool__(self):
         return self.available() > 0
+
+    def match(self, pattern, flags=0):
+        r = re.compile(pattern, flags=flags)
+        return r.match(self.text, pos=self.pos)
+
+    def match_consume(self, pattern, flags=0):
+        if m := self.match(pattern, flags):
+            self.pos = m.end()
+        return m
 
 def parse_whitespace(s):
     indentation = 0
@@ -56,32 +50,16 @@ def skip_whitespace(stream):
         stream.skip()
 
 def skip_empty_lines(stream):
-    while stream:
-        line = stream.peek_until("\n")
-
-        # Skip line if it is whitespace
-        if is_whitespace(line):
-            stream.skip(len(line))
-            if stream.peek() == "\n":
-                stream.skip()
-        else:
-            break
+    while stream and stream.match_consume(" *(\n|$)"):
+        pass
 
 def make_node(node_type, node_value, **kwargs):
     return {"type": node_type, "value": node_value, **kwargs}
 
 name_pattern = "[a-zA-Z_][a-zA_Z_0-9]*"
 
-def parse_inline(stream):
-    assert stream.consume() == ":"
-    name = stream.consume_until(":")
-    assert re.fullmatch(name, name)
-    assert stream.consume(2) == ":`"
-    value = stream.consume_until("`")
-    assert stream.consume() == "`"
-    return make_node("inline_" + name, value)
-
-url_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;=?@[]_~"
+url_char = "[a-zA-Z0-9" + escape("!#$%&'()*+,-./:;=?@[]_~") + "]"
+url_pattern = "(:?https?:\/\/|www.)" + url_char + "+"
 
 def parse_text(stream, end="\n\n"):
     skip_whitespace(stream)
@@ -92,68 +70,41 @@ def parse_text(stream, end="\n\n"):
     while stream and stream.peek(len(end)) != end:
         node = None
 
-        if re.match(":" + name_pattern + ":`", stream.peek(10)):
-            # TODO restructure so text does not need to be flushed everywhere
-            if text:
-                parts.append(make_node("text", text))
-                text = ""
+        if m := stream.match_consume(r"\:(?P<name>[a-zA-Z_]+)\:`(?P<value>.*?)`"):
+            node = make_node("inline_" + m.group("name"), m.group("value"))
 
-            parts.append(parse_inline(stream))
-
-        elif stream.peek() == "`":
-            if text:
-                parts.append(make_node("text", text))
-                text = ""
-
-            assert stream.consume() == "`"
-            code = stream.consume_until("`")
-            assert stream.consume() == "`"
-            parts.append(make_node("inline_code", code))
+        elif m := stream.match_consume(r"`(?P<code>.*?)`"):
+            node = make_node("inline_code", m.group("code"))
 
         elif stream.peek(2) == "![":
-            if text:
-                parts.append(make_node("text", text))
-                text = ""
-
             assert stream.consume(2) == "!["
             alt = parse_text(stream, end="](")
-            assert stream.consume(2) == "]("
-            url = stream.consume_until(")")
-            assert stream.consume() == ")"
+            url = stream.match_consume(r"\]\((.*?)\)").group(1)
+            node = make_node("image", url, alt=alt)
 
-            image_node = make_node("image", url, alt=alt)
-
-            parts.append(image_node)
-
-        # TODO stream.match
-        elif re.match("\\[[^\n]+?\\]\\(", stream.peek(100)):
-            if text:
-                parts.append(make_node("text", text))
-                text = ""
-
+        elif stream.match("\\[[^\n]+?\\]\\("):
             assert stream.consume(1) == "["
             value = parse_text(stream, end="](")
-            assert stream.consume(2) == "]("
-            url = stream.consume_until(")")
-            assert stream.consume() == ")"
+            url = stream.match_consume(r"\]\((.*?)\)").group(1)
 
             node = make_node("url", value, url=url)
 
-            parts.append(node)
+        elif m := stream.match_consume(url_pattern):
+            url = m.group(0)
+            node = make_node("url", url, url=url)
 
-        elif stream.peek(7) == "http://" or stream.peek(8) == "https://" or stream.peek(4) == "www.":
+        # If we found something different from text
+        if node:
+            # Flush text
             if text:
                 parts.append(make_node("text", text))
                 text = ""
-
-            url = ""
-            while stream and stream.peek() in url_chars:
-                url += stream.consume()
-            parts.append(make_node("url", None, url=url))
-
+            # Append different kind of node
+            parts.append(node)
         else:
             text += stream.consume()
 
+    # Flush text
     if text:
         parts.append(make_node("text", text))
 
@@ -162,30 +113,17 @@ def parse_text(stream, end="\n\n"):
     else:
         return make_node("blocks", parts)
 
-def parse_line(stream):
-    return parse_text(stream, end="\n")
-
 def is_indented(stream):
-    line = stream.peek_until("\n")
-    return len(line) > len(line.lstrip())
+    return stream.match(" +")
 
 def parse_codeblock(stream):
-    line = stream.peek_until("\n")
-    indentation = len(line) - len(line.lstrip())
+    indentation = len(stream.match(" *").group(0))
 
     codeblock = []
     while True:
         # Consume lines if they are whitespace
-        while stream:
-            line = stream.peek_until("\n")
-
-            if line.strip(): break
-
-            stream.skip(len(line))
-
-            if stream.peek() == "\n":
-                stream.skip()
-            codeblock.append(line)
+        while m := stream.match_consume(" *\n"):
+            codeblock.append(m.group(0).rstrip("\n"))
 
         if not is_indented(stream): break
 
@@ -200,7 +138,7 @@ def parse_unordered_list(stream):
     items = []
     while stream.peek() == "*":
         stream.skip()
-        items.append(parse_line(stream))
+        items.append(parse_text(stream, end="\n"))
         if stream.peek() == "\n":
             stream.skip()
         else:
@@ -208,8 +146,7 @@ def parse_unordered_list(stream):
     return make_node("ul", items)
 
 def is_ordered_list(stream):
-    line = stream.peek_until("\n")
-    return re.match("[0-9]+\\.", line)
+    return stream.match("[0-9]+\\.")
 
 def parse_ordered_list(stream):
     items = []
@@ -217,7 +154,7 @@ def parse_ordered_list(stream):
         while stream.peek() in "0123456789":
             stream.skip()
         assert stream.consume() == "."
-        items.append(parse_line(stream))
+        items.append(parse_text(stream, end="\n"))
         if stream.peek() == "\n":
             stream.skip()
         else:
@@ -225,21 +162,7 @@ def parse_ordered_list(stream):
     return make_node("ol", items)
 
 def parse_raw_line(stream):
-    line = stream.consume_until("\n")
-    if stream.peek() == "\n":
-        stream.skip()
-    return line
-
-def parse_block(stream):
-    assert stream.consume(3) == ".. "
-    name = ""
-    abc = "abcdefghijklmnopqrstuvwxyz"
-    while stream.peek() in abc:
-        name += stream.consume()
-    assert stream.consume(2) == "::"
-    skip_empty_lines(stream)
-    block = stream.consume_until("\n\n")
-    return make_node(name + "_block", block)
+    return stream.match_consume("(.*?)(\n|$)").group(1)
 
 underlined_pattern = re.compile("(.*?)\n[+-=]+\n")
 
@@ -253,19 +176,13 @@ def parse_underlined_block(stream):
     if len(dividers) != len(header):
         print(f"WARNING: Incorrect number of dividers:\n{header}\n{dividers}\n")
 
-    if stream.peek(4) == ">>> ":
-        code = stream.consume_until("\n\n")
-        code_block = make_node("code_block", code)
+    if m := stream.match_consume(">>> (.+\n?)+"):
+        code_block = make_node("code_block", m.group(0))
         return make_node("block", code_block, header=header)
 
     parameters = []
     while stream:
-        line = stream.peek_until("\n")
-        if re.match("[a-zA-Z_][a-zA-Z_0-9]* *:", line):
-            line = parse_raw_line(stream)
-            parameter, details = line.split(":", 1)
-            parameter = parameter.strip()
-            details = details.strip()
+        if m := stream.match_consume("(?P<parameter>[a-zA-Z_][a-zA-Z_0-9]*) *: *(?P<details>.*)\n"):
 
             description = []
             while is_indented(stream):
@@ -273,14 +190,24 @@ def parse_underlined_block(stream):
                 if stream.peek() == "\n":
                     stream.skip()
 
+            # Insert space between text nodes
+            # TODO Find a less hacky way to do this.
+            for node in description[:-1]:
+                if node["type"] == "text":
+                    node["value"] += " "
+                elif node["type"] == "blocks":
+                    node["value"].append(make_node("text", " "))
+                else:
+                    raise ValueError(f"Expected parse_text to return text or blocks node, but got {node} instead")
+
             if len(description) == 1:
                 description = description[0]
             else:
                 description = make_node("blocks", description)
 
             parameter = {
-                "parameter": parameter,
-                "details": details,
+                "parameter": m.group("parameter"),
+                "details": m.group("details"),
                 "description": description,
             }
 
@@ -298,12 +225,8 @@ def parse_stream(stream):
 
         if not stream: break
 
-        if stream.peek() == "#":
-            n = 0
-            while stream.peek() == "#":
-                stream.skip()
-                n += 1
-
+        if m := stream.match_consume("#+"):
+            n = len(m.group(0))
             blocks.append(make_node("h" + str(n), parse_text(stream)))
 
         elif stream.peek() == "*":
@@ -315,8 +238,8 @@ def parse_stream(stream):
         elif is_ordered_list(stream):
             blocks.append(parse_ordered_list(stream))
 
-        elif stream.peek(3) == ".. ":
-            blocks.append(parse_block(stream))
+        elif m := stream.match_consume(".. (?P<name>[a-z]+)::( *\n)*(?P<block>(.+\n)+)"):
+            blocks.append(make_node(m.group("name") + "_block", m.group("block")))
 
         elif is_underlined_block(stream):
             blocks.append(parse_underlined_block(stream))
@@ -344,7 +267,7 @@ def node_text(node, lines):
         return "\n".join([a] + between + [b])
 
 def parse_python_file(filename):
-    with open(filename, "r", encoding="utf-8") as f:
+    with open(filename, encoding="utf-8") as f:
         code = f.read()
 
     tree = ast.parse(code)
@@ -493,8 +416,9 @@ bar: 456
         'type': 'parameters',
         'value': [
             {'parameter': 'foo', 'details': '123', 'description': {'type': 'text', 'value': 'a description'}},
-            {'parameter': 'bar', 'details': '456', 'description': {'type': 'text', 'value': 'another description'}}
+            {'parameter': 'bar', 'details': '456', 'description': {'type': 'text', 'value': 'another description'}},
         ],
+        'header': 'Parameters',
     }
 
     compare(source, expected)
@@ -567,14 +491,14 @@ Example
     compare(source, expected)
 
 def test_https():
-    source = "https://www.example.com"
+    source = "https://www.example.com#foo"
 
     expected = {
         'type': 'text_block',
         'value': {
             "type": "url",
-            "value": None,
-            "url": "https://www.example.com",
+            "value": source,
+            "url": "https://www.example.com#foo",
         },
     }
 
@@ -596,6 +520,13 @@ def test_url():
     }
 
     compare(source, expected)
+
+def test_stream_match():
+    s = Stream("Hello, World!")
+
+    assert s.match("[a-zA-Z]+").group(0) == "Hello"
+    assert s.consume(7) == "Hello, "
+    assert s.match("[a-zA-Z]+").group(0) == "World"
 
 def run_all_tests():
     import traceback

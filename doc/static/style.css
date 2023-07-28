@@ -48,10 +48,11 @@ body {
 }
 .parameteritem {
     list-style-type: none;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     border: 1px solid #0000007a;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
+    background-color: #f3f3f3;
 
     box-sizing: border-box;
     display: table;
@@ -117,6 +118,7 @@ footer {
 }
 .textblock {
     max-width: 600px;
+    margin-bottom: 5px;
 }
 .codeblock {
     border-radius: 5px;
@@ -124,21 +126,20 @@ footer {
     background-color: #2b2537;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
-    display: block;
-    white-space: nowrap;
     white-space: pre;
 
     /* Take up as much space as available in parent, but no more than needed. */
     display: inline-block;
-    /* consider size of border when computing max-width */
+    /* Consider size of border when computing max-width */
     box-sizing: border-box;
-    max-width: 100%;
+    /* Subtract left margin */
+    max-width: calc(100% - 40px);
     overflow-x: scroll;
 }
 .function {
-    margin-bottom: 50px;
-    background-color: #e2e2e2;
-    padding: 0px 15px 15px 15px;
+    margin-bottom: 20px;
+    background-color: #e9e9e9;
+    padding: 0px 15px 0px 15px;
     border-radius: 5px;
     border: 1px solid #0000007a;
 
@@ -199,7 +200,18 @@ a.currentpage {
 .caption {
     text-align: center;
     font-size: 13px;
+    max-width: 600px;
 }
-.signature h4, .signature .codeblock {
-    margin: 0;
+.math_block {
+    max-width: 600px;
+}
+.function .textblock {
+    margin-left: 40px;
+    max-width: 540px;
+}
+.function .codeblock {
+    margin-left: 40px;
+}
+.middle ol, .middle ul {
+    max-width: 560px;
 }

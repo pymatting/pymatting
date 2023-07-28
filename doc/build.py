@@ -16,10 +16,10 @@ def generate_html(node, references, html=None):
             generate_html(child, references, html)
 
     elif node["type"] == "block":
-        html.append(div([
+        html.append(div(cls="block", children=[
             el("h4", node["header"]),
             generate_html(node["value"], references),
-        ], cls="block"))
+        ]))
 
     elif node["type"] == "parameters":
         html.append(el("h4", node["header"])),
@@ -30,7 +30,7 @@ def generate_html(node, references, html=None):
                 li(cls="parameteritem", children=[
                     span(parameter["parameter"], cls="parameter"),
                     [" (", el("i", parameter["details"]), ")"] if parameter["details"] else "",
-                    ul(li(
+                    ul(div(
                         cls="parameterdescription",
                         children=generate_html(parameter["description"], references),
                     )),
@@ -133,10 +133,10 @@ def generate_html(node, references, html=None):
             ]),
             div([
                 el("h4", "Signature"),
-                ul(li(signature, cls="parameterdescription")),
+                div(cls="signature", children=signature),
             ], cls="signature"),
             el("h4", "Function Description"),
-            div(generate_html(node["value"], references)),
+            generate_html(node["value"], references),
         ])))
 
     elif re.match("h[0-9]+", node["type"]):
@@ -290,6 +290,7 @@ def main():
             content = generate_html(page, references)
             write_website(build_dir / html_path, title, content)
 
+    # Create API reference pages
     packages = []
     for directory, title in directories:
         html_path = build_dir / (directory + ".html")
@@ -314,7 +315,6 @@ def main():
             title,
             ul(function_links),
         ]))
-
     write_website(build_dir / "api.html", "API References", ul(packages))
 
     reference_items = []
