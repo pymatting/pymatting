@@ -8,7 +8,7 @@
 We introduce the PyMatting package for Python which implements various methods to solve the alpha matting problem.
 
 - **Website and Documentation:** [https://pymatting.github.io/](https://pymatting.github.io)
-- **Benchmarks:**  [https://pymatting.github.io/benchmark.html](https://pymatting.github.io/benchmark.html)
+- **Benchmarks:**  [https://pymatting.github.io/benchmarks.html](https://pymatting.github.io/benchmarks.html)
 
 ![Lemur](https://github.com/pymatting/pymatting/raw/master/data/lemur/lemur_at_the_beach.png)
 
@@ -29,7 +29,7 @@ PyMatting provides:
 - Preconditioners to accelerate the convergence rate of conjugate gradient descent:
   - The *incomplete thresholded Cholesky decomposition* (*Incomplete* is part of the name. The implementation is quite complete.)
   - The V-Cycle Geometric Multigrid preconditioner
-- Readable code leveraging [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/scipylib/index.html) and [Numba](http://numba.pydata.org/)
+- Readable code leveraging [NumPy](https://numpy.org/), [SciPy](https://scipy.org/) and [Numba](http://numba.pydata.org/)
 
 ## Getting Started
 
