@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: pip install --user codespell[toml] ruff
-    - run: codespell -L Manuel --skip="*.bib" 
+    - run: codespell -L manuel,Manuel --skip="*.bib" 
     - name: Lint with ruff
       run: |
         # stop the build if there are Python syntax errors or undefined names
