@@ -11,15 +11,23 @@ def knn_laplacian(
     kernel="binary",
 ):
     """
-    This function calculates the KNN matting Laplacian matrix similar to :cite:`chen2013knn`.
-    We use a kernel of 1 instead of a soft kernel by default since the former is faster to compute and both produce almost identical results in all our experiments, which is to be expected as the soft kernel is very close to 1 in most cases.
+    This function calculates the KNN matting Laplacian matrix similar to
+    :cite:`chen2013knn`.
+    We use a kernel of 1 instead of a soft kernel by default since the former is
+    faster to compute and both produce almost identical results in all our
+    experiments, which is to be expected as the soft kernel is very close to 1
+    in most cases.
 
     Parameters
     ----------
     image: numpy.ndarray
         Image with shape :math:`h\\times w \\times 3`
     n_neighbors: list of ints
-        Number of neighbors to consider. If :code:`len(n_neighbors)>1` multiple nearest neighbor calculations are done and merged, defaults to `[20, 10]`, i.e. first 20 neighbors are considered and in the second run :math:`10` neighbors. The pixel distances are then weighted by the :code:`distance_weights`.
+        Number of neighbors to consider. If :code:`len(n_neighbors)>1` multiple
+        nearest neighbor calculations are done and merged, defaults to
+        `[20, 10]`, i.e. first 20 neighbors are considered and in the second run
+        :math:`10` neighbors. The pixel distances are then weighted by the
+        :code:`distance_weights`.
     distance_weights: list of floats
         Weight of distance in feature vector, defaults to `[2.0, 0.1]`.
     kernel: str

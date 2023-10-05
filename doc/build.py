@@ -123,7 +123,13 @@ def generate_html(node, references, html=None):
 
         node["fullname"] = fullname
 
-        source_url = str(Path("https://github.com/pymatting/pymatting/blob/master/pymatting") / Path(node["filename"]).relative_to(src_dir)) + "#L" + str(node["lineno"]) + "-L" + str(node["end_lineno"])
+        source_url = "".join([
+            str(Path("https://github.com/pymatting/pymatting/blob/master/pymatting") / Path(node["filename"]).relative_to(src_dir)),
+            "#L",
+            str(node["lineno"]),
+            "-L",
+            str(node["end_lineno"])
+        ])
 
         html.append(div(div(cls="function", children=[
             div(id=funcname, children=[

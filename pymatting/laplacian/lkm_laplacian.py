@@ -13,7 +13,11 @@ def lkm_laplacian(image, epsilon=1e-7, radius=10, return_diagonal=True):
     epsilons: float
         Regularization strength, defaults to :math:`10^{-7}`
     radius: int
-        Radius of local window size, defaults to :math:`10`, i.e. only adjacent pixels are considered. The size of the local window is given as :math:`(2 r + 1)^2`, where :math:`r` denotes the radius. A larger radius might lead to violated color line constraints, but also favors further propagation of information within the image.
+        Radius of local window size, defaults to :math:`10`, i.e. only adjacent
+        pixels are considered. The size of the local window is given as
+        :math:`(2 r + 1)^2`, where :math:`r` denotes the radius. A larger radius
+        might lead to violated color line constraints, but also favors further
+        propagation of information within the image.
     return_diagonal: bool
         Whether to also return the diagonal of the laplacian, defaults to True
 
@@ -22,7 +26,8 @@ def lkm_laplacian(image, epsilon=1e-7, radius=10, return_diagonal=True):
     L_matvec: function
         Function that applies the Laplacian matrix to a vector
     diag_L: numpy.ndarray
-        Diagonal entries of the matting Laplacian, only returns if `return_diagonal` is True
+        Diagonal entries of the matting Laplacian, only returns if
+        `return_diagonal` is True
     """
     image = image.astype(np.float64)
 

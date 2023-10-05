@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: pip install --user codespell[toml] ruff
-    - run: codespell -L manuel,Manuel --skip="*.bib" 
+    - run: codespell -L manuel,Manuel --skip="*.bib"
     - name: Lint with ruff
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        ruff . --format=github --line-length=332 --select=E501,E9,F63,F7,F82 --target-version=py38
+        ruff . --output-format=github --line-length=200 --select=E501,E9,F63,F7,F82 --target-version=py38
         # exit-zero treats all errors as warnings
-        ruff . --exit-zero --line-length=332 --statistics
+        ruff . --exit-zero --line-length=200 --statistics

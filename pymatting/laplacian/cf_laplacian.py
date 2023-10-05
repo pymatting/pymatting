@@ -131,17 +131,22 @@ def _cf_laplacian(image, epsilon, r, values, indices, indptr, is_known):
 
 def cf_laplacian(image, epsilon=1e-7, radius=1, is_known=None):
     """
-    This function implements the alpha estimator for closed-form alpha matting as proposed by :cite:`levin2007closed`.
+    This function implements the alpha estimator for closed-form alpha matting
+    as proposed by :cite:`levin2007closed`.
 
     Parameters
     ----------
     image: numpy.ndarray
        Image with shape :math:`h\\times w \\times 3`
     epsilon: float
-       Regularization strength, defaults to :math:`10^{-7}`. Strong regularization improves convergence but results in smoother alpha mattes.
+       Regularization strength, defaults to :math:`10^{-7}`. Strong
+       regularization improves convergence but results in smoother alpha mattes.
     radius: int
-       Radius of local window size, defaults to :math:`1`, i.e. only adjacent pixels are considered.
-       The size of the local window is given as :math:`(2 r + 1)^2`, where :math:`r` denotes         the radius. A larger radius might lead to violated color line constraints, but also
+       Radius of local window size, defaults to :math:`1`, i.e. only adjacent
+       pixels are considered.
+       The size of the local window is given as :math:`(2 r + 1)^2`, where
+       :math:`r` denotes         the radius. A larger radius might lead to
+       violated color line constraints, but also
        favors further propagation of information within the image.
     is_known: numpy.ndarray
         Binary mask of pixels for which to compute the laplacian matrix.
