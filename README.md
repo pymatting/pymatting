@@ -117,6 +117,13 @@ Please, see [our community guidelines](https://github.com/pymatting/pymatting/bl
 
 See also the list of [contributors](https://github.com/pymatting/pymatting/contributors) who participated in this project.
 
+## Projects using PyMatting
+
+* [Rembg](https://github.com/danielgatis/rembg) - an excellent tool for removing image backgrounds.
+* [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg) - a library for a wide range of image segmentation tasks.
+* [chaiNNer](https://github.com/chaiNNer-org/chaiNNer) - a node-based image processing GUI.
+* [LSA-Matting](https://github.com/kfeng123/LSA-Matting) - improving deep image matting via local smoothness assumption.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
