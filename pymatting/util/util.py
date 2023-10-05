@@ -838,7 +838,7 @@ def sparse_conv_matrix(width, height, kernel):
 
 
 def weights_to_laplacian(W, normalize=True, regularization=0.0):
-    """Calculates the random walk normlized Laplacian matrix from the weight matrix
+    """Calculates the random walk normalized Laplacian matrix from the weight matrix
 
     Parameters
     ----------
