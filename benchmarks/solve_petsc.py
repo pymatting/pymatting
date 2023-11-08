@@ -115,7 +115,7 @@ def main():
         count[i] += 1
     assert np.all(count < n)
 
-    seen = np.zeros((n, n), dtype=np.bool8)
+    seen = np.zeros((n, n), dtype=np.bool_)
 
     for i, j in zip(A.row, A.col):
         assert not seen[i, j]
