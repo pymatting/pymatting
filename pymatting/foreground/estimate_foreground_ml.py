@@ -75,8 +75,28 @@ def _estimate_fb_ml(
     w_prev = 1
     h_prev = 1
 
-    F_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype)
-    B_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype)
+    # Compute average foreground and background color
+    F_mean_color = np.zeros(depth, dtype=dtype)
+    B_mean_color = np.zeros(depth, dtype=dtype)
+    F_count = 0
+    B_count = 0
+    for y in range(h0):
+        for x in range(w0):
+            if input_alpha[y, x] > 0.9:
+                for c in range(depth):
+                    F_mean_color[c] += input_image[y, x, c]
+                F_count += 1
+            if input_alpha[y, x] < 0.1:
+                for c in range(depth):
+                    B_mean_color[c] += input_image[y, x, c]
+                B_count += 1
+
+    F_mean_color /= F_count + 1e-5
+    B_mean_color /= B_count + 1e-5
+
+    # Initialize initial foreground and background with average color
+    F_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype) + F_mean_color
+    B_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype) + B_mean_color
 
     n_levels = int(np.ceil(np.log2(max(w0, h0))))
 

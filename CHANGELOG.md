@@ -1,3 +1,8 @@
+### 1.1.11
+
+- Fix uninitialized memory in `estimate_foreground_ml`
+- Replace deprecated `np.bool8` with `np.bool_`
+
 ### 1.1.10
 
 - Introduce new tool to build documentation.
