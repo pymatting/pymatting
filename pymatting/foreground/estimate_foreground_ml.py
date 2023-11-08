@@ -75,8 +75,8 @@ def _estimate_fb_ml(
     w_prev = 1
     h_prev = 1
 
-    F_prev = np.empty((h_prev, w_prev, depth), dtype=dtype)
-    B_prev = np.empty((h_prev, w_prev, depth), dtype=dtype)
+    F_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype)
+    B_prev = np.zeros((h_prev, w_prev, depth), dtype=dtype)
 
     n_levels = int(np.ceil(np.log2(max(w0, h0))))
 
