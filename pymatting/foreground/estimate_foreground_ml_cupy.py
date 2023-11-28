@@ -116,6 +116,7 @@ def estimate_foreground_ml_cupy(
     small_size=32,
     block_size=(32, 32),
     return_background=False,
+    to_numpy: bool = True,
 ):
     """See the :code:`estimate_foreground` method for documentation."""
     h0, w0, depth = input_image.shape
@@ -203,11 +204,17 @@ def estimate_foreground_ml_cupy(
 
         w_prev = w
         h_prev = h
+    
+    # get to original shape
+    F = F.reshape(h0, w0, depth)
+    B = B.reshape(h0, w0, depth)
 
-    F_host = cp.asnumpy(F).reshape(h0, w0, depth)
-    B_host = cp.asnumpy(B).reshape(h0, w0, depth)
+    if to_numpy:
+        F_out, B_out = cp.asnumpy(F), cp.asnumpy(B)
+    else:
+        F_out, B_out = F, B
 
     if return_background:
-        return F_host, B_host
+        return F_out, B_out
 
-    return F_host
+    return F_out
