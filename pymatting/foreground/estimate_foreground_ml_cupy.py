@@ -116,7 +116,7 @@ def estimate_foreground_ml_cupy(
     small_size=32,
     block_size=(32, 32),
     return_background=False,
-    to_numpy: bool = True,
+    to_numpy=True,
 ):
     """See the :code:`estimate_foreground` method for documentation."""
     h0, w0, depth = input_image.shape
@@ -125,8 +125,15 @@ def estimate_foreground_ml_cupy(
 
     n = h0 * w0 * depth
 
-    input_image = cp.asarray(input_image.astype(np.float32).flatten())
-    input_alpha = cp.asarray(input_alpha.astype(np.float32).flatten())
+    if isinstance(input_image, cp.ndarray):
+        input_image = input_image.astype(cp.float32).ravel()
+    else:
+        input_image = cp.asarray(input_image.astype(np.float32).flatten())
+
+    if isinstance(input_alpha, cp.ndarray):
+        input_alpha = input_alpha.astype(cp.float32).ravel()
+    else:
+        input_alpha = cp.asarray(input_alpha.astype(np.float32).flatten())
 
     F_prev = cp.zeros(n, dtype=cp.float32)
     B_prev = cp.zeros(n, dtype=cp.float32)
@@ -204,15 +211,18 @@ def estimate_foreground_ml_cupy(
 
         w_prev = w
         h_prev = h
-    
-    # get to original shape
+
+    # Reshape back to original shape.
     F = F.reshape(h0, w0, depth)
     B = B.reshape(h0, w0, depth)
 
+    # Convert to NumPy if requested
     if to_numpy:
-        F_out, B_out = cp.asnumpy(F), cp.asnumpy(B)
+        F_out = cp.asnumpy(F)
+        B_out = cp.asnumpy(B)
     else:
-        F_out, B_out = F, B
+        F_out = F
+        B_out = B
 
     if return_background:
         return F_out, B_out
