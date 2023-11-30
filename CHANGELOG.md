@@ -1,7 +1,11 @@
+### 1.1.12
+
+- Allow CuPy input/output for `estimate_foreground_ml_cupy`.
+
 ### 1.1.11
 
-- Fix uninitialized memory in `estimate_foreground_ml`
-- Replace deprecated `np.bool8` with `np.bool_`
+- Fix uninitialized memory in `estimate_foreground_ml`.
+- Replace deprecated `np.bool8` with `np.bool_`.
 
 ### 1.1.10
 
@@ -9,7 +13,7 @@
 
 ### 1.1.9
 
-- Add Shared Matting
+- Add Shared Matting.
 
 ### 1.1.7
 
