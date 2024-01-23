@@ -35,7 +35,7 @@ PyMatting provides:
 
 ### Requirements
 
-Minimal requiremens
+Minimal requirements
 * numpy>=1.16.0
 * pillow>=5.2.0
 * numba>=0.47.0
@@ -79,7 +79,7 @@ cutout(
 
 ## Trimap Construction
 
-All implemented methods rely on trimaps which roughly classify the image into foreground, background and unknown reagions.
+All implemented methods rely on trimaps which roughly classify the image into foreground, background and unknown regions.
 Trimaps are expected to be `numpy.ndarrays` of type `np.float64`  having the same shape as the input image with only one color-channel.
 Trimap values of 0.0 denote pixels which are 100% background.
 Similarly, trimap values of 1.0 denote pixels which are 100% foreground.
