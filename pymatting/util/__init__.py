@@ -1,6 +1,7 @@
 from pymatting.util.timer import Timer
 from pymatting.util.kdtree import KDTree, knn
 from pymatting.util.boxfilter import boxfilter
+from pymatting.util.distance import distance_transform
 from pymatting.util.util import (
     apply_to_channels,
     blend,
