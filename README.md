@@ -63,7 +63,9 @@ pip3 install .
 ```
 
 ## Example
+
 ```python
+# First import will take a minute due to compilation
 from pymatting import cutout
 
 cutout(
