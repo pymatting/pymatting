@@ -90,9 +90,8 @@ All other values indicate unknown pixels which will be estimated by the algorith
 
 Run the tests from the main directory:
 ```
- python3 tests/download_images.py
- pip3 install -r requirements_tests.txt
- pytest
+pip3 install -r requirements_tests.txt
+ppytest
 ```
 
 Currently 89% of the code is covered by tests.
