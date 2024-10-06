@@ -310,6 +310,12 @@ class KDTree(object):
         """
         assert query_points.dtype == np.float32
 
+        if self.shuffled_data_points.shape[0] < k:
+            raise ValueError(
+                f"Number of data points ({self.shuffled_data_points.shape[0]}) is less than the number of neighbors requested (k={k})."
+                " Please provide a larger dataset or reduce the value of k."
+            )
+
         n_query = query_points.shape[0]
 
         squared_distances = np.empty((n_query, k), np.float32)
