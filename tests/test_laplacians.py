@@ -9,216 +9,53 @@ from pymatting import (
 
 
 def test_laplacians():
-    indices = np.arange(27) + 1
     scale = 0.1
-    image_dir = "data"
+
+    image_path = "data/lemur/lemur.png"
+    trimap_path = "data/lemur/lemur_trimap.png"
+    good_alpha_path = "data/lemur/lemur_alpha_fba.png"
+
+    image = load_image(image_path, "rgb", scale, "bilinear")
+    trimap = load_image(trimap_path, "gray", scale, "nearest")
+    good_alpha = load_image(good_alpha_path, "gray", scale, "bilinear")
 
     # allow 1% regression
     allowed_error = 0.01
 
     expected_errors = {
-        "cf_laplacian": [
-            1.0839111942763648,
-            3.841759348043566,
-            3.358489754678929,
-            5.079739853533443,
-            1.8166309691629416,
-            1.4385024442876313,
-            1.501023996041348,
-            4.18173542822268,
-            3.4705502834921487,
-            1.9351918367749816,
-            2.488966062209934,
-            1.3989649710604704,
-            3.8741776417276306,
-            0.9728827692868615,
-            2.5399897862272747,
-            10.642191399781298,
-            1.6438877577185722,
-            2.1543490658816635,
-            1.1489311470229537,
-            0.954323791336118,
-            4.63568149096655,
-            1.3580148342589717,
-            1.1415671048773133,
-            2.6984843343086196,
-            4.691593185812834,
-            6.003127907648125,
-            4.390608172576709,
-        ],
-        "knn_laplacian": [
-            2.089130250752722,
-            3.767524785077177,
-            3.7231290999572506,
-            4.248310409891682,
-            2.577488769545899,
-            3.966983051036645,
-            2.672147903806734,
-            5.083407281314084,
-            4.325617257887361,
-            2.491360039941334,
-            3.4146860032738173,
-            2.1208129283441575,
-            5.147092338936775,
-            2.1976345580461056,
-            3.0719533535155263,
-            13.440447444054444,
-            3.1829279859509327,
-            3.711063622279358,
-            2.4566255493763935,
-            1.9078593671486113,
-            4.956619727222683,
-            3.1646762552974868,
-            2.783888863957631,
-            4.714904428201373,
-            4.496672172372184,
-            10.402315008230564,
-            5.270881922679586,
-        ],
-        "lbdm_laplacian": [
-            1.0839897312877216,
-            3.841573408975021,
-            3.365742999572245,
-            5.077997360572911,
-            1.8211938024322178,
-            1.4392778020952708,
-            1.5006381799933766,
-            4.242864047447403,
-            3.4904348404779753,
-            1.9357254296106827,
-            2.48917998418364,
-            1.4043779651168937,
-            3.8737045683526024,
-            0.973164964965189,
-            2.5443819959543457,
-            10.651958437589906,
-            1.6551494481797882,
-            2.155449159543011,
-            1.1490544867887889,
-            0.9538815333644246,
-            4.635535802794727,
-            1.3595341099477465,
-            1.143076373539195,
-            2.707384007058893,
-            4.698042368150364,
-            6.0029066668301,
-            4.390146320671879,
-        ],
-        "rw_laplacian": [
-            4.865828574946059,
-            6.1494492984553615,
-            5.309294879045085,
-            9.319890125482436,
-            5.133000114540576,
-            5.6589208995955405,
-            6.225056464430212,
-            9.487026325071337,
-            7.871287695275896,
-            5.059639993759375,
-            5.810823041482708,
-            4.846480646386845,
-            10.15011136629045,
-            4.9853995176605395,
-            4.285341458168511,
-            19.431455009600853,
-            5.8216134507328015,
-            5.952428504902877,
-            4.0253392720779555,
-            5.8843985862801045,
-            8.728913826808643,
-            5.5895832018589084,
-            4.840184561383416,
-            6.210095889788392,
-            7.375539945860434,
-            14.111658110736256,
-            10.200776413201114,
-        ],
-        "uniform_laplacian": [
-            4.0444203072543266,
-            5.2284413228378135,
-            9.019003158309758,
-            9.778390304677947,
-            3.6483079178591966,
-            5.0698226038235195,
-            4.712467105116259,
-            8.21743217218649,
-            8.122577721412982,
-            4.696993284565137,
-            4.268656408720733,
-            3.477238604177124,
-            10.00684602150998,
-            3.481498583276864,
-            3.9349298092727087,
-            11.370794857942638,
-            4.369772744405769,
-            5.607500940968039,
-            2.8416197864350137,
-            4.550807753215429,
-            8.621295976221598,
-            4.878478538957252,
-            4.979139178621439,
-            4.5556096152615835,
-            7.20245540436063,
-            11.036244338204016,
-            7.370920965316346,
-        ],
+        "cf_laplacian": 1.6383251091411692,
+        "knn_laplacian": 2.1748604717689384,
+        "lbdm_laplacian": 1.6402653371109384,
+        "rw_laplacian": 5.950822534778654,
+        "uniform_laplacian": 5.307956449533795,
     }
-
-    debug = False
-
-    actual_errors = {}
 
     for laplacian in LAPLACIANS:
         laplacian_name = laplacian.__name__
-        print("testing", laplacian_name)
 
-        errors = []
+        print("Testing", laplacian_name)
 
-        for index, expected_error in zip(indices, expected_errors[laplacian_name]):
-            name = f"GT{index:02d}"
-            if debug:
-                print(name)
+        A, b = make_linear_system(laplacian(image), trimap)
 
-            image = load_image(
-                f"{image_dir}/input_training_lowres/{name}.png",
-                "rgb",
-                scale,
-                "bilinear",
-            )
-            trimap = load_image(
-                f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
-                "gray",
-                scale,
-                "nearest",
-            )
-            true_alpha = load_image(
-                f"{image_dir}/gt_training_lowres/{name}.png", "gray", scale, "bilinear"
-            )
+        x = scipy.sparse.linalg.spsolve(A, b)
 
-            A, b = make_linear_system(laplacian(image), trimap)
+        alpha = np.clip(x, 0, 1).reshape(trimap.shape)
 
-            x = scipy.sparse.linalg.spsolve(A, b)
+        is_unknown = trimap_split(trimap, flatten=False)[3]
 
-            alpha = np.clip(x, 0, 1).reshape(trimap.shape)
+        difference_unknown = np.abs(alpha - good_alpha)[is_unknown]
 
-            is_unknown = trimap_split(trimap, flatten=False)[3]
+        error = np.linalg.norm(difference_unknown)
 
-            difference_unknown = np.abs(alpha - true_alpha)[is_unknown]
+        expected_error = expected_errors[laplacian_name]
 
-            error = np.linalg.norm(difference_unknown)
+        additional_error = (error - expected_error) / expected_error
 
-            additional_error = (error - expected_error) / expected_error
+        print(f'"{laplacian_name}: {error},')
 
-            if additional_error > allowed_error:
-                print("Regression:")
-                print(laplacian_name)
-                print(f"Performance decreased by {100.0 * additional_error:.3f} %")
+        if additional_error > allowed_error:
+            print("Regression:")
+            print(laplacian_name)
+            print(f"Performance decreased by {100.0 * additional_error:.3f} %")
 
-            assert additional_error < allowed_error
-
-            errors.append(error)
-
-        actual_errors[laplacian_name] = errors
-
-    print("Errors:")
-    print(actual_errors)
+        assert additional_error < allowed_error

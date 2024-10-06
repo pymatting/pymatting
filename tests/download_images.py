@@ -56,6 +56,9 @@ def download_files():
             while n_bytes < filesize:
                 chunk = r.read(10 ** 6)
 
+                if len(chunk) == 0:
+                    break
+
                 if len(chunk) < 0:
                     raise Exception("Failed to download", url)
 

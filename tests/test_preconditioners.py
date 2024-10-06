@@ -13,38 +13,28 @@ from pymatting import (
 
 def test_preconditioners():
     atol = 1e-6
-    index = 1
-    scale = 0.2
+    scale = 0.125
 
-    name = f"GT{index:02d}"
-    # print(name)
+    image_path = "data/lemur/lemur.png"
+    trimap_path = "data/lemur/lemur_trimap.png"
 
-    image_dir = "data"
-
-    image = load_image(
-        f"{image_dir}/input_training_lowres/{name}.png", "rgb", scale, "bilinear"
-    )
-    trimap = load_image(
-        f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
-        "gray",
-        scale,
-        "nearest",
-    )
+    image = load_image(image_path, "rgb", scale, "bilinear")
+    trimap = load_image(trimap_path, "gray", scale, "nearest")
 
     A, b = make_linear_system(cf_laplacian(image), trimap)
 
     preconditioners = [
-        ("no", lambda A: None),
+        ("none", lambda A: None),
         ("jacobi", lambda A: jacobi(A)),
         ("icholt", lambda A: ichol(A, max_nnz=500000)),
         ("vcycle", lambda A: vcycle(A, trimap.shape)),
     ]
 
     expected_iterations = {
-        "no": 532,
-        "jacobi": 250,
+        "none": 378,
+        "jacobi": 197,
         "icholt": 3,
-        "vcycle": 88,
+        "vcycle": 48,
     }
 
     for preconditioner_name, preconditioner in preconditioners:

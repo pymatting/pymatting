@@ -11,23 +11,15 @@ from pymatting import (
 
 
 def test_lkm():
-    index = 1
-    scale = 0.2
+    scale = 0.125
     epsilon = 1e-7
     radius = 2
-    image_dir = "data"
 
-    name = f"GT{index:02d}"
+    image_path = "data/lemur/lemur.png"
+    trimap_path = "data/lemur/lemur_trimap.png"
 
-    image = load_image(
-        f"{image_dir}/input_training_lowres/{name}.png", "rgb", scale, "bilinear"
-    )
-    trimap = load_image(
-        f"{image_dir}/trimap_training_lowres/Trimap1/{name}.png",
-        "gray",
-        scale,
-        "nearest",
-    )
+    image = load_image(image_path, "rgb", scale, "bilinear")
+    trimap = load_image(trimap_path, "gray", scale, "nearest")
 
     L_lkm, diag_L_lkm = lkm_laplacian(image, epsilon=epsilon, radius=radius)
 
@@ -48,10 +40,10 @@ def test_lkm():
     lkm_callback = ProgressCallback()
     cf_callback = ProgressCallback()
 
-    x_lkm = cg(A_lkm, b, M=jacobi_lkm)
-    x_cf = cg(A_cf, b, M=jacobi_cf)
+    x_lkm = cg(A_lkm, b, M=jacobi_lkm, callback=lkm_callback)
+    x_cf = cg(A_cf, b, M=jacobi_cf, callback=cf_callback)
 
     difference = np.linalg.norm(x_lkm - x_cf)
 
-    assert difference < 2e-4
+    assert difference < 1e-5
     assert abs(lkm_callback.n - cf_callback.n) <= 2
