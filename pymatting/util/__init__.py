@@ -26,4 +26,5 @@ from pymatting.util.util import (
     vec_vec_dot,
     vec_vec_outer,
     weights_to_laplacian,
+    remove_background_bicolor,
 )
