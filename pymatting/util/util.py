@@ -923,3 +923,55 @@ def div_round_up(x, n):
     2
     """
     return (x + n - 1) // n
+
+
+def remove_background_bicolor(image, fg_color, bg_color):
+    """Remove background from image with at most two colors.
+    Might not work if image has more than two colors.
+
+    Parameters
+    ----------
+    image: numpy.ndarray
+        RGB input image
+    fg_color: numpy.ndarray
+        RGB Foreground color
+    bg_color: numpy.ndarray
+        RGB Background color
+
+    Returns
+    -------
+    output: numpy.ndarray
+        RGBA output image
+
+    Example
+    -------
+    >>> from pymatting import *
+    >>> import numpy as np
+    >>> image = np.random.rand(480, 320, 3)
+    >>> fg_color = np.random.rand(3)
+    >>> bg_color = np.random.rand(3)
+    >>> output = remove_background_bicolor(image, fg_color, bg_color)
+    >>> print(output.shape)
+    (480, 320, 4)
+    """
+
+    fg_bg = fg_color - bg_color
+
+    # Project image colors onto (fg, bg) color line and clamp to [0, 1] to obtain alpha
+    u = np.sum((image - bg_color) * fg_bg, axis=-1) / np.sum(np.square(fg_bg))
+    alpha = np.clip(u, 0.0, 1.0)
+
+    # Unmix colors by solving
+    # image = actual_color * alpha + bg_color * (1 - alpha)
+    # for actual_color
+    a = alpha[:, :, None]
+
+    actual_color = np.divide(
+        (image - (1 - a) * bg_color), a, out=np.zeros_like(image), where=a != 0.0
+    )
+
+    actual_color = np.clip(actual_color, 0.0, 1.0)
+
+    output = np.dstack([actual_color, alpha])
+
+    return output

@@ -1,3 +1,7 @@
+### 1.1.13
+
+- Add `remove_background_bicolor`.
+
 ### 1.1.12
 
 - Allow CuPy input/output for `estimate_foreground_ml_cupy`.
