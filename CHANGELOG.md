@@ -1,3 +1,7 @@
+### 1.1.14
+
+- Ensure that OpenCL buffers are initialized with zeros.
+
 ### 1.1.13
 
 - Add `remove_background_bicolor`.

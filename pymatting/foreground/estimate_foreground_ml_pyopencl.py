@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import pyopencl as cl
 
@@ -121,8 +122,11 @@ def estimate_foreground_ml_pyopencl(
         )
 
     def alloc(*shape):
-        n = np.product(shape)
-        return cl.Buffer(context, cl.mem_flags.READ_WRITE, n * 4)
+        n = math.prod(shape)
+        buffer = cl.Buffer(context, cl.mem_flags.READ_WRITE, n * 4)
+        zero = np.uint32(0)
+        cl.enqueue_fill_buffer(queue, buffer, zero, 0, n*4)
+        return buffer
 
     def download(device_buf, shape):
         host_buf = np.empty(shape, dtype=np.float32)
