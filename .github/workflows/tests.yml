@@ -22,9 +22,7 @@ jobs:
         python-version: 3.11
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt -r requirements_tests.txt
-        pip install .
+        pip install .[test]
     - name: Test with pytest
       run: |
         python -c "import pymatting"
