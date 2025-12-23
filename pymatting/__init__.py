@@ -6,4 +6,3 @@ from pymatting.foreground import *
 from pymatting.preconditioner import *
 from pymatting.alpha import *
 from pymatting.cutout import *
-from pymatting.__about__ import __version__
