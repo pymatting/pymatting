@@ -7,3 +7,5 @@ from pymatting.preconditioner import *
 from pymatting.alpha import *
 from pymatting.cutout import *
 
+import importlib
+__version__ = importlib.metadata.version(__name__)
