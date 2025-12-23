@@ -92,8 +92,8 @@ All other values indicate unknown pixels which will be estimated by the algorith
 
 Run the tests from the main directory:
 ```
-pip3 install -r requirements_tests.txt
-ppytest
+pip3 install -r .[test]
+pytest
 ```
 
 Currently 89% of the code is covered by tests.
