@@ -165,7 +165,7 @@ def main():
         ("util", "Utility Functions"),
     ]
 
-    bib_path = "source/biblography.bib"
+    bib_path = "source/bibliography.bib"
 
     build_dir = Path("build")
 
@@ -191,7 +191,7 @@ def main():
         ("API Reference", None, None),
         ("Examples", "source/examples.md", "examples.html"),
         ("Benchmarks", "source/benchmarks.md", "benchmarks.html"),
-        ("Biblography", None, None),
+        ("Bibliography", None, None),
         ("PyPI", "https://pypi.org/project/PyMatting/", None),
         ("GitHub", "https://www.github.com/pymatting/pymatting", None),
     ]
@@ -247,8 +247,8 @@ def main():
                         a_link("/api.html", "API Reference", cls=cls),
                         HTML("<br>"),
                         ul(api_reference)], cls=cls))
-            elif title2 == "Biblography":
-                pages.append(li(a_link("/references.html", "Biblography", cls=cls)))
+            elif title2 == "Bibliography":
+                pages.append(li(a_link("/references.html", "Bibliography", cls=cls)))
             elif src_path.startswith("https"):
                 pages.append(li(a_link(src_path, title2, cls=cls)))
             else:
@@ -332,7 +332,7 @@ def main():
                 a_link("#" + referenceid, referenceid, id=referenceid),
                 span(ul(li(reference["value"]))),
             ]))
-    write_website(build_dir / "references.html", "Biblography", ul(reference_items))
+    write_website(build_dir / "references.html", "Bibliography", ul(reference_items))
 
 if __name__ == "__main__":
     main()
