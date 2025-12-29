@@ -129,6 +129,7 @@ export LD_LIBRARY_PATH="$(dirname $(locate libnvrtc.so.12)):$LD_LIBRARY_PATH"
 ```
 
 For PyOpenCL, see [docs](https://documen.tician.de/pyopencl/misc.html).
+You can select computing device by setting `PYOPENCL_CTX` environment variable.
 
 There currently is no GPU support for alpha estimation, only for foreground estimation.
 

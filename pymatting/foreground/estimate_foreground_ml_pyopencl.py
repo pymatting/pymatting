@@ -95,12 +95,13 @@ __kernel void ml_iteration(
 }
 """
 
-platform = cl.get_platforms()[0]
-device = platform.get_devices(cl.device_type.GPU)[0]
-context = cl.Context([device])
+context = cl.create_some_context()
 queue = cl.CommandQueue(context)
 program = cl.Program(context, source).build()
 
+# Cache kernel compilation triggered by program attribute access
+_resize_nearest = program.resize_nearest
+_ml_iteration = program.ml_iteration
 
 def estimate_foreground_ml_pyopencl(
     input_image,
@@ -156,7 +157,7 @@ def estimate_foreground_ml_pyopencl(
     n_levels = (max(w0, h0) - 1).bit_length()
 
     def resize_nearest(dst, src, w_src, h_src, w_dst, h_dst, depth):
-        program.resize_nearest(
+        _resize_nearest(
             queue,
             (w_dst, h_dst),
             None,
@@ -187,7 +188,7 @@ def estimate_foreground_ml_pyopencl(
             n_iter = n_small_iterations
 
         for i_iter in range(n_iter):
-            program.ml_iteration(
+            _ml_iteration(
                 queue,
                 (w, h),
                 None,
