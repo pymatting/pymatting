@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyMatting"
-version = "1.1.14"
+version = "1.1.15"
 description = "Python package for alpha matting."
 readme = "README.md"
 requires-python = ">=3"
