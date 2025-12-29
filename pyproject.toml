@@ -32,7 +32,8 @@ Source = "https://github.com/pymatting/pymatting"
 
 [project.optional-dependencies]
 gpu = [
-    # If you have cuda90, try the following instead of cuda12x
+    # If you have cuda90, try the following instead of cuda12x.
+    # Other versions probably work as well.
     #"cupy-cuda90>=6.5.0",
     "cupy-cuda12x>=13.6.0",
     "pyopencl>=2019.1.2",

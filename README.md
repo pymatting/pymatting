@@ -105,6 +105,33 @@ pip3 install --upgrade pymatting
 python3 -c "import pymatting"
 ```
 
+## GPU-Support
+
+There is
+[CuPy](https://pymatting.github.io/foreground.html#estimate_foreground_ml_cupy)
+and
+[PyOpenCL](https://pymatting.github.io/foreground.html#estimate_foreground_ml_pyopencl)
+support for foreground estimation.
+
+```
+pip3 install -r .[gpu]
+pytest tests/test_foreground.py
+```
+
+You still need to install proper drivers for GPU support separately.
+
+If you have installed drivers, but CuPy can not find `libnvrtc.so.12`, you might have link to CUDA libraries manually:
+
+```
+sudo apt install plocate
+# might resolve to something like /home/user/myenv/lib/python3.12/site-packages/nvidia/cuda_nvrtc/lib/
+export LD_LIBRARY_PATH="$(dirname $(locate libnvrtc.so.12)):$LD_LIBRARY_PATH"
+```
+
+For PyOpenCL, see [docs](https://documen.tician.de/pyopencl/misc.html).
+
+There currently is no GPU support for alpha estimation, only for foreground estimation.
+
 ## Bug Reports, Questions and Pull-Requests
 
 Please, see [our community guidelines](https://github.com/pymatting/pymatting/blob/master/CONTRIBUTING.md).
