@@ -1,3 +1,8 @@
+### 1.1.15
+
+- Update packaging from setup.py to pyproject.toml.
+- Cache PyOpenCL kernels for `estimate_foreground_ml_opencl`.
+
 ### 1.1.14
 
 - Ensure that OpenCL buffers are initialized with zeros.

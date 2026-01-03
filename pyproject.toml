@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyMatting"
+version = "1.1.15"
+description = "Python package for alpha matting."
+readme = "README.md"
+requires-python = ">=3"
+license = {text = "MIT"}
+authors = [
+    {name = "The PyMatting Developers", email = "pymatting@gmail.com"}
+]
+keywords = ["alpha matting"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "numpy>=1.16.0",
+    "pillow>=5.2.0",
+    "numba>=0.60.0",
+    "scipy>=1.1.0",
+]
+
+[project.urls]
+Homepage = "https://pymatting.github.io"
+Source = "https://github.com/pymatting/pymatting"
+
+[project.optional-dependencies]
+gpu = [
+    # If you have cuda90, try the following instead of cuda12x.
+    # Other versions probably work as well.
+    #"cupy-cuda90>=6.5.0",
+    "cupy-cuda12x>=13.6.0",
+    "pyopencl>=2019.1.2",
+]
+test = [
+    "flake8>=3.7.9",
+    "pytest>=5.3.4",
+]
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+include = ["pymatting*"]
